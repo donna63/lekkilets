@@ -509,12 +509,7 @@
                 margin: 0 0.5rem;
             }
 
-             .hero-bg {
-                background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('image/3d-rendering-loft-luxury-living-room-with-shelf-near-dining-table-counter.jpg');
-                background-size: cover;
-                background-position: center;
-                background-attachment: fixed;
-            }
+            
         }
 
         /* Prevent text selection during swipe */
@@ -525,6 +520,15 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+        }
+
+        @media (max-width: 360px){
+               .hero-bg {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('image/3d-rendering-loft-luxury-living-room-with-shelf-near-dining-table-counter.jpg');
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
         }
    
   </style>
