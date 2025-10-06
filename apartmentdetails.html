@@ -74,6 +74,95 @@
         .available { background-color: #10b981; color: white; }
         .booked { background-color: #ef4444; color: white; }
         .pending { background-color: #f59e0b; color: white; }
+
+
+
+        /* WhatsApp-specific styles */
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.whatsapp-button {
+    background-color: #25D366;
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.whatsapp-button:hover {
+    background-color: #128C7E;
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+}
+
+/* Success modal animations */
+@keyframes modalEnter {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.fixed.inset-0 {
+    animation: modalEnter 0.3s ease-out;
+}
+
+/* Enhanced booking form styles */
+.booking-summary {
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    border-left: 4px solid #d4af37;
+}
+
+/* Price highlight animation */
+@keyframes pricePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.price-display {
+    animation: pricePulse 2s infinite;
+}
+
+/* Form validation styles */
+input:invalid {
+    border-color: #ef4444;
+}
+
+input:valid {
+    border-color: #10b981;
+}
+
+/* Loading state for booking button */
+.booking-loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.booking-loading::after {
+    content: '';
+    animation: loadingDots 1.5s infinite;
+}
+
+@keyframes loadingDots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+}
     </style>
 </head>
 <body class="bg-gray-50">
@@ -529,63 +618,250 @@
         });
 
         // Booking Form Submission
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const bookingData = Object.fromEntries(formData);
-            
-            // Calculate total nights and amount
-            const checkIn = new Date(bookingData.checkIn);
-            const checkOut = new Date(bookingData.checkOut);
-            const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
-            const totalAmount = (nights * 180000) + 15000 + 10000;
-            
-            // Create WhatsApp message
-            const message = `
+      // Enhanced Booking Form with WhatsApp Integration
+document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form data
+    const formData = new FormData(this);
+    const bookingData = Object.fromEntries(formData);
+    
+    // Validate dates
+    const checkIn = new Date(bookingData.checkIn);
+    const checkOut = new Date(bookingData.checkOut);
+    
+    if (!bookingData.checkIn || !bookingData.checkOut) {
+        alert('Please select both check-in and check-out dates.');
+        return;
+    }
+    
+    if (checkOut <= checkIn) {
+        alert('Check-out date must be after check-in date.');
+        return;
+    }
+    
+    // Calculate booking details
+    const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+    const nightlyRate = 180000;
+    const subtotal = nights * nightlyRate;
+    const cleaningFee = 15000;
+    const serviceFee = 10000;
+    const totalAmount = subtotal + cleaningFee + serviceFee;
+    
+    // Get guest details
+    const guests = bookingData.guests;
+    
+    // Create comprehensive WhatsApp message
+    const message = `
 🏠 *LEKKILET BOOKING REQUEST* 🏠
 
 *APARTMENT DETAILS*
-🏢 Kay's Full House
-📍 Lekki Phase 1
-💰 ₦180,000 per night
+🏢 *Apartment:* Kay's Full House
+📍 *Location:* Lekki Phase 1, Lagos
+💰 *Rate:* ₦180,000 per night
+⭐ *Rating:* 4.9/5 (124 reviews)
 
 *BOOKING INFORMATION*
-📅 Check-in: ${bookingData.checkIn}
-📅 Check-out: ${bookingData.checkOut}
-🕒 Nights: ${nights}
-👥 Guests: ${bookingData.guests}
+📅 *Check-in:* ${formatDate(checkIn)}
+📅 *Check-out:* ${formatDate(checkOut)}
+🕒 *Nights:* ${nights} nights
+👥 *Guests:* ${guests} guest${guests > 1 ? 's' : ''}
 
 *PRICE BREAKDOWN*
-• ${nights} nights: ₦${(nights * 180000).toLocaleString()}
-• Cleaning fee: ₦15,000
-• Service fee: ₦10,000
-• *Total: ₦${totalAmount.toLocaleString()}*
+• ${nights} nights × ₦180,000 = ₦${subtotal.toLocaleString()}
+• Cleaning fee = ₦15,000
+• Service fee = ₦10,000
+• *TOTAL = ₦${totalAmount.toLocaleString()}*
 
-*NEXT STEPS*
-We'll contact you within 1 hour to confirm availability and proceed with payment.
+*PAYMENT INFORMATION*
+💳 *Payment Methods Accepted:*
+  - Bank Transfer
+  - Credit/Debit Card
+  - Online Payment
+  - Cash (on arrival)
+
+*BOOKING PROCESS*
+1. Confirm availability via WhatsApp
+2. Pay 30% deposit to secure booking
+3. Receive booking confirmation
+4. Pay balance 7 days before check-in
+5. Enjoy your stay! 🎉
+
+*CONTACT INFORMATION*
+📞 Phone: +234 814 590 3557
+📧 Email: bookings@lekkilet.com
+🌐 Website: lekkilet.com
+
+We'll contact you within 30 minutes to confirm availability and proceed with payment.
 
 Thank you for choosing Lekkilet! 🎉
-            `.trim();
+    `.trim();
 
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappURL = `https://wa.me/message/5EXA7GAZB5THC1?text=${encodedMessage}`;
-            
-            // Open WhatsApp
-            window.open(whatsappURL, '_blank');
-            
-            // Show confirmation
-            alert('Booking request sent! You will be redirected to WhatsApp to confirm your booking.');
-        });
+    // Encode message for WhatsApp URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // WhatsApp phone number (replace with actual Lekkilet WhatsApp number)
+    const whatsappNumber = '2348145903557'; // Using the number from your contact info
+    
+    // Create WhatsApp URL
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    
+    // Show confirmation before redirecting
+    const userConfirmed = confirm(`You're about to send this booking request to Lekkilet via WhatsApp. Click OK to proceed.`);
+    
+    if (userConfirmed) {
+        // Open WhatsApp in new tab
+        window.open(whatsappURL, '_blank');
+        
+        // Optional: Show success message
+        showBookingSuccess(bookingData, nights, totalAmount);
+    }
+});
 
-        // Mobile menu functionality (if needed)
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        if (mobileMenuButton) {
-            mobileMenuButton.addEventListener('click', function() {
-                // Add mobile menu functionality here if needed
-                alert('Mobile menu would open here');
-            });
+// Format date for better readability
+function formatDate(date) {
+    return date.toLocaleDateString('en-US', {
+        weekday: 'short',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+}
+
+// Show booking success message
+function showBookingSuccess(bookingData, nights, totalAmount) {
+    const successHTML = `
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-2xl p-8 max-w-md mx-4">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Booking Request Sent!</h3>
+                    <p class="text-gray-600 mb-4">
+                        We've sent your booking request to Lekkilet via WhatsApp. 
+                        They'll contact you shortly to confirm availability and payment details.
+                    </p>
+                    
+                    <div class="bg-gray-50 rounded-lg p-4 mb-6 text-left">
+                        <h4 class="font-semibold text-gray-900 mb-2">Booking Summary:</h4>
+                        <p class="text-sm text-gray-600">
+                            📅 ${formatDate(new Date(bookingData.checkIn))} - ${formatDate(new Date(bookingData.checkOut))}<br>
+                            🕒 ${nights} nights<br>
+                            👥 ${bookingData.guests} guest${bookingData.guests > 1 ? 's' : ''}<br>
+                            💰 Total: ₦${totalAmount.toLocaleString()}
+                        </p>
+                    </div>
+                    
+                    <div class="flex space-x-3">
+                        <button onclick="closeSuccessModal()" class="flex-1 bg-gray-200 text-gray-800 py-3 rounded-lg font-semibold hover:bg-gray-300 transition">
+                            Close
+                        </button>
+                        <button onclick="openWhatsAppDirectly()" class="flex-1 bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition">
+                            <i class="fab fa-whatsapp mr-2"></i>Open WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Add success modal to page
+    const modalDiv = document.createElement('div');
+    modalDiv.id = 'bookingSuccessModal';
+    modalDiv.innerHTML = successHTML;
+    document.body.appendChild(modalDiv);
+}
+
+// Close success modal
+function closeSuccessModal() {
+    const modal = document.getElementById('bookingSuccessModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+// Open WhatsApp directly
+function openWhatsAppDirectly() {
+    const whatsappNumber = '+2349044282729';
+    window.open(`https://wa.me/${whatsappNumber}`, '_blank');
+    closeSuccessModal();
+}
+
+// Enhanced Price Calculation with Validation
+function calculatePrice() {
+    const checkIn = new Date(document.getElementById('checkIn').value);
+    const checkOut = new Date(document.getElementById('checkOut').value);
+    
+    if (checkIn && checkOut && checkOut > checkIn) {
+        const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+        const nightlyRate = 180000;
+        const subtotal = nights * nightlyRate;
+        const cleaningFee = 15000;
+        const serviceFee = 10000;
+        const total = subtotal + cleaningFee + serviceFee;
+        
+        document.getElementById('nightsCount').textContent = nights;
+        document.getElementById('subtotal').textContent = subtotal.toLocaleString();
+        document.getElementById('totalAmount').textContent = total.toLocaleString();
+        
+        // Update booking button text
+        const bookButton = document.querySelector('#bookingForm button[type="submit"]');
+        if (nights > 0) {
+            bookButton.textContent = `Book ${nights} Nights - ₦${total.toLocaleString()}`;
         }
+    }
+}
+
+// Set minimum dates and initialize
+document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('checkIn').min = today;
+    document.getElementById('checkOut').min = today;
+    
+    // Add event listeners for date changes
+    document.getElementById('checkIn').addEventListener('change', function() {
+        const checkIn = new Date(this.value);
+        const nextDay = new Date(checkIn);
+        nextDay.setDate(nextDay.getDate() + 1);
+        document.getElementById('checkOut').min = nextDay.toISOString().split('T')[0];
+        calculatePrice();
+    });
+    
+    document.getElementById('checkOut').addEventListener('change', calculatePrice);
+    document.getElementById('guests').addEventListener('change', calculatePrice);
+    
+    // Initialize price calculation
+    calculatePrice();
+});
+
+// Add WhatsApp quick contact button
+function addWhatsAppButton() {
+    const whatsappHTML = `
+        <div class="fixed bottom-6 right-6 z-40">
+            <a href="https://wa.me/2348145903557" 
+               target="_blank"
+               class="bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-all duration-300 transform hover:scale-110 animate-bounce"
+               title="Chat with us on WhatsApp">
+                <i class="fab fa-whatsapp text-2xl"></i>
+            </a>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', whatsappHTML);
+}
+
+// Initialize WhatsApp button
+addWhatsAppButton();
+
+// Mobile menu functionality
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+if (mobileMenuButton) {
+    mobileMenuButton.addEventListener('click', function() {
+        // Add mobile menu functionality here
+        alert('Mobile menu would open here');
+    });
+}
     </script>
 </body>
 </html>
