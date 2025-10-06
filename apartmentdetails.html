@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kay's Full House - Lekkilet Premium Shortlets</title>
+    <title>Lekkilet - Premium Shortlets</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -50,6 +50,78 @@
             transform: translateX(0);
         }
         
+        /* Dropdown Styles */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 240px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+            z-index: 1000;
+            overflow: hidden;
+        }
+        
+        .dropdown-menu.show {
+            display: block;
+        }
+        
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            justify-content: between;
+            padding: 12px 16px;
+            color: #374151;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #f9fafb;
+            color: #4f46e5;
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-toggle {
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown-toggle.rotated {
+            transform: rotate(180deg);
+        }
+        
+        .sub-dropdown {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            min-width: 220px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+            z-index: 1001;
+        }
+        
+        .sub-dropdown.show {
+            display: block;
+        }
+        
+        .dropdown-item.has-submenu {
+            position: relative;
+        }
+        
+        .dropdown-item.has-submenu:hover .sub-dropdown {
+            display: block;
+        }
+        
         /* Button Animation */
         .btn-animate {
             transition: all 0.3s ease;
@@ -86,6 +158,102 @@
             animation: modalEnter 0.3s ease-out;
         }
         
+        /* Loading spinner */
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #d4af37;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Success checkmark */
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+        }
+        
+        .check-icon {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            border-radius: 50%;
+            box-sizing: content-box;
+            border: 4px solid #4CAF50;
+        }
+        
+        .check-icon::before {
+            top: 3px;
+            left: -2px;
+            width: 30px;
+            transform-origin: 100% 50%;
+            border-radius: 100px 0 0 100px;
+        }
+        
+        .check-icon::after {
+            top: 0;
+            left: 30px;
+            width: 60px;
+            transform-origin: 0 50%;
+            border-radius: 0 100px 100px 0;
+            animation: rotate-circle 4.25s ease-in;
+        }
+        
+        .check-icon::before, .check-icon::after {
+            content: '';
+            height: 100px;
+            position: absolute;
+            background: #FFFFFF;
+            transform: rotate(-45deg);
+        }
+        
+        .icon-line {
+            height: 5px;
+            background-color: #4CAF50;
+            display: block;
+            border-radius: 2px;
+            position: absolute;
+            z-index: 10;
+        }
+        
+        .icon-line.line-tip {
+            top: 46px;
+            left: 14px;
+            width: 25px;
+            transform: rotate(45deg);
+            animation: icon-line-tip 0.75s;
+        }
+        
+        .icon-line.line-long {
+            top: 38px;
+            right: 8px;
+            width: 47px;
+            transform: rotate(-45deg);
+            animation: icon-line-long 0.75s;
+        }
+        
+        @keyframes icon-line-tip {
+            0% { width: 0; left: 1px; top: 19px; }
+            54% { width: 0; left: 1px; top: 19px; }
+            70% { width: 50px; left: -8px; top: 37px; }
+            84% { width: 17px; left: 21px; top: 48px; }
+            100% { width: 25px; left: 14px; top: 45px; }
+        }
+        
+        @keyframes icon-line-long {
+            0% { width: 0; right: 46px; top: 54px; }
+            65% { width: 0; right: 46px; top: 54px; }
+            84% { width: 55px; right: 0px; top: 35px; }
+            100% { width: 47px; right: 8px; top: 38px; }
+        }
+
         /* WhatsApp button styles */
         .whatsapp-float {
             position: fixed;
@@ -130,7 +298,40 @@
                 <!-- Desktop Navigation -->
                 <nav class="hidden md:flex space-x-8">
                     <a href="index.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">HOME</a>
-                    <a href="apartments.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">APARTMENTS</a>
+                    
+                    <!-- Apartments Dropdown -->
+                    <div class="relative group">
+                        <button id="apartments-toggle" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1 flex items-center focus:outline-none">
+                            APARTMENTS
+                            <i class="fas fa-chevron-down text-xs ml-1 dropdown-toggle transition-transform duration-300"></i>
+                        </button>
+                        
+                        <!-- Dropdown Menu -->
+                        <div id="apartments-dropdown" class="dropdown-menu">
+                            <!-- Lekki Apartments -->
+                            <div class="dropdown-item has-submenu">
+                                <a href="lekki.html" class="flex justify-between items-center w-full">
+                                    <span>Lekki Apartments</span>
+                                    <i class="fas fa-chevron-right text-xs text-gray-400"></i>
+                                </a>
+                            </div>
+                            
+                            <!-- Victoria Island Apartments -->
+                            <div class="dropdown-item has-submenu">
+                                <a href="victoria-island.html" class="flex justify-between items-center w-full">
+                                    <span>Victoria Island</span>
+                                    <i class="fas fa-chevron-right text-xs text-gray-400"></i>
+                                </a>
+                            </div>
+                            
+                            <!-- All Apartments Link -->
+                            <a href="apartments.html" class="dropdown-item border-t border-gray-100 mt-2 bg-black ">
+                                <i class="fas fa-list text-white mr-3"></i>
+                                View All Apartments
+                            </a>
+                        </div>
+                    </div>
+                    
                     <a href="about.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">ABOUT US</a>
                     <a href="booking.html" class="text-gray-700 hover:text-black font-medium transition transform hover:-translate-y-1">BOOKING</a>
                     <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">REVIEWS</a>
@@ -148,6 +349,54 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
                 </button>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-white z-40 md:hidden">
+                <div class="flex flex-col h-full">
+                    <div class="flex justify-between items-center p-4 border-b">
+                        <img style="width: 150px;" src="image/new-removebg-preview.png" alt="Lekkilet Logo">
+                        <button id="close-mobile-menu" class="text-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex-1 p-6 space-y-4 overflow-y-auto">
+                        <a href="index.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">HOME</a>
+                        
+                        <!-- Mobile Apartments Dropdown -->
+                        <div class="border-b border-gray-200 pb-4">
+                            <button id="mobile-apartments-toggle" class="w-full flex justify-between items-center text-lg font-medium text-gray-700 py-2">
+                                <span>APARTMENTS</span>
+                                <i class="fas fa-chevron-down text-xs dropdown-toggle transition-transform duration-300"></i>
+                            </button>
+                            
+                            <div id="mobile-apartments-dropdown" class="mt-2 space-y-2 hidden">
+                                <!-- Lekki Apartments -->
+                                <div class="ml-4">
+                                    <a href="lekki.html" class="block text-gray-600 py-2">Lekki Apartments</a>
+                                </div>
+                                
+                                <!-- Victoria Island Apartments -->
+                                <div class="ml-4">
+                                    <a href="victoria-island.html" class="block text-gray-600 py-2">Victoria Island</a>
+                                </div>
+                                
+                                <a href="apartments.html" class="block text-white font-medium py-2 ml-4 bg-black p-4">View All Apartments</a>
+                            </div>
+                        </div>
+                        
+                        <a href="about.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">ABOUT US</a>
+                        <a href="booking.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">BOOKING</a>
+                        <a href="#" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">REVIEWS</a>
+                        <a href="contact.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">CONTACT</a>
+                        
+                        <div class="pt-6">
+                            <button class="w-full bg-black text-white py-3 rounded-md hover:bg-indigo-700 transition font-medium btn-animate">BOOK NOW</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -335,6 +584,34 @@
                             </select>
                         </div>
 
+                        <!-- Contact Information -->
+                        <div class="border-t border-gray-200 pt-4">
+                            <h3 class="font-semibold text-gray-900 mb-4">Your Information</h3>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                                    <input type="text" id="userName" name="userName" required 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-gold focus:border-transparent"
+                                           placeholder="Enter your full name">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                                    <input type="tel" id="userPhone" name="userPhone" required 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-gold focus:border-transparent"
+                                           placeholder="+234 800 000 0000">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                                    <input type="email" id="userEmail" name="userEmail" 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-gold focus:border-transparent"
+                                           placeholder="your@email.com">
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Price Breakdown -->
                         <div class="border-t border-gray-200 pt-4 space-y-2">
                             <div class="flex justify-between text-sm">
@@ -357,13 +634,14 @@
                             </div>
                         </div>
 
-                        <button type="submit" 
-                                class="w-full bg-custom-gold text-gray-900 font-semibold py-4 rounded-lg hover:bg-amber-500 transition duration-300 btn-animate">
-                            Check Availability & Book
+                        <button type="submit" id="submitButton"
+                                class="w-full bg-custom-gold text-gray-900 font-semibold py-4 rounded-lg hover:bg-amber-500 transition duration-300 flex items-center justify-center">
+                            <span id="buttonText">Check Availability & Book</span>
+                            <div id="buttonSpinner" class="loading-spinner ml-2 hidden"></div>
                         </button>
                         
                         <p class="text-xs text-gray-500 text-center">
-                            You won't be charged yet
+                            We'll contact you within 30 minutes to confirm your booking
                         </p>
                     </form>
                 </div>
@@ -419,7 +697,7 @@
             <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Similar Apartments</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Similar Apartment 1 -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift transition-all duration-300">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-2">
                     <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
                          alt="Kay's Comfort Loft" 
                          class="w-full h-48 object-cover">
@@ -434,7 +712,7 @@
                 </div>
 
                 <!-- Similar Apartment 2 -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift transition-all duration-300">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-2">
                     <img src="https://images.unsplash.com/photo-1567496898669-ee935f5f647a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" 
                          alt="Dynax Place" 
                          class="w-full h-48 object-cover">
@@ -449,7 +727,7 @@
                 </div>
 
                 <!-- Similar Apartment 3 -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift transition-all duration-300">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-2">
                     <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80" 
                          alt="Beachfront Villa" 
                          class="w-full h-48 object-cover">
@@ -533,54 +811,49 @@
         </div>
     </footer>
 
-    <!-- User Information Modal -->
-    <div id="userInfoModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 modal-overlay">
-            <div class="text-center mb-6">
-                <h3 class="text-2xl font-bold text-gray-900 mb-2">Complete Your Booking</h3>
-                <p class="text-gray-600">Please provide your contact information to proceed</p>
+    <!-- Processing Modal -->
+    <div id="processingModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 text-center modal-overlay">
+            <div class="loading-spinner mx-auto mb-4" style="width: 40px; height: 40px;"></div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Processing Your Booking</h3>
+            <p class="text-gray-600">Sending booking information to Lekkilet...</p>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 text-center modal-overlay">
+            <div class="success-checkmark mb-4">
+                <div class="check-icon">
+                    <span class="icon-line line-tip"></span>
+                    <span class="icon-line line-long"></span>
+                    <div class="icon-circle"></div>
+                    <div class="icon-fix"></div>
+                </div>
             </div>
-            
-            <form id="userInfoForm" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
-                    <input type="text" id="userName" name="userName" required 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-gold focus:border-transparent"
-                           placeholder="Enter your full name">
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
-                    <input type="tel" id="userPhone" name="userPhone" required 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-gold focus:border-transparent"
-                           placeholder="+234 800 000 0000">
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                    <input type="email" id="userEmail" name="userEmail" 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-gold focus:border-transparent"
-                           placeholder="your@email.com">
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Special Requests</label>
-                    <textarea id="specialRequests" name="specialRequests" rows="3"
-                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-gold focus:border-transparent"
-                              placeholder="Any special requirements or questions..."></textarea>
-                </div>
-                
-                <div class="flex space-x-3 pt-4">
-                    <button type="button" onclick="closeUserInfoModal()" 
-                            class="flex-1 bg-gray-200 text-gray-800 py-3 rounded-lg font-semibold hover:bg-gray-300 transition">
-                        Cancel
-                    </button>
-                    <button type="submit" 
-                            class="flex-1 bg-custom-gold text-gray-900 py-3 rounded-lg font-semibold hover:bg-amber-500 transition">
-                        Send to WhatsApp
-                    </button>
-                </div>
-            </form>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Booking Request Sent!</h3>
+            <p class="text-gray-600 mb-6">
+                Your booking request has been sent to Lekkilet. We'll contact you within 30 minutes to confirm availability and payment details.
+            </p>
+            <button onclick="closeSuccessModal()" 
+                    class="w-full bg-custom-gold text-gray-900 font-semibold py-3 rounded-lg hover:bg-amber-500 transition">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="errorModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 text-center modal-overlay">
+            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-exclamation-triangle text-red-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2" id="errorTitle">Booking Failed</h3>
+            <p class="text-gray-600 mb-4" id="errorMessage">There was an error processing your booking request.</p>
+            <button onclick="closeErrorModal()" 
+                    class="w-full bg-gray-200 text-gray-800 font-semibold py-3 rounded-lg hover:bg-gray-300 transition">
+                Try Again
+            </button>
         </div>
     </div>
 
@@ -595,6 +868,69 @@
     </div>
 
     <script>
+        // Mobile Menu Functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileApartmentsToggle = document.getElementById('mobile-apartments-toggle');
+        const mobileApartmentsDropdown = document.getElementById('mobile-apartments-dropdown');
+        const mobileDropdownToggle = mobileApartmentsToggle?.querySelector('.dropdown-toggle');
+
+        // Desktop Apartments Dropdown
+        const apartmentsToggle = document.getElementById('apartments-toggle');
+        const apartmentsDropdown = document.getElementById('apartments-dropdown');
+        const dropdownToggle = apartmentsToggle?.querySelector('.dropdown-toggle');
+
+        if (apartmentsToggle) {
+            apartmentsToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                apartmentsDropdown.classList.toggle('show');
+                dropdownToggle.classList.toggle('rotated');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function() {
+                apartmentsDropdown.classList.remove('show');
+                dropdownToggle.classList.remove('rotated');
+            });
+
+            // Prevent dropdown from closing when clicking inside
+            apartmentsDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+
+        // Mobile Menu Toggle
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.add('open');
+            });
+        }
+
+        if (closeMobileMenu) {
+            closeMobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        }
+
+        // Mobile Apartments Dropdown
+        if (mobileApartmentsToggle) {
+            mobileApartmentsToggle.addEventListener('click', function() {
+                mobileApartmentsDropdown.classList.toggle('hidden');
+                mobileDropdownToggle.classList.toggle('rotated');
+            });
+        }
+
+        // Close mobile menu when clicking on links
+        const mobileMenuLinks = mobileMenu?.querySelectorAll('a');
+        if (mobileMenuLinks) {
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                });
+            });
+        }
+
         // Price Calculation
         function calculatePrice() {
             const checkIn = new Date(document.getElementById('checkIn').value);
@@ -611,6 +947,12 @@
                 document.getElementById('nightsCount').textContent = nights;
                 document.getElementById('subtotal').textContent = subtotal.toLocaleString();
                 document.getElementById('totalAmount').textContent = total.toLocaleString();
+                
+                // Update button text
+                const buttonText = document.getElementById('buttonText');
+                if (nights > 0) {
+                    buttonText.textContent = `Book ${nights} Nights - ₦${total.toLocaleString()}`;
+                }
             }
         }
 
@@ -621,72 +963,82 @@
             document.getElementById('checkOut').min = today;
             
             // Add event listeners for date changes
-            document.getElementById('checkIn').addEventListener('change', calculatePrice);
+            document.getElementById('checkIn').addEventListener('change', function() {
+                const checkIn = new Date(this.value);
+                const nextDay = new Date(checkIn);
+                nextDay.setDate(nextDay.getDate() + 1);
+                document.getElementById('checkOut').min = nextDay.toISOString().split('T')[0];
+                calculatePrice();
+            });
+            
             document.getElementById('checkOut').addEventListener('change', calculatePrice);
+            document.getElementById('guests').addEventListener('change', calculatePrice);
             
             // Initialize price calculation
             calculatePrice();
         });
 
-        // Show user information modal
-        function showUserInfoModal() {
-            document.getElementById('userInfoModal').classList.remove('hidden');
+        // Show processing modal
+        function showProcessingModal() {
+            document.getElementById('processingModal').classList.remove('hidden');
         }
 
-        // Close user information modal
-        function closeUserInfoModal() {
-            document.getElementById('userInfoModal').classList.add('hidden');
+        // Hide processing modal
+        function hideProcessingModal() {
+            document.getElementById('processingModal').classList.add('hidden');
         }
 
-        // Booking Form Submission - Show User Info Modal
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const bookingData = Object.fromEntries(formData);
-            
-            // Validate dates
-            const checkIn = new Date(bookingData.checkIn);
-            const checkOut = new Date(bookingData.checkOut);
-            
-            if (!bookingData.checkIn || !bookingData.checkOut) {
-                alert('Please select both check-in and check-out dates.');
-                return;
-            }
-            
-            if (checkOut <= checkIn) {
-                alert('Check-out date must be after check-in date.');
-                return;
-            }
-            
-            // Store booking data for later use
-            window.bookingData = bookingData;
-            
-            // Show user information modal
-            showUserInfoModal();
-        });
+        // Show success modal
+        function showSuccessModal() {
+            document.getElementById('successModal').classList.remove('hidden');
+        }
 
-        // User Information Form Submission - Send to WhatsApp
-        document.getElementById('userInfoForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const userFormData = new FormData(this);
-            const userData = Object.fromEntries(userFormData);
-            const bookingData = window.bookingData;
-            
-            // Calculate booking details
-            const checkIn = new Date(bookingData.checkIn);
-            const checkOut = new Date(bookingData.checkOut);
-            const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
-            const nightlyRate = 180000;
-            const subtotal = nights * nightlyRate;
-            const cleaningFee = 15000;
-            const serviceFee = 10000;
-            const totalAmount = subtotal + cleaningFee + serviceFee;
-            
-            // Create comprehensive WhatsApp message
-            const message = `
-🏠 *LEKKILET - NEW BOOKING REQUEST* 🏠
+        // Close success modal
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.add('hidden');
+            // Reset form
+            document.getElementById('bookingForm').reset();
+            calculatePrice();
+        }
+
+        // Show error modal
+        function showErrorModal(title, message) {
+            document.getElementById('errorTitle').textContent = title;
+            document.getElementById('errorMessage').textContent = message;
+            document.getElementById('errorModal').classList.remove('hidden');
+        }
+
+        // Close error modal
+        function closeErrorModal() {
+            document.getElementById('errorModal').classList.add('hidden');
+        }
+
+        // Format date for better readability
+        function formatDate(date) {
+            return date.toLocaleDateString('en-US', {
+                weekday: 'short',
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        // Auto-send booking to WhatsApp
+        async function sendBookingToWhatsApp(bookingData, userData) {
+            try {
+                // Calculate booking details
+                const checkIn = new Date(bookingData.checkIn);
+                const checkOut = new Date(bookingData.checkOut);
+                const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+                const nightlyRate = 180000;
+                const subtotal = nights * nightlyRate;
+                const cleaningFee = 15000;
+                const serviceFee = 10000;
+                const totalAmount = subtotal + cleaningFee + serviceFee;
+                
+                // Create comprehensive WhatsApp message
+                const message = `
+🏠 *LEKKILET - AUTOMATED BOOKING REQUEST* 🏠
 
 *CUSTOMER INFORMATION*
 👤 *Name:* ${userData.userName}
@@ -711,64 +1063,137 @@
 • Service fee = ₦10,000
 • *TOTAL = ₦${totalAmount.toLocaleString()}*
 
-*SPECIAL REQUESTS*
-${userData.specialRequests || 'No special requests'}
+*BOOKING STATUS*
+🟡 *Status:* Automated Booking Request
+⏰ *Received:* ${new Date().toLocaleString()}
+🌐 *Source:* Website Form
 
-*CONTACT CUSTOMER*
+*IMMEDIATE ACTION REQUIRED*
+Please contact the customer within 30 minutes to confirm availability and proceed with payment.
+
+*CONTACT DETAILS:*
 📞 ${userData.userPhone}
 ${userData.userEmail ? `📧 ${userData.userEmail}` : ''}
 
-*BOOKING STATUS*
-🟡 *Status:* Pending Confirmation
-⏰ *Received:* ${new Date().toLocaleString()}
+This is an automated booking request from the Lekkilet website.
+                `.trim();
 
-Please contact the customer within 30 minutes to confirm availability and proceed with payment.
+                // Encode message for WhatsApp URL
+                const encodedMessage = encodeURIComponent(message);
+                
+                // Your WhatsApp number
+                const whatsappNumber = '2349044282729'; // Replace with your actual number
+                
+                // Create WhatsApp URL
+                const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+                
+                // Create a hidden iframe to trigger WhatsApp
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = whatsappURL;
+                document.body.appendChild(iframe);
+                
+                // Wait a moment for the iframe to load
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Remove the iframe
+                document.body.removeChild(iframe);
+                
+                return true;
+                
+            } catch (error) {
+                console.error('Error sending to WhatsApp:', error);
+                return false;
+            }
+        }
 
-Thank you! 🎉
-            `.trim();
-
-            // Encode message for WhatsApp URL
-            const encodedMessage = encodeURIComponent(message);
+        // Booking Form Submission
+        document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            // WhatsApp phone number for Lekkilet
-            const whatsappNumber = '16145151223';
+            // Get form data
+            const formData = new FormData(this);
+            const bookingData = {
+                checkIn: formData.get('checkIn'),
+                checkOut: formData.get('checkOut'),
+                guests: formData.get('guests')
+            };
             
-            // Create WhatsApp URL
-            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            const userData = {
+                userName: formData.get('userName'),
+                userPhone: formData.get('userPhone'),
+                userEmail: formData.get('userEmail')
+            };
             
-            // Close modal
-            closeUserInfoModal();
+            // Validate dates
+            const checkIn = new Date(bookingData.checkIn);
+            const checkOut = new Date(bookingData.checkOut);
             
-            // Open WhatsApp in new tab
-            window.open(whatsappURL, '_blank');
+            if (!bookingData.checkIn || !bookingData.checkOut) {
+                showErrorModal('Missing Dates', 'Please select both check-in and check-out dates.');
+                return;
+            }
             
-            // Show success message
-            alert('Your booking request has been sent! Lekkilet will contact you shortly to confirm availability and payment details.');
+            if (checkOut <= checkIn) {
+                showErrorModal('Invalid Dates', 'Check-out date must be after check-in date.');
+                return;
+            }
             
-            // Reset forms
-            document.getElementById('bookingForm').reset();
-            document.getElementById('userInfoForm').reset();
-            calculatePrice();
+            // Validate user information
+            if (!userData.userName || !userData.userPhone) {
+                showErrorModal('Missing Information', 'Please provide your full name and phone number.');
+                return;
+            }
+            
+            // Show processing state
+            const submitButton = document.getElementById('submitButton');
+            const buttonText = document.getElementById('buttonText');
+            const buttonSpinner = document.getElementById('buttonSpinner');
+            
+            submitButton.disabled = true;
+            buttonText.textContent = 'Processing...';
+            buttonSpinner.classList.remove('hidden');
+            
+            // Show processing modal
+            showProcessingModal();
+            
+            try {
+                // Send booking to WhatsApp
+                const success = await sendBookingToWhatsApp(bookingData, userData);
+                
+                // Hide processing modal
+                hideProcessingModal();
+                
+                if (success) {
+                    // Show success modal
+                    showSuccessModal();
+                } else {
+                    showErrorModal('Sending Failed', 'There was an error sending your booking request. Please try again or contact us directly.');
+                }
+                
+            } catch (error) {
+                hideProcessingModal();
+                showErrorModal('Unexpected Error', 'An unexpected error occurred. Please try again or contact us directly.');
+            } finally {
+                // Reset button state
+                submitButton.disabled = false;
+                buttonText.textContent = 'Check Availability & Book';
+                buttonSpinner.classList.add('hidden');
+                calculatePrice();
+            }
         });
 
-        // Format date for better readability
-        function formatDate(date) {
-            return date.toLocaleDateString('en-US', {
-                weekday: 'short',
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-            });
-        }
-
-        // Mobile menu functionality
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        if (mobileMenuButton) {
-            mobileMenuButton.addEventListener('click', function() {
-                // Add mobile menu functionality here
-                alert('Mobile menu would open here');
-            });
-        }
+        // Phone number formatting
+        document.getElementById('userPhone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.startsWith('0')) {
+                value = '234' + value.substring(1);
+            }
+            if (value.length > 0 && !value.startsWith('+')) {
+                value = '+' + value;
+            }
+            e.target.value = value;
+        });
     </script>
 </body>
 </html>
