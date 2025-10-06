@@ -967,41 +967,31 @@
                             <div id="mobile-apartments-dropdown" class="mt-2 space-y-2 hidden">
                                 <!-- Lekki Apartments -->
                                 <div class="ml-4">
-                                    <button class="w-full flex justify-between items-center text-gray-600 py-2">
+                                    <a href="lekki.html">
+                                        <button class="w-full flex justify-between items-center text-gray-600 py-2">
                                         <span>Lekki Apartments</span>
-                                        <i class="fas fa-chevron-down text-xs"></i>
+                                        
                                     </button>
-                                    <div class="ml-4 space-y-1 hidden">
-                                        <a href="#" class="block text-gray-600 py-1">Kay's Full House</a>
-                                        <a href="#" class="block text-gray-600 py-1">Kay's Comfort Loft</a>
-                                        <a href="#" class="block text-gray-600 py-1">Dynax Place</a>
-                                        <a href="#" class="block text-gray-600 py-1">Beachfront Villa</a>
-                                    </div>
+                                    </a>
+                                    
                                 </div>
                                 
                                 <!-- Victoria Island Apartments -->
                                 <div class="ml-4">
                                     <button class="w-full flex justify-between items-center text-gray-600 py-2">
                                         <span>Victoria Island</span>
-                                        <i class="fas fa-chevron-down text-xs"></i>
+                                        
                                     </button>
-                                    <div class="ml-4 space-y-1 hidden">
-                                        <a href="#" class="block text-gray-600 py-1">Executive Penthouse</a>
-                                        <a href="#" class="block text-gray-600 py-1">Lagoon View Suite</a>
-                                        <a href="#" class="block text-gray-600 py-1">Royal Residence</a>
-                                    </div>
+                                    
                                 </div>
                                 
                                 <!-- Ikoyi Apartments -->
                                 <div class="ml-4">
-                                    <button class="w-full flex justify-between items-center text-gray-600 py-2">
+                                    <a href="lekki.html"><button class="w-full flex justify-between items-center text-gray-600 py-2">
                                         <span>Ikoyi Apartments</span>
-                                        <i class="fas fa-chevron-down text-xs"></i>
-                                    </button>
-                                    <div class="ml-4 space-y-1 hidden">
-                                        <a href="#" class="block text-gray-600 py-1">Garden Retreat</a>
-                                        <a href="#" class="block text-gray-600 py-1">Poolside Villa</a>
-                                    </div>
+                                        
+                                    </button></a>
+                                    
                                 </div>
                                 
                                 <a href="#" class="block text-indigo-600 font-medium py-2 ml-4">View All Apartments</a>
@@ -1103,17 +1093,92 @@
     </section>
 
     <!-- Map Section -->
-    <section class="map-section">
-        <div class="container">
-            <h2 class="section-title">Our Location</h2>
-            <div class="map-container">
-                <!-- In a real implementation, this would be an embedded Google Map -->
-                <div style="width:100%;height:100%;background-color:#e9ecef;display:flex;align-items:center;justify-content:center;color:var(--navy);font-weight:500;">
-                    Interactive Google Map - Lekki, Lagos
+    <!-- Location Map Section -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="brand-font text-3xl md:text-4xl text-center text-custom-navy mb-12 relative">
+            Our Locations
+            <div class="w-20 h-1 bg-custom-gold mx-auto mt-4"></div>
+        </h2>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <!-- OpenStreetMap Container -->
+            <div class="h-[400px] rounded-2xl shadow-lg overflow-hidden">
+                <iframe 
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=3.4230%2C6.4280%2C3.4700%2C6.4700&layer=mapnik&marker=6.465422,3.566448"
+                    width="100%" 
+                    height="100%" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    marginheight="0" 
+                    marginwidth="0"
+                    class="w-full h-full"
+                    title="Lekkilet Locations Map">
+                </iframe>
+            </div>
+            
+            <!-- Location Info -->
+            <div class="space-y-6">
+                <h3 class="text-2xl font-bold text-custom-navy mb-6">Prime Lekki Locations</h3>
+                
+                <div class="space-y-4">
+                    <!-- Location 1 -->
+                    <div class="flex items-start space-x-4 p-4 bg-white rounded-xl hover:shadow-lg transition-all duration-300 cursor-pointer" onclick="showLocation('lekki')">
+                        <div class="w-12 h-12 bg-custom-gold rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-map-marker-alt text-custom-navy"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-custom-navy mb-1">Lekki Phase 1</h4>
+                            <p class="text-gray-600 text-sm mb-2">Premium apartments with ocean views and modern amenities</p>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-clock mr-2"></i>
+                                <span>15 mins from Lekki Mall | 25 mins from Airport</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location 2 -->
+                    <div class="flex items-start space-x-4 p-4 bg-white rounded-xl hover:shadow-lg transition-all duration-300 cursor-pointer" onclick="showLocation('victoria')">
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-building text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-custom-navy mb-1">Victoria Island</h4>
+                            <p class="text-gray-600 text-sm mb-2">Luxury suites in the heart of business district</p>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-clock mr-2"></i>
+                                <span>10 mins from business centers | 5 mins from fine dining</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location 3 -->
+                    <div class="flex items-start space-x-4 p-4 bg-white rounded-xl hover:shadow-lg transition-all duration-300 cursor-pointer" onclick="showLocation('ikoyi')">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-tree text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-custom-navy mb-1">Ikoyi</h4>
+                            <p class="text-gray-600 text-sm mb-2">Exclusive residential area with premium security</p>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-clock mr-2"></i>
+                                <span>20 mins from airport | 15 mins from business district</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-blue-50 rounded-xl border border-blue-200">
+                    <p class="text-sm text-blue-700 flex items-center">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        All locations include 24/7 security, uninterrupted power backup, and high-speed fiber internet
+                    </p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
 
     <!-- FAQ Section -->
     <section class="faq-section">
@@ -1352,5 +1417,26 @@
             });
         });
     </script>
+
+
+        <script>
+        function showLocation(location) {
+            let mapUrl = '';
+            switch(location) {
+                case 'lekki':
+                    mapUrl = 'https://www.openstreetmap.org/export/embed.html?bbox=3.4230%2C6.4280%2C3.4700%2C6.4700&layer=mapnik&marker=6.465422,3.566448';
+                    break;
+                case 'victoria':
+                    mapUrl = 'https://www.openstreetmap.org/export/embed.html?bbox=3.4200%2C6.4250%2C3.4300%2C6.4350&layer=mapnik&marker=6.4281,3.4215';
+                    break;
+                case 'ikoyi':
+                    mapUrl = 'https://www.openstreetmap.org/export/embed.html?bbox=3.4300%2C6.4450%2C3.4400%2C6.4550&layer=mapnik&marker=6.4522,3.4358';
+                    break;
+            }
+            
+            // Update the iframe source
+            document.querySelector('iframe').src = mapUrl;
+        }
+        </script>
 </body>
 </html>

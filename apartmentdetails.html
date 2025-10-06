@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kay's Full House - Lekkilet Premium Shortlets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .fade-in { animation: fadeIn 0.6s ease-out; }
+        .slide-down { animation: slideDown 0.3s ease-out; }
+        
+        /* Custom colors */
+        .bg-custom-gold { background-color: #d4af37; }
+        .text-custom-gold { color: #d4af37; }
+        .border-custom-gold { border-color: #d4af37; }
+        
+        /* Price display */
+        .price-display {
+            background: linear-gradient(135deg, #d4af37, #f4e8c1);
+            color: #0a1a35;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
+        /* Button Animation */
+        .btn-animate {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-animate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Image gallery */
+        .gallery-image {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .gallery-image:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Availability calendar */
+        .available { background-color: #10b981; color: white; }
+        .booked { background-color: #ef4444; color: white; }
+        .pending { background-color: #f59e0b; color: white; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header/Navigation -->
+    <header id="main-header" class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-2 py-2">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <h1 class="brand-font text-2xl font-bold text-indigo-700">
+                        <img style="width: 150px;" src="image/new-removebg-preview.png" alt="Lekkilet Logo" class="transition-transform duration-300 hover:scale-105">
+                    </h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">HOME</a>
+                    <a href="apartments.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">APARTMENTS</a>
+                    <a href="about.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">ABOUT US</a>
+                    <a href="booking.html" class="text-gray-700 hover:text-black font-medium transition transform hover:-translate-y-1">BOOKING</a>
+                    <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">REVIEWS</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">CONTACT</a>
+                </nav>
+                
+                <!-- Book Now button -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button class="bg-black text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-medium btn-animate">BOOK NOW</button>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none transition-transform hover:scale-110">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Apartment Hero Section -->
+    <section class="relative h-96 bg-gradient-to-r from-blue-900 to-purple-900 text-white overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+        <div class="container mx-auto px-4 relative z-10 h-full flex items-center">
+            <div class="max-w-4xl">
+                <div class="fade-in">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4 brand-font">Kay's Full House</h1>
+                    <p class="text-xl text-gray-200 mb-6">Luxury 3-Bedroom Apartment in Lekki Phase 1</p>
+                    <div class="flex items-center space-x-6 text-sm">
+                        <div class="flex items-center">
+                            <i class="fas fa-bed text-custom-gold mr-2"></i>
+                            <span>3 Bedrooms</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-bath text-custom-gold mr-2"></i>
+                            <span>2 Bathrooms</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-users text-custom-gold mr-2"></i>
+                            <span>Sleeps 6</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-ruler-combined text-custom-gold mr-2"></i>
+                            <span>120 sqm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column - Apartment Details -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Image Gallery -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden fade-in">
+                    <div class="grid grid-cols-2 gap-2 p-2">
+                        <div class="col-span-2">
+                            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                                 alt="Living Room" 
+                                 class="w-full h-64 object-cover rounded-lg gallery-image">
+                        </div>
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80" 
+                                 alt="Bedroom" 
+                                 class="w-full h-32 object-cover rounded-lg gallery-image">
+                        </div>
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                                 alt="Kitchen" 
+                                 class="w-full h-32 object-cover rounded-lg gallery-image">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Apartment Description -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 fade-in">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Apartment Description</h2>
+                    <div class="prose prose-lg text-gray-600">
+                        <p class="mb-4">
+                            Welcome to Kay's Full House, a stunning 3-bedroom luxury apartment located in the heart of Lekki Phase 1. This beautifully designed space offers the perfect blend of comfort, style, and convenience for your stay in Lagos.
+                        </p>
+                        <p class="mb-4">
+                            The apartment features a spacious living area with modern furnishings, a fully equipped kitchen with premium appliances, and three comfortable bedrooms designed for restful sleep. With two modern bathrooms, high-speed WiFi, and 24/7 security, every detail has been carefully considered for your comfort.
+                        </p>
+                        <p>
+                            Located just minutes from Lekki Mall, restaurants, and business centers, this is the ideal base for both business and leisure travelers seeking premium accommodation in Lagos.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Amenities -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 fade-in">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Amenities & Features</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-wifi text-custom-gold"></i>
+                            <span>High-Speed WiFi</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-tv text-custom-gold"></i>
+                            <span>Smart TV</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-utensils text-custom-gold"></i>
+                            <span>Fully Equipped Kitchen</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-snowflake text-custom-gold"></i>
+                            <span>Air Conditioning</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-swimming-pool text-custom-gold"></i>
+                            <span>Swimming Pool Access</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-dumbbell text-custom-gold"></i>
+                            <span>Fitness Center</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-car text-custom-gold"></i>
+                            <span>Secure Parking</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-shield-alt text-custom-gold"></i>
+                            <span>24/7 Security</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-concierge-bell text-custom-gold"></i>
+                            <span>Concierge Service</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 fade-in">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Location</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-map-marker-alt text-custom-gold mt-1"></i>
+                            <div>
+                                <h3 class="font-semibold">Lekki Phase 1, Lagos</h3>
+                                <p class="text-gray-600">Prime residential area with easy access to amenities</p>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold mb-2">Nearby Attractions:</h4>
+                            <ul class="text-gray-600 space-y-1">
+                                <li>• Lekki Mall - 5 minutes drive</li>
+                                <li>• Lekki Conservation Centre - 10 minutes</li>
+                                <li>• Business District - 15 minutes</li>
+                                <li>• Lagos Island - 25 minutes</li>
+                                <li>• Airport - 45 minutes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Booking Widget -->
+            <div class="space-y-6">
+                <!-- Price & Booking Card -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-24 fade-in">
+                    <div class="text-center mb-6">
+                        <div class="price-display px-6 py-4 rounded-xl mb-4">
+                            <div class="text-2xl font-bold">₦180,000</div>
+                            <div class="text-sm opacity-90">per night</div>
+                        </div>
+                        <div class="text-sm text-gray-600">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            4.9 (124 reviews)
+                        </div>
+                    </div>
+
+                    <!-- Booking Form -->
+                    <form id="bookingForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Check-in Date</label>
+                            <input type="date" id="checkIn" name="checkIn" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-gold focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Check-out Date</label>
+                            <input type="date" id="checkOut" name="checkOut" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-gold focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Guests</label>
+                            <select id="guests" name="guests" required 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-gold focus:border-transparent">
+                                <option value="1">1 Guest</option>
+                                <option value="2" selected>2 Guests</option>
+                                <option value="3">3 Guests</option>
+                                <option value="4">4 Guests</option>
+                                <option value="5">5 Guests</option>
+                                <option value="6">6 Guests</option>
+                            </select>
+                        </div>
+
+                        <!-- Price Breakdown -->
+                        <div class="border-t border-gray-200 pt-4 space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span>₦180,000 x <span id="nightsCount">0</span> nights</span>
+                                <span>₦<span id="subtotal">0</span></span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span>Cleaning fee</span>
+                                <span>₦15,000</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span>Service fee</span>
+                                <span>₦10,000</span>
+                            </div>
+                            <div class="border-t border-gray-200 pt-2">
+                                <div class="flex justify-between font-semibold">
+                                    <span>Total</span>
+                                    <span>₦<span id="totalAmount">0</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" 
+                                class="w-full bg-custom-gold text-gray-900 font-semibold py-4 rounded-lg hover:bg-amber-500 transition duration-300 btn-animate">
+                            Check Availability & Book
+                        </button>
+                        
+                        <p class="text-xs text-gray-500 text-center">
+                            You won't be charged yet
+                        </p>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 fade-in">
+                    <h3 class="font-semibold text-gray-900 mb-4">Need Help?</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-phone text-custom-gold"></i>
+                            <span class="text-gray-600">+234 801 234 5678</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-custom-gold"></i>
+                            <span class="text-gray-600">bookings@lekkilet.com</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fab fa-whatsapp text-custom-gold"></i>
+                            <span class="text-gray-600">Chat on WhatsApp</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Facts -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 fade-in">
+                    <h3 class="font-semibold text-gray-900 mb-4">Quick Facts</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Check-in</span>
+                            <span class="font-medium">2:00 PM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Check-out</span>
+                            <span class="font-medium">11:00 AM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Minimum stay</span>
+                            <span class="font-medium">2 nights</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Cancellation</span>
+                            <span class="font-medium">Flexible</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Similar Apartments -->
+    <section class="bg-gray-50 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Similar Apartments</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Similar Apartment 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift transition-all duration-300">
+                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                         alt="Kay's Comfort Loft" 
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Kay's Comfort Loft</h3>
+                        <p class="text-gray-600 mb-4">2-Bedroom apartment in Lekki</p>
+                        <div class="flex justify-between items-center">
+                            <div class="text-lg font-bold text-custom-gold">₦80,000 <span class="text-sm font-normal text-gray-500">/night</span></div>
+                            <a href="apartment-comfort-loft.html" class="text-custom-gold hover:text-amber-600 font-semibold">View Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Similar Apartment 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift transition-all duration-300">
+                    <img src="https://images.unsplash.com/photo-1567496898669-ee935f5f647a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" 
+                         alt="Dynax Place" 
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Dynax Place</h3>
+                        <p class="text-gray-600 mb-4">2-Bedroom executive suite</p>
+                        <div class="flex justify-between items-center">
+                            <div class="text-lg font-bold text-custom-gold">₦70,000 <span class="text-sm font-normal text-gray-500">/night</span></div>
+                            <a href="apartment-dynax.html" class="text-custom-gold hover:text-amber-600 font-semibold">View Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Similar Apartment 3 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift transition-all duration-300">
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80" 
+                         alt="Beachfront Villa" 
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Beachfront Villa</h3>
+                        <p class="text-gray-600 mb-4">4-Bedroom luxury villa</p>
+                        <div class="flex justify-between items-center">
+                            <div class="text-lg font-bold text-custom-gold">₦250,000 <span class="text-sm font-normal text-gray-500">/night</span></div>
+                            <a href="apartment-beachfront.html" class="text-custom-gold hover:text-amber-600 font-semibold">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="brand-font text-2xl font-bold mb-4">
+                        <img style="width: 200px; background-color: black;" src="image/new-removebg-preview.png" alt="Lekkilet Logo">
+                    </h3>
+                    <p class="text-gray-400 mb-4">Premium shortlet apartments for business and leisure travelers.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="apartments.html" class="text-gray-400 hover:text-white transition duration-300">Apartments</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition duration-300">About Us</a></li>
+                        <li><a href="booking.html" class="text-gray-400 hover:text-white transition duration-300">Booking</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition duration-300">Contact Us</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-white transition duration-300">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-2 text-amber-400"></i>
+                            <span>+234 801 234 5678</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-amber-400"></i>
+                            <span>hello@lekkilet.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-amber-400"></i>
+                            <span>Lekki, Lagos, Nigeria</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Lekkilet. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Price Calculation
+        function calculatePrice() {
+            const checkIn = new Date(document.getElementById('checkIn').value);
+            const checkOut = new Date(document.getElementById('checkOut').value);
+            
+            if (checkIn && checkOut && checkOut > checkIn) {
+                const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+                const nightlyRate = 180000;
+                const subtotal = nights * nightlyRate;
+                const cleaningFee = 15000;
+                const serviceFee = 10000;
+                const total = subtotal + cleaningFee + serviceFee;
+                
+                document.getElementById('nightsCount').textContent = nights;
+                document.getElementById('subtotal').textContent = subtotal.toLocaleString();
+                document.getElementById('totalAmount').textContent = total.toLocaleString();
+            }
+        }
+
+        // Set minimum dates
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('checkIn').min = today;
+            document.getElementById('checkOut').min = today;
+            
+            // Add event listeners for date changes
+            document.getElementById('checkIn').addEventListener('change', calculatePrice);
+            document.getElementById('checkOut').addEventListener('change', calculatePrice);
+            
+            // Initialize price calculation
+            calculatePrice();
+        });
+
+        // Booking Form Submission
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const bookingData = Object.fromEntries(formData);
+            
+            // Calculate total nights and amount
+            const checkIn = new Date(bookingData.checkIn);
+            const checkOut = new Date(bookingData.checkOut);
+            const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+            const totalAmount = (nights * 180000) + 15000 + 10000;
+            
+            // Create WhatsApp message
+            const message = `
+🏠 *LEKKILET BOOKING REQUEST* 🏠
+
+*APARTMENT DETAILS*
+🏢 Kay's Full House
+📍 Lekki Phase 1
+💰 ₦180,000 per night
+
+*BOOKING INFORMATION*
+📅 Check-in: ${bookingData.checkIn}
+📅 Check-out: ${bookingData.checkOut}
+🕒 Nights: ${nights}
+👥 Guests: ${bookingData.guests}
+
+*PRICE BREAKDOWN*
+• ${nights} nights: ₦${(nights * 180000).toLocaleString()}
+• Cleaning fee: ₦15,000
+• Service fee: ₦10,000
+• *Total: ₦${totalAmount.toLocaleString()}*
+
+*NEXT STEPS*
+We'll contact you within 1 hour to confirm availability and proceed with payment.
+
+Thank you for choosing Lekkilet! 🎉
+            `.trim();
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/message/5EXA7GAZB5THC1?text=${encodedMessage}`;
+            
+            // Open WhatsApp
+            window.open(whatsappURL, '_blank');
+            
+            // Show confirmation
+            alert('Booking request sent! You will be redirected to WhatsApp to confirm your booking.');
+        });
+
+        // Mobile menu functionality (if needed)
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', function() {
+                // Add mobile menu functionality here if needed
+                alert('Mobile menu would open here');
+            });
+        }
+    </script>
+</body>
+</html>
