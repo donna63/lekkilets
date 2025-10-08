@@ -58,10 +58,35 @@
         .mobile-menu {
             transform: translateX(-100%);
             transition: transform 0.3s ease-in-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            overflow-y: auto;
         }
         
         .mobile-menu.open {
             transform: translateX(0);
+        }
+        
+        /* Dropdown Styles */
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            justify-content: between;
+            padding: 12px 16px;
+            color: #374151;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #f9fafb;
+            color: #4f46e5;
         }
     </style>
 </head>
@@ -73,7 +98,9 @@
                 <!-- Logo -->
                 <div class="flex items-center">
                     <h1 class="brand-font text-2xl font-bold text-indigo-700">
-                        <img style="width: 150px;" src="image/new-removebg-preview.png" alt="Lekkilet Logo" class="transition-transform duration-300 hover:scale-105">
+                        <a href="index.html">
+                            <img style="width: 150px;" src="image/new-removebg-preview.png" alt="Lekkilet Logo" class="transition-transform duration-300 hover:scale-105">
+                        </a>
                     </h1>
                 </div>
                 
@@ -82,14 +109,14 @@
                     <a href="index.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">HOME</a>
                     <a href="apartments.html" class="text-gray-700 hover:text-black font-medium transition transform hover:-translate-y-1">APARTMENTS</a>
                     <a href="about.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">ABOUT US</a>
-                    <a href="booking.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">BOOKING</a>
+                    <!-- <a href="booking.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">BOOKING</a> -->
                     <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">REVIEWS</a>
                     <a href="contact.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">CONTACT</a>
                 </nav>
                 
                 <!-- Book Now button -->
                 <div class="hidden md:flex items-center space-x-4">
-                    <button class="bg-black text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-medium btn-animate">BOOK NOW</button>
+                    <a href="apart.html" class="bg-black text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-medium btn-animate">BOOK NOW</a>
                 </div>
                 
                 <!-- Mobile menu button -->
@@ -98,6 +125,32 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
                 </button>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="mobile-menu md:hidden">
+                <div class="flex flex-col h-full">
+                    <div class="flex justify-between items-center p-4 border-b">
+                        <img style="width: 150px;" src="image/new-removebg-preview.png" alt="Lekkilet Logo">
+                        <button id="close-mobile-menu" class="text-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex-1 p-6 space-y-4 overflow-y-auto">
+                        <a href="index.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">HOME</a>
+                        <a href="apartments.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">APARTMENTS</a>
+                        <a href="about.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">ABOUT US</a>
+                        <!-- <a href="booking.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">BOOKING</a> -->
+                        <a href="#" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">REVIEWS</a>
+                        <a href="contact.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">CONTACT</a>
+                        
+                        <div class="pt-6">
+                            <a href="apart.html" class="w-full bg-black text-white py-3 rounded-md hover:bg-indigo-700 transition font-medium text-center block">BOOK NOW</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -115,15 +168,12 @@
     <!-- Apartments Grid -->
     <section class="py-16">
         <div class="container mx-auto px-4">
-            <!-- Filter Section -->
-  
-
             <!-- Apartments Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Apartment 1 - Kay's Full House -->
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift fade-in">
                     <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                        <img src="image/DSC_38.JPG" 
                              alt="Kay's Full House" 
                              class="w-full h-64 object-cover">
                         <div class="absolute top-4 left-4 bg-custom-gold text-gray-900 px-3 py-1 rounded-full text-sm font-semibold">
@@ -132,13 +182,13 @@
                     </div>
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-gray-900">Kay's Full House</h3>
+                            <h3 class="text-xl font-bold text-gray-900">QuickNest Apartment</h3>
                             <div class="flex items-center">
                                 <i class="fas fa-star text-yellow-400 mr-1"></i>
                                 <span class="text-sm text-gray-600">4.9</span>
                             </div>
                         </div>
-                        <p class="text-gray-600 mb-4">Lekki Phase 1 • 3 Bedrooms • 2 Baths</p>
+                        <p class="text-gray-600 mb-4">• 3 Bedrooms • 3 Baths</p>
                         
                         <div class="space-y-2 mb-4">
                             <div class="flex items-center text-sm text-gray-600">
@@ -147,11 +197,65 @@
                             </div>
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fas fa-bath text-custom-gold mr-2 w-4"></i>
-                                <span>2 bathrooms</span>
+                                <span>3 bathrooms</span>
                             </div>
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fas fa-users text-custom-gold mr-2 w-4"></i>
                                 <span>Sleeps 6 guests</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-wifi text-custom-gold mr-2 w-4"></i>
+                                <span>High-speed WiFi</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center mb-4">
+                            <div>
+                                <div class="text-2xl font-bold text-custom-gold">₦160,000</div>
+                                <div class="text-sm text-gray-500">per night</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex space-x-3">
+                            <a href="QuickNest1.html" class="flex-1 bg-custom-gold text-gray-900 text-center font-semibold py-3 rounded-lg hover:bg-amber-500 transition duration-300 btn-animate">
+                                View Details
+                            </a>
+                            <button class="px-4 py-3 border border-custom-gold text-custom-gold rounded-lg hover:bg-custom-gold hover:text-gray-900 transition duration-300 btn-animate">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Apartment 2 - Kay's Comfort Loft -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift fade-in">
+                    <div class="relative">
+                        <img src="image/DSC_18.JPG" 
+                             alt="Kay's Comfort Loft" 
+                             class="w-full h-64 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-900">QuickNest Apartment 2</h3>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                <span class="text-sm text-gray-600">4.8</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4"> • 4 Bedrooms • 4 Baths</p>
+                        
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-bed text-custom-gold mr-2 w-4"></i>
+                                <span>4 bedrooms</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-bath text-custom-gold mr-2 w-4"></i>
+                                <span>4 bathrooms</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-users text-custom-gold mr-2 w-4"></i>
+                                <span>Sleeps 8 guests</span>
                             </div>
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fas fa-wifi text-custom-gold mr-2 w-4"></i>
@@ -167,61 +271,7 @@
                         </div>
                         
                         <div class="flex space-x-3">
-                            <a href="apartmentdetails.html" class="flex-1 bg-custom-gold text-gray-900 text-center font-semibold py-3 rounded-lg hover:bg-amber-500 transition duration-300 btn-animate">
-                                View Details
-                            </a>
-                            <button class="px-4 py-3 border border-custom-gold text-custom-gold rounded-lg hover:bg-custom-gold hover:text-gray-900 transition duration-300 btn-animate">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Apartment 2 - Kay's Comfort Loft -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift fade-in">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                             alt="Kay's Comfort Loft" 
-                             class="w-full h-64 object-cover">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-gray-900">Kay's Comfort Loft</h3>
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                <span class="text-sm text-gray-600">4.8</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-4">Lekki Phase 1 • 2 Bedrooms • 2 Baths</p>
-                        
-                        <div class="space-y-2 mb-4">
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-bed text-custom-gold mr-2 w-4"></i>
-                                <span>2 bedrooms</span>
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-bath text-custom-gold mr-2 w-4"></i>
-                                <span>2 bathrooms</span>
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-users text-custom-gold mr-2 w-4"></i>
-                                <span>Sleeps 4 guests</span>
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-swimming-pool text-custom-gold mr-2 w-4"></i>
-                                <span>Swimming pool</span>
-                            </div>
-                        </div>
-                        
-                        <div class="flex justify-between items-center mb-4">
-                            <div>
-                                <div class="text-2xl font-bold text-custom-gold">₦80,000</div>
-                                <div class="text-sm text-gray-500">per night</div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex space-x-3">
-                            <a href="apartment-kays-comfort-loft.html" class="flex-1 bg-custom-gold text-gray-900 text-center font-semibold py-3 rounded-lg hover:bg-amber-500 transition duration-300 btn-animate">
+                            <a href="Quicknest2.html" class="flex-1 bg-custom-gold text-gray-900 text-center font-semibold py-3 rounded-lg hover:bg-amber-500 transition duration-300 btn-animate">
                                 View Details
                             </a>
                             <button class="px-4 py-3 border border-custom-gold text-custom-gold rounded-lg hover:bg-custom-gold hover:text-gray-900 transition duration-300 btn-animate">
@@ -234,48 +284,48 @@
                 <!-- Apartment 3 - Dynax Place -->
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift fade-in">
                     <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1567496898669-ee935f5f647a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" 
+                        <img src="image/DSC_04.JPG" 
                              alt="Dynax Place" 
                              class="w-full h-64 object-cover">
                     </div>
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-gray-900">Dynax Place</h3>
+                            <h3 class="text-xl font-bold text-gray-900">Fifth Nest </h3>
                             <div class="flex items-center">
                                 <i class="fas fa-star text-yellow-400 mr-1"></i>
                                 <span class="text-sm text-gray-600">4.7</span>
                             </div>
                         </div>
-                        <p class="text-gray-600 mb-4">Victoria Island • 2 Bedrooms • 2 Baths</p>
+                        <p class="text-gray-600 mb-4"> • 4 Bedrooms • 4 Baths</p>
                         
                         <div class="space-y-2 mb-4">
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fas fa-bed text-custom-gold mr-2 w-4"></i>
-                                <span>2 bedrooms</span>
+                                <span>4 bedrooms</span>
                             </div>
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fas fa-bath text-custom-gold mr-2 w-4"></i>
-                                <span>2 bathrooms</span>
+                                <span>4 bathrooms</span>
                             </div>
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fas fa-users text-custom-gold mr-2 w-4"></i>
-                                <span>Sleeps 4 guests</span>
+                                <span>Sleeps 8 guests</span>
                             </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-dumbbell text-custom-gold mr-2 w-4"></i>
-                                <span>Fitness center</span>
+                             <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-wifi text-custom-gold mr-2 w-4"></i>
+                                <span>High-speed WiFi</span>
                             </div>
                         </div>
                         
                         <div class="flex justify-between items-center mb-4">
                             <div>
-                                <div class="text-2xl font-bold text-custom-gold">₦70,000</div>
+                                <div class="text-2xl font-bold text-custom-gold">₦310,000</div>
                                 <div class="text-sm text-gray-500">per night</div>
                             </div>
                         </div>
                         
                         <div class="flex space-x-3">
-                            <a href="apartment-dynax-place.html" class="flex-1 bg-custom-gold text-gray-900 text-center font-semibold py-3 rounded-lg hover:bg-amber-500 transition duration-300 btn-animate">
+                            <a href="Fifthnest1.html" class="flex-1 bg-custom-gold text-gray-900 text-center font-semibold py-3 rounded-lg hover:bg-amber-500 transition duration-300 btn-animate">
                                 View Details
                             </a>
                             <button class="px-4 py-3 border border-custom-gold text-custom-gold rounded-lg hover:bg-custom-gold hover:text-gray-900 transition duration-300 btn-animate">
@@ -288,7 +338,7 @@
                 <!-- Apartment 4 - Beachfront Villa -->
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift fade-in">
                     <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80" 
+                        <img src="image/DSC_03.JPG" 
                              alt="Beachfront Villa" 
                              class="w-full h-64 object-cover">
                         <div class="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
@@ -297,150 +347,42 @@
                     </div>
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-gray-900">Beachfront Villa</h3>
+                            <h3 class="text-xl font-bold text-gray-900">Fifth Nest 2</h3>
                             <div class="flex items-center">
                                 <i class="fas fa-star text-yellow-400 mr-1"></i>
                                 <span class="text-sm text-gray-600">5.0</span>
                             </div>
                         </div>
-                        <p class="text-gray-600 mb-4">Ikoyi • 4 Bedrooms • 3 Baths</p>
+                        <p class="text-gray-600 mb-4"> • 5 Bedrooms • 5 Baths</p>
                         
                         <div class="space-y-2 mb-4">
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fas fa-bed text-custom-gold mr-2 w-4"></i>
-                                <span>4 bedrooms</span>
+                                <span>5 bedrooms</span>
                             </div>
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fas fa-bath text-custom-gold mr-2 w-4"></i>
-                                <span>3 bathrooms</span>
+                                <span>5 bathrooms</span>
                             </div>
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fas fa-users text-custom-gold mr-2 w-4"></i>
-                                <span>Sleeps 8 guests</span>
+                                <span>Sleeps 10 guests</span>
                             </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-swimming-pool text-custom-gold mr-2 w-4"></i>
-                                <span>Private pool</span>
+                           <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-wifi text-custom-gold mr-2 w-4"></i>
+                                <span>High-speed WiFi</span>
                             </div>
                         </div>
                         
                         <div class="flex justify-between items-center mb-4">
                             <div>
-                                <div class="text-2xl font-bold text-custom-gold">₦250,000</div>
+                                <div class="text-2xl font-bold text-custom-gold">₦350,000</div>
                                 <div class="text-sm text-gray-500">per night</div>
                             </div>
                         </div>
                         
                         <div class="flex space-x-3">
-                            <a href="apartment-beachfront-villa.html" class="flex-1 bg-custom-gold text-gray-900 text-center font-semibold py-3 rounded-lg hover:bg-amber-500 transition duration-300 btn-animate">
-                                View Details
-                            </a>
-                            <button class="px-4 py-3 border border-custom-gold text-custom-gold rounded-lg hover:bg-custom-gold hover:text-gray-900 transition duration-300 btn-animate">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Apartment 5 - Executive Penthouse -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift fade-in">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                             alt="Executive Penthouse" 
-                             class="w-full h-64 object-cover">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-gray-900">Executive Penthouse</h3>
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                <span class="text-sm text-gray-600">4.9</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-4">Victoria Island • 3 Bedrooms • 3 Baths</p>
-                        
-                        <div class="space-y-2 mb-4">
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-bed text-custom-gold mr-2 w-4"></i>
-                                <span>3 bedrooms</span>
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-bath text-custom-gold mr-2 w-4"></i>
-                                <span>3 bathrooms</span>
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-users text-custom-gold mr-2 w-4"></i>
-                                <span>Sleeps 6 guests</span>
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-concierge-bell text-custom-gold mr-2 w-4"></i>
-                                <span>Concierge service</span>
-                            </div>
-                        </div>
-                        
-                        <div class="flex justify-between items-center mb-4">
-                            <div>
-                                <div class="text-2xl font-bold text-custom-gold">₦120,000</div>
-                                <div class="text-sm text-gray-500">per night</div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex space-x-3">
-                            <a href="apartment-executive-penthouse.html" class="flex-1 bg-custom-gold text-gray-900 text-center font-semibold py-3 rounded-lg hover:bg-amber-500 transition duration-300 btn-animate">
-                                View Details
-                            </a>
-                            <button class="px-4 py-3 border border-custom-gold text-custom-gold rounded-lg hover:bg-custom-gold hover:text-gray-900 transition duration-300 btn-animate">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Apartment 6 - Garden Retreat -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift fade-in">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                             alt="Garden Retreat" 
-                             class="w-full h-64 object-cover">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-gray-900">Garden Retreat</h3>
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                <span class="text-sm text-gray-600">4.8</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-4">Ikoyi • 3 Bedrooms • 2.5 Baths</p>
-                        
-                        <div class="space-y-2 mb-4">
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-bed text-custom-gold mr-2 w-4"></i>
-                                <span>3 bedrooms</span>
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-bath text-custom-gold mr-2 w-4"></i>
-                                <span>2.5 bathrooms</span>
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-users text-custom-gold mr-2 w-4"></i>
-                                <span>Sleeps 6 guests</span>
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-tree text-custom-gold mr-2 w-4"></i>
-                                <span>Private garden</span>
-                            </div>
-                        </div>
-                        
-                        <div class="flex justify-between items-center mb-4">
-                            <div>
-                                <div class="text-2xl font-bold text-custom-gold">₦140,000</div>
-                                <div class="text-sm text-gray-500">per night</div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex space-x-3">
-                            <a href="apartment-garden-retreat.html" class="flex-1 bg-custom-gold text-gray-900 text-center font-semibold py-3 rounded-lg hover:bg-amber-500 transition duration-300 btn-animate">
+                            <a href="Fifthnest2.html" class="flex-1 bg-custom-gold text-gray-900 text-center font-semibold py-3 rounded-lg hover:bg-amber-500 transition duration-300 btn-animate">
                                 View Details
                             </a>
                             <button class="px-4 py-3 border border-custom-gold text-custom-gold rounded-lg hover:bg-custom-gold hover:text-gray-900 transition duration-300 btn-animate">
@@ -539,9 +481,53 @@
     </footer>
 
     <script>
+        // Mobile Menu Functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Mobile Menu Toggle
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.add('open');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            });
+        }
+
+        if (closeMobileMenu) {
+            closeMobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+        }
+
+        // Close mobile menu when clicking on links
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target) && mobileMenu.classList.contains('open')) {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        });
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        });
+
         // Simple filter functionality (can be enhanced)
         document.addEventListener('DOMContentLoaded', function() {
-            // Add any JavaScript functionality needed for filters
             console.log('Apartments page loaded');
         });
     </script>

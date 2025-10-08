@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Lekkilet Premium Shortlets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Custom colors */
+        .bg-custom-gold { background-color: #d4af37; }
+        .text-custom-gold { color: #d4af37; }
+        .border-custom-gold { border-color: #d4af37; }
+        
+        /* Terms sections */
+        .terms-section {
+            border-left: 4px solid #d4af37;
+            transition: all 0.3s ease;
+        }
+        
+        .terms-section:hover {
+            background-color: #fefce8;
+            transform: translateX(5px);
+        }
+        
+        /* Table styling */
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        .terms-table th, .terms-table td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .terms-table th {
+            background-color: #f8fafc;
+            font-weight: 600;
+        }
+        
+        .terms-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
+        /* Dropdown Styles */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 240px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+            z-index: 1000;
+            overflow: hidden;
+        }
+        
+        .dropdown-menu.show {
+            display: block;
+        }
+        
+        .dropdown-toggle {
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown-toggle.rotated {
+            transform: rotate(180deg);
+        }
+        
+        /* Sticky table of contents */
+        .toc-sticky {
+            position: sticky;
+            top: 100px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header/Navigation -->
+    <header id="main-header" class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-2 py-2">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <h1 class="brand-font text-2xl font-bold text-indigo-700">
+                        <a href="index.html">
+                            <img style="width: 150px;" src="image/new-removebg-preview.png" alt="Lekkilet Logo" class="transition-transform duration-300 hover:scale-105">
+                        </a>
+                    </h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">HOME</a>
+                    
+                    <!-- Apartments Dropdown -->
+                    <div class="relative group">
+                        <button id="apartments-toggle" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1 flex items-center focus:outline-none">
+                            APARTMENTS
+                            <i class="fas fa-chevron-down text-xs ml-1 dropdown-toggle transition-transform duration-300"></i>
+                        </button>
+                        
+                        <!-- Dropdown Menu -->
+                        <div id="apartments-dropdown" class="dropdown-menu">
+                            <!-- quicknest Apartments -->
+                            <div class="dropdown-item has-submenu">
+                                <a href="apartmentdetails.html" class="flex justify-between items-center w-full">
+                                    <span>Quick Nest Apartment</span>
+                                    <i class="fas fa-chevron-right text-xs text-gray-400"></i>
+                                </a>
+                            </div>
+                            
+                            <!-- Quicknest Apartments -->
+                            <div class="dropdown-item has-submenu">
+                                <a href="#" class="flex justify-between items-center w-full">
+                                    <span>Quick Nest Apartment 2</span>
+                                </a>
+                            </div>
+
+                            <!-- fifth nest apartment -->
+                            <div class="dropdown-item has-submenu">
+                                <a href="#" class="flex justify-between items-center w-full">
+                                    <span>Fifth Nest Apartment</span>
+                                </a>
+                            </div>
+
+                            <!-- fifth nest apartment -->
+                            <div class="dropdown-item has-submenu">
+                                <a href="#" class="flex justify-between items-center w-full">
+                                    <span>Fifth Nest Apartment 2</span>
+                                </a>
+                            </div>
+                            
+                            <!-- All Apartments Link -->
+                            <a href="apartments.html" class="dropdown-item border-t border-gray-100 mt-2 bg-black ">
+                                <i class="fas fa-list text-white mr-3"></i>
+                                View All Apartments
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <a href="about.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">ABOUT US</a>
+                    <a href="booking.html" class="text-gray-700 hover:text-black font-medium transition transform hover:-translate-y-1">BOOKING</a>
+                    <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">REVIEWS</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">CONTACT</a>
+                </nav>
+                
+                <!-- Book Now button -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="booking.html" class="bg-black text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-medium">BOOK NOW</a>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none transition-transform hover:scale-110">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-white z-40 md:hidden">
+                <div class="flex flex-col h-full">
+                    <div class="flex justify-between items-center p-4 border-b">
+                        <img style="width: 150px;" src="image/new-removebg-preview.png" alt="Lekkilet Logo">
+                        <button id="close-mobile-menu" class="text-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex-1 p-6 space-y-4 overflow-y-auto">
+                        <a href="index.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">HOME</a>
+                        
+                        <!-- Mobile Apartments Dropdown -->
+                        <div class="border-b border-gray-200 pb-4">
+                            <button id="mobile-apartments-toggle" class="w-full flex justify-between items-center text-lg font-medium text-gray-700 py-2">
+                                <span>APARTMENTS</span>
+                                <i class="fas fa-chevron-down text-xs dropdown-toggle transition-transform duration-300"></i>
+                            </button>
+                            
+                            <div id="mobile-apartments-dropdown" class="mt-2 space-y-2 hidden">
+                                <!--Quicnest Apartments -->
+                                <div class="ml-4">
+                                    <a href="apartmentdetails.html" class="block text-gray-600 py-2">QuickNest Apartment</a>
+                                </div>
+
+                                <div class="ml-4">
+                                    <a href="#" class="block text-gray-600 py-2">QuickNest Apartment 2</a>
+                                </div>
+                                
+                                <!-- fifth Apartments -->
+                                <div class="ml-4">
+                                    <a href="#" class="block text-gray-600 py-2">Fifth Nest Apartment</a>
+                                </div>
+
+                                <!-- fifth Apartments -->
+                                <div class="ml-4">
+                                    <a href="#" class="block text-gray-600 py-2">Fifth Nest Apartment 2</a>
+                                </div>
+                                
+                                <a href="apartments.html" class="block text-white font-medium py-2 ml-4 bg-black p-4">View All Apartments</a>
+                            </div>
+                        </div>
+                        
+                        <a href="about.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">ABOUT US</a>
+                        <a href="booking.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">BOOKING</a>
+                        <a href="#" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">REVIEWS</a>
+                        <a href="contact.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">CONTACT</a>
+                        
+                        <div class="pt-6">
+                            <a href="booking.html" class="w-full bg-black text-white py-3 rounded-md hover:bg-indigo-700 transition font-medium text-center block">BOOK NOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 bg-gradient-to-r from-blue-900 to-purple-900 text-white overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 brand-font">Terms of Service</h1>
+                <p class="text-xl text-gray-200">Legal terms governing your use of Lekkilet services and accommodations</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-12">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Table of Contents -->
+            <div class="lg:col-span-1">
+                <div class="toc-sticky bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Table of Contents</h3>
+                    <nav class="space-y-2">
+                        <a href="#acceptance" class="block text-gray-600 hover:text-custom-gold transition py-1 border-l-2 border-transparent hover:border-custom-gold pl-3">1. Acceptance of Terms</a>
+                        <a href="#definitions" class="block text-gray-600 hover:text-custom-gold transition py-1 border-l-2 border-transparent hover:border-custom-gold pl-3">2. Definitions</a>
+                        <a href="#bookings" class="block text-gray-600 hover:text-custom-gold transition py-1 border-l-2 border-transparent hover:border-custom-gold pl-3">3. Bookings & Payments</a>
+                        <a href="#cancellation" class="block text-gray-600 hover:text-custom-gold transition py-1 border-l-2 border-transparent hover:border-custom-gold pl-3">4. Cancellation Policy</a>
+                        <a href="#checkin" class="block text-gray-600 hover:text-custom-gold transition py-1 border-l-2 border-transparent hover:border-custom-gold pl-3">5. Check-in & Check-out</a>
+                        <a href="#guest" class="block text-gray-600 hover:text-custom-gold transition py-1 border-l-2 border-transparent hover:border-custom-gold pl-3">6. Guest Responsibilities</a>
+                        <a href="#property" class="block text-gray-600 hover:text-custom-gold transition py-1 border-l-2 border-transparent hover:border-custom-gold pl-3">7. Property Rules</a>
+                        <a href="#liability" class="block text-gray-600 hover:text-custom-gold transition py-1 border-l-2 border-transparent hover:border-custom-gold pl-3">8. Liability & Insurance</a>
+                        <a href="#privacy" class="block text-gray-600 hover:text-custom-gold transition py-1 border-l-2 border-transparent hover:border-custom-gold pl-3">9. Privacy & Data</a>
+                        <a href="#termination" class="block text-gray-600 hover:text-custom-gold transition py-1 border-l-2 border-transparent hover:border-custom-gold pl-3">10. Termination</a>
+                        <a href="#disputes" class="block text-gray-600 hover:text-custom-gold transition py-1 border-l-2 border-transparent hover:border-custom-gold pl-3">11. Dispute Resolution</a>
+                        <a href="#changes" class="block text-gray-600 hover:text-custom-gold transition py-1 border-l-2 border-transparent hover:border-custom-gold pl-3">12. Changes to Terms</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Terms Content -->
+            <div class="lg:col-span-3 space-y-8">
+                <!-- Last Updated -->
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-exclamation-triangle text-yellow-600 mr-3"></i>
+                        <div>
+                            <h3 class="font-semibold text-yellow-800">Last Updated: January 2025</h3>
+                            <p class="text-yellow-700 text-sm">Please read these terms carefully before making a booking</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 1: Acceptance of Terms -->
+                <div id="acceptance" class="bg-white rounded-2xl shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">1. Acceptance of Terms</h2>
+                    <div class="terms-section p-6 bg-white rounded-lg">
+                        <p class="text-gray-600 mb-4">
+                            By accessing, browsing, or making a reservation through Lekkilet Premium Shortlets ("we," "us," "our"), you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.
+                        </p>
+                        <p class="text-gray-600">
+                            These terms constitute a legally binding agreement between you and Lekkilet Premium Shortlets. If you disagree with any part of these terms, you may not access our services or make bookings.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Section 2: Definitions -->
+                <div id="definitions" class="bg-white rounded-2xl shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">2. Definitions</h2>
+                    <div class="terms-section p-6 bg-white rounded-lg">
+                        <ul class="text-gray-600 space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-chevron-right text-custom-gold mt-1 mr-2"></i>
+                                <span><strong>Guest:</strong> Any person who makes a booking or stays at our property</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-chevron-right text-custom-gold mt-1 mr-2"></i>
+                                <span><strong>Booking:</strong> A reservation for accommodation at Lekkilet properties</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-chevron-right text-custom-gold mt-1 mr-2"></i>
+                                <span><strong>Caution Fee:</strong> A refundable security deposit held against damages</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-chevron-right text-custom-gold mt-1 mr-2"></i>
+                                <span><strong>Property:</strong> Any apartment, villa, or accommodation managed by Lekkilet</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 3: Bookings & Payments -->
+                <div id="bookings" class="bg-white rounded-2xl shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">3. Bookings & Payments</h2>
+                    <div class="terms-section p-6 bg-white rounded-lg">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Payment Terms</h3>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Full payment is required to confirm your booking</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>We accept bank transfers, credit/debit cards, and other approved payment methods</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>A caution fee is required and will be refunded after check-out, subject to property inspection</span>
+                            </li>
+                        </ul>
+
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Booking Requirements</h3>
+                        <ul class="text-gray-600 space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-user-check text-blue-500 mt-1 mr-2"></i>
+                                <span>Guests must be at least 21 years old to make a booking</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-id-card text-blue-500 mt-1 mr-2"></i>
+                                <span>Valid government-issued ID is required at check-in</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-users text-blue-500 mt-1 mr-2"></i>
+                                <span>Maximum occupancy limits must be strictly observed</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 4: Cancellation Policy -->
+                <div id="cancellation" class="bg-white rounded-2xl shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">4. Cancellation Policy</h2>
+                    <div class="terms-section p-6 bg-white rounded-lg">
+                        <table class="terms-table">
+                            <thead>
+                                <tr>
+                                    <th>Cancellation Timeframe</th>
+                                    <th>Refund Amount</th>
+                                    <th>Conditions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Within 48 hours of booking</td>
+                                    <td>70% refund</td>
+                                    <td>Must be more than 14 days before check-in</td>
+                                </tr>
+                                <tr>
+                                    <td>7+ days before check-in</td>
+                                    <td>50% refund</td>
+                                    <td>Minus 30% cancellation fee</td>
+                                </tr>
+                                <tr>
+                                    <td>Less than 7 days before check-in</td>
+                                    <td>No refund</td>
+                                    <td>Full amount forfeited</td>
+                                </tr>
+                                <tr>
+                                    <td>Immediate cancellation after payment</td>
+                                    <td>60% refund</td>
+                                    <td>40% cancellation fee applies</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-gray-600 mt-4 text-sm">
+                            <i class="fas fa-info-circle text-blue-500 mr-1"></i>
+                            All cancellation requests must be submitted in writing via email to bookings@lekkilet.com
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Section 5: Check-in & Check-out -->
+                <div id="checkin" class="bg-white rounded-2xl shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">5. Check-in & Check-out</h2>
+                    <div class="terms-section p-6 bg-white rounded-lg">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2 flex items-center">
+                                    <i class="fas fa-sign-in-alt text-green-500 mr-2"></i>
+                                    Check-in
+                                </h4>
+                                <ul class="text-gray-600 space-y-2">
+                                    <li>Standard time: 2:00 PM</li>
+                                    <li>Early check-in: Subject to availability</li>
+                                    <li>ID verification required</li>
+                                    <li>Property orientation provided</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2 flex items-center">
+                                    <i class="fas fa-sign-out-alt text-red-500 mr-2"></i>
+                                    Check-out
+                                </h4>
+                                <ul class="text-gray-600 space-y-2">
+                                    <li>Standard time: 12:00 PM</li>
+                                    <li>Late check-out: Fees apply</li>
+                                    <li>Property inspection conducted</li>
+                                    <li>Caution fee refund processed</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 6: Guest Responsibilities -->
+                <div id="guest" class="bg-white rounded-2xl shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">6. Guest Responsibilities</h2>
+                    <div class="terms-section p-6 bg-white rounded-lg">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">During Your Stay</h3>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-alt text-blue-500 mt-1 mr-2"></i>
+                                <span>Maintain the property in good condition</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-bolt text-yellow-500 mt-1 mr-2"></i>
+                                <span>Conserve electricity and water resources</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-volume-mute text-green-500 mt-1 mr-2"></i>
+                                <span>Respect noise regulations and neighbors</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-exclamation-triangle text-red-500 mt-1 mr-2"></i>
+                                <span>Report any issues or damages immediately</span>
+                            </li>
+                        </ul>
+
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Prohibited Activities</h3>
+                        <ul class="text-gray-600 space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-ban text-red-500 mt-1 mr-2"></i>
+                                <span>Illegal activities or substance use</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-ban text-red-500 mt-1 mr-2"></i>
+                                <span>Smoking inside the property</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-ban text-red-500 mt-1 mr-2"></i>
+                                <span>Unauthorized commercial activities</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-ban text-red-500 mt-1 mr-2"></i>
+                                <span>Pets without prior approval</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 7: Property Rules -->
+                <div id="property" class="bg-white rounded-2xl shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">7. Property Rules</h2>
+                    <div class="terms-section p-6 bg-white rounded-lg">
+                        <div class="space-y-4">
+                            <div class="border-b pb-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">Smoking Policy</h4>
+                                <p class="text-gray-600">Strictly prohibited indoors. ₦100,000 penalty for violations.</p>
+                            </div>
+                            <div class="border-b pb-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">Guest Limits</h4>
+                                <p class="text-gray-600">QuickNest: Max 8 guests. FifthNest: Max 10 guests. No unregistered visitors.</p>
+                            </div>
+                            <div class="border-b pb-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">Commercial Shoots</h4>
+                                <p class="text-gray-600">Prior approval required. ₦500,000 fine for unauthorized shoots.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Decorations</h4>
+                                <p class="text-gray-600">No attachments to walls/ceilings. ₦500,000 repair charge for violations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 8: Liability & Insurance -->
+                <div id="liability" class="bg-white rounded-2xl shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">8. Liability & Insurance</h2>
+                    <div class="terms-section p-6 bg-white rounded-lg">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Guest Liability</h3>
+                        <p class="text-gray-600 mb-4">
+                            Guests are fully responsible for any damage, loss, or theft of property contents during their stay. Costs exceeding the caution fee must be settled immediately.
+                        </p>
+
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Limitation of Liability</h3>
+                        <p class="text-gray-600 mb-4">
+                            Lekkilet shall not be liable for any indirect, incidental, or consequential damages, including but not limited to loss of enjoyment, travel delays, or personal injury, except where required by law.
+                        </p>
+
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Personal Belongings</h3>
+                        <p class="text-gray-600">
+                            Guests are advised to secure their personal belongings. Lekkilet is not responsible for lost, stolen, or damaged personal items.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Section 9: Privacy & Data -->
+                <div id="privacy" class="bg-white rounded-2xl shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">9. Privacy & Data Protection</h2>
+                    <div class="terms-section p-6 bg-white rounded-lg">
+                        <p class="text-gray-600 mb-4">
+                            We collect and process personal data in accordance with our Privacy Policy. By using our services, you consent to such processing and warrant that all data provided is accurate.
+                        </p>
+                        <p class="text-gray-600">
+                            For complete details on how we handle your personal information, please refer to our <a href="privacy-policy.html" class="text-custom-gold hover:underline">Privacy Policy</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Section 10: Termination -->
+                <div id="termination" class="bg-white rounded-2xl shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">10. Termination</h2>
+                    <div class="terms-section p-6 bg-white rounded-lg">
+                        <p class="text-gray-600 mb-4">
+                            Lekkilet reserves the right to terminate any booking or refuse service at our discretion, particularly in cases of:
+                        </p>
+                        <ul class="text-gray-600 space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                <span>Violation of these Terms of Service</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                <span>Illegal or disruptive behavior</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                <span>Property damage or misuse</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                <span>Exceeding maximum occupancy limits</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 11: Dispute Resolution -->
+                <div id="disputes" class="bg-white rounded-2xl shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">11. Dispute Resolution</h2>
+                    <div class="terms-section p-6 bg-white rounded-lg">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Governing Law</h3>
+                        <p class="text-gray-600 mb-4">
+                            These Terms shall be governed by and construed in accordance with the laws of the Federal Republic of Nigeria.
+                        </p>
+
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Dispute Process</h3>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-handshake text-green-500 mt-1 mr-2"></i>
+                                <span>First attempt: Direct negotiation with management</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-balance-scale text-blue-500 mt-1 mr-2"></i>
+                                <span>Second attempt: Mediation by neutral third party</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-gavel text-red-500 mt-1 mr-2"></i>
+                                <span>Final resolution: Legal proceedings in Nigerian courts</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 12: Changes to Terms -->
+                <div id="changes" class="bg-white rounded-2xl shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">12. Changes to Terms</h2>
+                    <div class="terms-section p-6 bg-white rounded-lg">
+                        <p class="text-gray-600 mb-4">
+                            Lekkilet reserves the right to modify these Terms of Service at any time. Changes will be effective immediately upon posting on our website.
+                        </p>
+                        <p class="text-gray-600">
+                            Continued use of our services after any changes constitutes acceptance of the modified terms. We recommend reviewing these terms periodically for updates.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Agreement Section -->
+                <div class="bg-custom-gold rounded-2xl shadow-lg p-8 text-center">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Agreement</h2>
+                    <p class="text-gray-800 mb-6">
+                        By making a booking with Lekkilet Premium Shortlets, you acknowledge that you have read, understood, and agree to be bound by all the terms and conditions outlined in this document.
+                    </p>
+                    <div class="border-t border-amber-600 pt-6">
+                        <p class="text-gray-800 font-semibold">For questions regarding these terms, please contact:</p>
+                        <p class="text-xl font-bold text-gray-900">legal@lekkilet.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="brand-font text-2xl font-bold mb-4">
+                        <img style="width: 200px; background-color: black;" src="image/new-removebg-preview.png" alt="Lekkilet Logo">
+                    </h3>
+                    <p class="text-gray-400 mb-4">Premium shortlet apartments for business and leisure travelers.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="apart.html" class="text-gray-400 hover:text-white transition duration-300">Apartments</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition duration-300">About Us</a></li>
+                        <!-- <li><a href="booking.html" class="text-gray-400 hover:text-white transition duration-300">Booking</a></li> -->
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="privacypolicy.html" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="text-gray-400 hover:text-white transition duration-300">Terms of Service</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition duration-300">Contact Us</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-white transition duration-300">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-2 text-amber-400"></i>
+                            <span>+234 911 346 6296 or +234 916 631 4718</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-amber-400"></i>
+                            <span>Quicknestresidence@gmail.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-amber-400"></i>
+                            <span>4 & 5 bedroom address:  5 Kola Motajo Cl ilasan, Ikate Lekki 106104, Lagos, Nigeria</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Lekkilet. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu and Smooth Scrolling -->
+    <script>
+        // Mobile Menu Functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileApartmentsToggle = document.getElementById('mobile-apartments-toggle');
+        const mobileApartmentsDropdown = document.getElementById('mobile-apartments-dropdown');
+        const mobileDropdownToggle = mobileApartmentsToggle?.querySelector('.dropdown-toggle');
+
+        // Desktop Apartments Dropdown
+        const apartmentsToggle = document.getElementById('apartments-toggle');
+        const apartmentsDropdown = document.getElementById('apartments-dropdown');
+        const dropdownToggle = apartmentsToggle?.querySelector('.dropdown-toggle');
+
+        if (apartmentsToggle) {
+            apartmentsToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                apartmentsDropdown.classList.toggle('show');
+                dropdownToggle.classList.toggle('rotated');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function() {
+                apartmentsDropdown.classList.remove('show');
+                dropdownToggle.classList.remove('rotated');
+            });
+
+            // Prevent dropdown from closing when clicking inside
+            apartmentsDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+
+        // Mobile Menu Toggle
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.add('open');
+            });
+        }
+
+        if (closeMobileMenu) {
+            closeMobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        }
+
+        // Mobile Apartments Dropdown
+        if (mobileApartmentsToggle) {
+            mobileApartmentsToggle.addEventListener('click', function() {
+                mobileApartmentsDropdown.classList.toggle('hidden');
+                mobileDropdownToggle.classList.toggle('rotated');
+            });
+        }
+
+        // Close mobile menu when clicking on links
+        const mobileMenuLinks = mobileMenu?.querySelectorAll('a');
+        if (mobileMenuLinks) {
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                });
+            });
+        }
+
+        // Smooth scrolling for table of contents
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight active section in table of contents
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('div[id]');
+            const navLinks = document.querySelectorAll('.toc-sticky a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-custom-gold', 'border-custom-gold');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('text-custom-gold', 'border-custom-gold');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

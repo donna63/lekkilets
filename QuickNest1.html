@@ -282,6 +282,16 @@
             box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
         }
     </style>
+
+    <!-- Add this before closing </head> -->
+    <!-- In your <head> section -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    // Initialize EmailJS with your public key
+    (function() {
+        emailjs.init("vRgGNPAWHSIJOJW2P");
+    })();
+</script>
 </head>
 <body class="bg-gray-50">
     <!-- Header/Navigation -->
@@ -308,24 +318,40 @@
                         
                         <!-- Dropdown Menu -->
                         <div id="apartments-dropdown" class="dropdown-menu">
-                            <!-- Lekki Apartments -->
+                            <!-- quicknest Apartments -->
                             <div class="dropdown-item has-submenu">
-                                <a href="lekki.html" class="flex justify-between items-center w-full">
-                                    <span>Lekki Apartments</span>
+                                <a href="QuickNest1.html" class="flex justify-between items-center w-full">
+                                    <span>Quick Nest Apartment</span>
                                     <i class="fas fa-chevron-right text-xs text-gray-400"></i>
                                 </a>
                             </div>
                             
-                            <!-- Victoria Island Apartments -->
+                            <!-- Quicknest Apartments -->
                             <div class="dropdown-item has-submenu">
-                                <a href="victoria-island.html" class="flex justify-between items-center w-full">
-                                    <span>Victoria Island</span>
-                                    <i class="fas fa-chevron-right text-xs text-gray-400"></i>
+                                <a href="Quicknest2.html" class="flex justify-between items-center w-full">
+                                    <span>Quick Nest Apartment 2</span>
+                                    <!-- <i class="fas fa-chevron-right text-xs text-gray-400"></i> -->
+                                </a>
+                            </div>
+
+                            <!-- fith next apartment -->
+                            <div class="dropdown-item has-submenu">
+                                <a href="#" class="flex justify-between items-center w-full">
+                                    <span>Fift Nest Apartment </span>
+                                    <!-- <i class="fas fa-chevron-right text-xs text-gray-400"></i> -->
+                                </a>
+                            </div>
+
+                            <!-- fith next apartment -->
+                            <div class="dropdown-item has-submenu">
+                                <a href="#" class="flex justify-between items-center w-full">
+                                    <span>Fift Nest Apartment 2</span>
+                                    <!-- <i class="fas fa-chevron-right text-xs text-gray-400"></i> -->
                                 </a>
                             </div>
                             
                             <!-- All Apartments Link -->
-                            <a href="apartments.html" class="dropdown-item border-t border-gray-100 mt-2 bg-black ">
+                            <a href="apart.html" class="dropdown-item border-t border-gray-100 mt-2 bg-black ">
                                 <i class="fas fa-list text-white mr-3"></i>
                                 View All Apartments
                             </a>
@@ -373,17 +399,26 @@
                             </button>
                             
                             <div id="mobile-apartments-dropdown" class="mt-2 space-y-2 hidden">
-                                <!-- Lekki Apartments -->
+                                <!--Quicnest Apartments -->
                                 <div class="ml-4">
-                                    <a href="lekki.html" class="block text-gray-600 py-2">Lekki Apartments</a>
+                                    <a href="QuickNest1.html" class="block text-gray-600 py-2">QuickNest  Apartment</a>
+                                </div>
+
+                                <div class="ml-4">
+                                    <a href="Quicknest2.html" class="block text-gray-600 py-2">QuickNest  Apartment 2</a>
                                 </div>
                                 
-                                <!-- Victoria Island Apartments -->
+                                <!-- fifth Apartments -->
                                 <div class="ml-4">
-                                    <a href="victoria-island.html" class="block text-gray-600 py-2">Victoria Island</a>
+                                    <a href="#" class="block text-gray-600 py-2">Fifth Nest Apartment </a>
+                                </div>
+
+                                <!-- fifth Apartments -->
+                                <div class="ml-4">
+                                    <a href="#" class="block text-gray-600 py-2">Fifth Nest Apartment 2</a>
                                 </div>
                                 
-                                <a href="apartments.html" class="block text-white font-medium py-2 ml-4 bg-black p-4">View All Apartments</a>
+                                <a href="apart.html" class="block text-white font-medium py-2 ml-4 bg-black p-4">View All Apartments</a>
                             </div>
                         </div>
                         
@@ -402,13 +437,14 @@
     </header>
 
     <!-- Apartment Hero Section -->
-    <section class="relative h-96 bg-gradient-to-r from-blue-900 to-purple-900 text-white overflow-hidden">
+    <section style="background-image: url(/image/DSC_04.JPG); background-size: cover; background-repeat: no-repeat; background-position: center;" class="relative h-96 bg-gradient-to-r from-blue-900 to-purple-900 text-white overflow-hidden">
         <div class="absolute inset-0 bg-black opacity-40"></div>
         <div class="container mx-auto px-4 relative z-10 h-full flex items-center">
             <div class="max-w-4xl">
                 <div class="fade-in">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-4 brand-font">Kay's Full House</h1>
-                    <p class="text-xl text-gray-200 mb-6">Luxury 3-Bedroom Apartment in Lekki Phase 1</p>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4 brand-font">QuickNest  Apartment</h1>
+                    <p class="text-xl text-gray-200 mb-6"> 3 bedroom Duplex (Self Compound)
+📍Ikate </p>
                     <div class="flex items-center space-x-6 text-sm">
                         <div class="flex items-center">
                             <i class="fas fa-bed text-custom-gold mr-2"></i>
@@ -416,16 +452,16 @@
                         </div>
                         <div class="flex items-center">
                             <i class="fas fa-bath text-custom-gold mr-2"></i>
-                            <span>2 Bathrooms</span>
+                            <span>3 Bathrooms</span>
                         </div>
                         <div class="flex items-center">
                             <i class="fas fa-users text-custom-gold mr-2"></i>
-                            <span>Sleeps 6</span>
+                            <span>Maximum of 6 Guest</span>
                         </div>
-                        <div class="flex items-center">
+                        <!-- <div class="flex items-center">
                             <i class="fas fa-ruler-combined text-custom-gold mr-2"></i>
                             <span>120 sqm</span>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -441,17 +477,17 @@
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden fade-in">
                     <div class="grid grid-cols-2 gap-2 p-2">
                         <div class="col-span-2">
-                            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                            <img src="image/DSC_19.JPG" 
                                  alt="Living Room" 
                                  class="w-full h-64 object-cover rounded-lg gallery-image">
                         </div>
                         <div>
-                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80" 
+                            <img src="image/DSC_17.JPG" 
                                  alt="Bedroom" 
                                  class="w-full h-32 object-cover rounded-lg gallery-image">
                         </div>
                         <div>
-                            <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                            <img src="image/DSC_39.JPG" 
                                  alt="Kitchen" 
                                  class="w-full h-32 object-cover rounded-lg gallery-image">
                         </div>
@@ -463,14 +499,14 @@
                     <h2 class="text-2xl font-bold text-gray-900 mb-6">Apartment Description</h2>
                     <div class="prose prose-lg text-gray-600">
                         <p class="mb-4">
-                            Welcome to Kay's Full House, a stunning 3-bedroom luxury apartment located in the heart of Lekki Phase 1. This beautifully designed space offers the perfect blend of comfort, style, and convenience for your stay in Lagos.
+                            Welcome to QuickNest Apartment, a stunning 4 bedroom Duplex (Self Compound) Duplex (Self Compound)located in 📍Ikate . This beautifully designed space offers the perfect blend of comfort, style, and convenience for your stay in Lagos.
                         </p>
                         <p class="mb-4">
                             The apartment features a spacious living area with modern furnishings, a fully equipped kitchen with premium appliances, and three comfortable bedrooms designed for restful sleep. With two modern bathrooms, high-speed WiFi, and 24/7 security, every detail has been carefully considered for your comfort.
                         </p>
-                        <p>
+                        <!-- <p>
                             Located just minutes from Lekki Mall, restaurants, and business centers, this is the ideal base for both business and leisure travelers seeking premium accommodation in Lagos.
-                        </p>
+                        </p> -->
                     </div>
                 </div>
 
@@ -486,6 +522,15 @@
                             <i class="fas fa-tv text-custom-gold"></i>
                             <span>Smart TV</span>
                         </div>
+
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-bath text-custom-gold"></i>
+                            <span>Bathtub</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-chess-board text-custom-gold"></i>
+                            <span>Snooker Board</span>
+                        </div>
                         <div class="flex items-center space-x-3">
                             <i class="fas fa-utensils text-custom-gold"></i>
                             <span>Fully Equipped Kitchen</span>
@@ -495,12 +540,12 @@
                             <span>Air Conditioning</span>
                         </div>
                         <div class="flex items-center space-x-3">
-                            <i class="fas fa-swimming-pool text-custom-gold"></i>
-                            <span>Swimming Pool Access</span>
+                            <i class="fa-solid fa-film text-custom-gold"></i>
+                            <span>Netflix & Prime</span>
                         </div>
                         <div class="flex items-center space-x-3">
-                            <i class="fas fa-dumbbell text-custom-gold"></i>
-                            <span>Fitness Center</span>
+                            <i class="fa-solid fa-gamepad text-custom-gold"></i>
+                            <span>Ps5 slim</span>
                         </div>
                         <div class="flex items-center space-x-3">
                             <i class="fas fa-car text-custom-gold"></i>
@@ -508,11 +553,11 @@
                         </div>
                         <div class="flex items-center space-x-3">
                             <i class="fas fa-shield-alt text-custom-gold"></i>
-                            <span>24/7 Security</span>
+                            <span>24/7 Electricity & Security</span>
                         </div>
                         <div class="flex items-center space-x-3">
-                            <i class="fas fa-concierge-bell text-custom-gold"></i>
-                            <span>Concierge Service</span>
+                            <i class="fa-solid fa-house-circle-check text-custom-gold"></i>
+                            <span>free daily housekeeping</span>
                         </div>
                     </div>
                 </div>
@@ -524,21 +569,135 @@
                         <div class="flex items-start space-x-3">
                             <i class="fas fa-map-marker-alt text-custom-gold mt-1"></i>
                             <div>
-                                <h3 class="font-semibold">Lekki Phase 1, Lagos</h3>
+                                <h3 class="font-semibold">5 Kola Motajo Cl ilasan, Ikate Lekki 106104, Lagos, Nigeria</h3>
                                 <p class="text-gray-600">Prime residential area with easy access to amenities</p>
                             </div>
                         </div>
                         <div class="bg-gray-50 rounded-lg p-4">
-                            <h4 class="font-semibold mb-2">Nearby Attractions:</h4>
+                            <h4 class="font-semibold mb-2">Important Policies & Rules</h4>
                             <ul class="text-gray-600 space-y-1">
-                                <li>• Lekki Mall - 5 minutes drive</li>
-                                <li>• Lekki Conservation Centre - 10 minutes</li>
-                                <li>• Business District - 15 minutes</li>
-                                <li>• Lagos Island - 25 minutes</li>
-                                <li>• Airport - 45 minutes</li>
+                                <h4 class="font-semibold mb-2">Smoking Policies </h4>
+                                <li>• Smoking is strictly prohibited inside the apartment.</li><br>
+                                <li>• Evidence of smoking will result in forfeiture of the caution fee to cover deep cleaning and odor removal.</li><br>
+                                <li>• A penalty of ₦100,000 will be charged for indoor smoking.</li><br>
+                                <h4 class="font-semibold mb-2">Refund Policies </h4>
+                                <li>• No refunds will be issued after payment.</li><br>
+                                <li>• Cancellation within 48 hours of booking (and more than 14 days before check-in) is eligible for a full refund minus a 30% cancellation fee.</li><br>
+                                 <li>• Cancellations made at least 7 days before check-in receive a 50% refund minus a 30% cancellation fee.</li><br>
+                                  <li>• No refunds for cancellations less than 7 days before check-in.</li><br>
+                                
+
+                                <h4 class="font-semibold mb-2">⁠Power Usage </h4>
+
+                                <li>• Guests must turn off all appliances (lights, AC, TV, water heater, etc.) when not in use.</li><br>
+
+                                <h4 class="font-semibold mb-2">⁠Guest Limit and Visitors </h4>
+                                <li>•The booking is for the registered guests only.</li><br>
+                                <li>• Maximum of 6 guests agreed upon. No unregistered visitors allowed.</li><br>
+
+                                <h4 class="font-semibold mb-2">Commercial Shoots</h4>
+
+                                <li>• Commercial or photo shoots require prior approval.</li><br>
+                                <li>• Unauthorized shoots will incur a fine of ₦500,000.</li><br>
+
+                                <h4 class="font-semibold mb-2"> ⁠Decorations</h4>
+                                <li>• No decorations, including hanging or attaching items to walls or ceilings.</li><br>
+                                <li>• Violation will result in forfeiture of the caution fee and additional charges of ₦500,000 for repairs..</li><br>
+
+                                <h4 class="font-semibold mb-2"> ⁠Damage & Loss</h4>
+                                <li>• Guests are responsible for any damage or loss to the property or its contents.</li><br>
+                                <li>• Costs exceeding the caution fee must be settled before check-out.</li><br>
+
+                                <h4 class="font-semibold mb-2">⁠Orderliness</h4>
+                                <li>• No eating on floor rugs to prevent stains.</li><br>
+                                <li>• Shoes are not allowed on sofas or chairs.</li><br>
+                                <li>• Keep furniture clean to avoid extra cleaning charges.</li><br>
+
+                                <h4 class="font-semibold mb-2">⁠Penalties & Fees</h4>
+                                <li>• Failure to comply with rules may result in additional charges or cancellation of your reservation.</li><br>
+                                <li>• Caution fee refunds take 12-24 hours after check-out.</li><br>
+                                <li>• Canceling immediately after payment will result in a 40% cancellation fee.</li><br>
+                                <li>• By making payment, you agree to these terms and conditions.</li><br>
+                                <li>• Shoes are not allowed on sofas or chairs.</li><br>
+                                <li>Enjoy your stay!</li>
+                                <li>Signed,<br>Management.</li>
                             </ul>
                         </div>
                     </div>
+
+
+
+                     <!-- Quick Facts -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 fade-in">
+                    <h3 class="font-semibold text-gray-900 mb-4">Arrival & Departure</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Standard Check-in</span>
+                            <span class="font-medium">2:00 PM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Standard Check-out</span>
+                            <span class="font-medium">12:00 PM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Late check-out fees </span>
+                            <span class="font-medium">After 12:00 PM, 50% deduction from caution fee</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Late check-out fees</span>
+                            <span class="font-medium">After 1:00 PM, 100% deduction from caution fee</span>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <!-- <span class="text-gray-600">Late check-out fees</span> -->
+                            <span class="font-medium">Early check-in is subject to availability and may incur an additional fee. Please confirm in advance.</span>
+                        </div>
+                        <!-- <li>• Early check-in is subject to availability and may incur an additional fee. Please confirm in advance.</li><br> -->
+                    </div>
+                </div>
+
+
+                     <!-- Contact Info -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 fade-in">
+                    <h3 class="font-semibold text-gray-900 mb-4">Need Help?</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-phone text-custom-gold"></i>
+                            <span class="text-gray-600"> +234 911 346 6296 or +234 916 631 4718</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-custom-gold"></i>
+                            <span class="text-gray-600">Quicknestresidence@gmail.com</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fab fa-whatsapp text-custom-gold"></i>
+                            <span class="text-gray-600">Chat on WhatsApp</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Facts -->
+                <!-- <div class="bg-white rounded-2xl shadow-lg p-6 fade-in">
+                    <h3 class="font-semibold text-gray-900 mb-4">Arrival & Departure</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Standard Check-in</span>
+                            <span class="font-medium">2:00 PM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Standard Check-out</span>
+                            <span class="font-medium">12:00 PM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Late check-out fees </span>
+                            <span class="font-medium">After 12:00 PM, 50% deduction from caution fee</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Late check-out fees</span>
+                            <span class="font-medium">After 1:00 PM, 100% deduction from caution fee</span>
+                        </div>
+                    </div>
+                </div> -->
                 </div>
             </div>
 
@@ -548,8 +707,8 @@
                 <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-24 fade-in">
                     <div class="text-center mb-6">
                         <div class="price-display px-6 py-4 rounded-xl mb-4">
-                            <div class="text-2xl font-bold">₦180,000</div>
-                            <div class="text-sm opacity-90">per night</div>
+                            <div class="text-2xl font-bold">₦160,000</div>
+                            <div class="text-sm opacity-90">per day</div>
                         </div>
                         <div class="text-sm text-gray-600">
                             <i class="fas fa-star text-yellow-400 mr-1"></i>
@@ -559,6 +718,7 @@
 
                     <!-- Booking Form -->
                     <form id="bookingForm" class="space-y-4">
+                         <input type="hidden" id="apartmentId" name="apartmentId" value="quicknest-apartment-1">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Check-in Date</label>
                             <input type="date" id="checkIn" name="checkIn" required 
@@ -615,17 +775,17 @@
                         <!-- Price Breakdown -->
                         <div class="border-t border-gray-200 pt-4 space-y-2">
                             <div class="flex justify-between text-sm">
-                                <span>₦180,000 x <span id="nightsCount">0</span> nights</span>
+                                <span>₦160,000 x <span id="nightsCount">0</span> day</span>
                                 <span>₦<span id="subtotal">0</span></span>
                             </div>
                             <div class="flex justify-between text-sm">
-                                <span>Cleaning fee</span>
-                                <span>₦15,000</span>
+                                <span>Caution fee</span>
+                                <span>₦100,000</span>
                             </div>
-                            <div class="flex justify-between text-sm">
+                            <!-- <div class="flex justify-between text-sm">
                                 <span>Service fee</span>
                                 <span>₦10,000</span>
-                            </div>
+                            </div> -->
                             <div class="border-t border-gray-200 pt-2">
                                 <div class="flex justify-between font-semibold">
                                     <span>Total</span>
@@ -646,58 +806,24 @@
                     </form>
                 </div>
 
-                <!-- Contact Info -->
-                <div class="bg-white rounded-2xl shadow-lg p-6 fade-in">
-                    <h3 class="font-semibold text-gray-900 mb-4">Need Help?</h3>
-                    <div class="space-y-3">
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-phone text-custom-gold"></i>
-                            <span class="text-gray-600">+234 814 590 3557</span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-envelope text-custom-gold"></i>
-                            <span class="text-gray-600">bookings@lekkilet.com</span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <i class="fab fa-whatsapp text-custom-gold"></i>
-                            <span class="text-gray-600">Chat on WhatsApp</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quick Facts -->
-                <div class="bg-white rounded-2xl shadow-lg p-6 fade-in">
-                    <h3 class="font-semibold text-gray-900 mb-4">Quick Facts</h3>
-                    <div class="space-y-3 text-sm">
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Check-in</span>
-                            <span class="font-medium">2:00 PM</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Check-out</span>
-                            <span class="font-medium">11:00 AM</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Minimum stay</span>
-                            <span class="font-medium">2 nights</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Cancellation</span>
-                            <span class="font-medium">Flexible</span>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
+
+            
         </div>
+
+        
     </div>
 
+    
+
     <!-- Similar Apartments -->
-    <section class="bg-gray-50 py-16">
+    <!-- <section class="bg-gray-50 py-16">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Similar Apartments</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8"> -->
                 <!-- Similar Apartment 1 -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-2">
+                <!-- <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-2">
                     <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
                          alt="Kay's Comfort Loft" 
                          class="w-full h-48 object-cover">
@@ -709,10 +835,10 @@
                             <a href="apartment-comfort-loft.html" class="text-custom-gold hover:text-amber-600 font-semibold">View Details</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Similar Apartment 2 -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-2">
+                <!-- <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-2">
                     <img src="https://images.unsplash.com/photo-1567496898669-ee935f5f647a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" 
                          alt="Dynax Place" 
                          class="w-full h-48 object-cover">
@@ -724,10 +850,10 @@
                             <a href="apartment-dynax.html" class="text-custom-gold hover:text-amber-600 font-semibold">View Details</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Similar Apartment 3 -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-2">
+                <!-- <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-2">
                     <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80" 
                          alt="Beachfront Villa" 
                          class="w-full h-48 object-cover">
@@ -742,7 +868,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Footer -->
     <footer class="bg-black text-white py-12">
@@ -772,7 +898,7 @@
                         <li><a href="index.html" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
                         <li><a href="apartments.html" class="text-gray-400 hover:text-white transition duration-300">Apartments</a></li>
                         <li><a href="about.html" class="text-gray-400 hover:text-white transition duration-300">About Us</a></li>
-                        <li><a href="booking.html" class="text-gray-400 hover:text-white transition duration-300">Booking</a></li>
+                        <!-- <li><a href="booking.html" class="text-gray-400 hover:text-white transition duration-300">Booking</a></li> -->
                     </ul>
                 </div>
                 
@@ -780,9 +906,9 @@
                     <h4 class="text-lg font-semibold mb-4">Support</h4>
                     <ul class="space-y-2">
                         <li><a href="contact.html" class="text-gray-400 hover:text-white transition duration-300">Contact Us</a></li>
-                        <li><a href="faq.html" class="text-gray-400 hover:text-white transition duration-300">FAQs</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Terms of Service</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white transition duration-300">FAQs</a></li>
+                        <li><a href="privacypolicy.html" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="text-gray-400 hover:text-white transition duration-300">Terms of Service</a></li>
                     </ul>
                 </div>
                 
@@ -791,15 +917,15 @@
                     <ul class="space-y-2 text-gray-400">
                         <li class="flex items-center">
                             <i class="fas fa-phone mr-2 text-amber-400"></i>
-                            <span>+234 814 590 3557</span>
+                            <span> +234 911 346 6296 or +234 916 631 4718</span>
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-envelope mr-2 text-amber-400"></i>
-                            <span>hello@lekkilet.com</span>
+                            <span>Quicknestresidence@gmail.com</span>
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-map-marker-alt mr-2 text-amber-400"></i>
-                            <span>Lekki, Lagos, Nigeria</span>
+                            <span>5 Kola Motajo Cl ilasan, Ikate Lekki 106104, Lagos, Nigeria</span>
                         </li>
                     </ul>
                 </div>
@@ -859,7 +985,7 @@
 
     <!-- Floating WhatsApp Button -->
     <div class="whatsapp-float">
-        <a href="https://wa.me/2348145903557" 
+        <a href="https://wa.me/2349113466296" 
            target="_blank"
            class="whatsapp-button"
            title="Chat with us on WhatsApp">
@@ -867,333 +993,493 @@
         </a>
     </div>
 
+
+
     <script>
-        // Mobile Menu Functionality
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const closeMobileMenu = document.getElementById('close-mobile-menu');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileApartmentsToggle = document.getElementById('mobile-apartments-toggle');
-        const mobileApartmentsDropdown = document.getElementById('mobile-apartments-dropdown');
-        const mobileDropdownToggle = mobileApartmentsToggle?.querySelector('.dropdown-toggle');
+    // Mobile Menu Functionality
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const closeMobileMenu = document.getElementById('close-mobile-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileApartmentsToggle = document.getElementById('mobile-apartments-toggle');
+    const mobileApartmentsDropdown = document.getElementById('mobile-apartments-dropdown');
+    const mobileDropdownToggle = mobileApartmentsToggle?.querySelector('.dropdown-toggle');
 
-        // Desktop Apartments Dropdown
-        const apartmentsToggle = document.getElementById('apartments-toggle');
-        const apartmentsDropdown = document.getElementById('apartments-dropdown');
-        const dropdownToggle = apartmentsToggle?.querySelector('.dropdown-toggle');
+    // Desktop Apartments Dropdown
+    const apartmentsToggle = document.getElementById('apartments-toggle');
+    const apartmentsDropdown = document.getElementById('apartments-dropdown');
+    const dropdownToggle = apartmentsToggle?.querySelector('.dropdown-toggle');
 
-        if (apartmentsToggle) {
-            apartmentsToggle.addEventListener('click', function(e) {
-                e.stopPropagation();
-                apartmentsDropdown.classList.toggle('show');
-                dropdownToggle.classList.toggle('rotated');
-            });
+    if (apartmentsToggle) {
+        apartmentsToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            apartmentsDropdown.classList.toggle('show');
+            dropdownToggle.classList.toggle('rotated');
+        });
 
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function() {
-                apartmentsDropdown.classList.remove('show');
-                dropdownToggle.classList.remove('rotated');
-            });
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            apartmentsDropdown.classList.remove('show');
+            dropdownToggle.classList.remove('rotated');
+        });
 
-            // Prevent dropdown from closing when clicking inside
-            apartmentsDropdown.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
-        }
+        // Prevent dropdown from closing when clicking inside
+        apartmentsDropdown.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
 
-        // Mobile Menu Toggle
-        if (mobileMenuButton) {
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.add('open');
-            });
-        }
+    // Mobile Menu Toggle
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+        });
+    }
 
-        if (closeMobileMenu) {
-            closeMobileMenu.addEventListener('click', () => {
+    if (closeMobileMenu) {
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+        });
+    }
+
+    // Mobile Apartments Dropdown
+    if (mobileApartmentsToggle) {
+        mobileApartmentsToggle.addEventListener('click', function() {
+            mobileApartmentsDropdown.classList.toggle('hidden');
+            mobileDropdownToggle.classList.toggle('rotated');
+        });
+    }
+
+    // Close mobile menu when clicking on links
+    const mobileMenuLinks = mobileMenu?.querySelectorAll('a');
+    if (mobileMenuLinks) {
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
                 mobileMenu.classList.remove('open');
             });
-        }
+        });
+    }
 
-        // Mobile Apartments Dropdown
-        if (mobileApartmentsToggle) {
-            mobileApartmentsToggle.addEventListener('click', function() {
-                mobileApartmentsDropdown.classList.toggle('hidden');
-                mobileDropdownToggle.classList.toggle('rotated');
-            });
-        }
-
-        // Close mobile menu when clicking on links
-        const mobileMenuLinks = mobileMenu?.querySelectorAll('a');
-        if (mobileMenuLinks) {
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.remove('open');
-                });
-            });
-        }
-
-        // Price Calculation
-        function calculatePrice() {
-            const checkIn = new Date(document.getElementById('checkIn').value);
-            const checkOut = new Date(document.getElementById('checkOut').value);
+    // Price Calculation
+    function calculatePrice() {
+        const checkIn = new Date(document.getElementById('checkIn').value);
+        const checkOut = new Date(document.getElementById('checkOut').value);
+        
+        if (checkIn && checkOut && checkOut > checkIn) {
+            const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+            const nightlyRate = 160000;
+            const cautionFee = 100000;
+            const subtotal = nights * nightlyRate;
+            const total = subtotal + cautionFee;
             
-            if (checkIn && checkOut && checkOut > checkIn) {
-                const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
-                const nightlyRate = 180000;
-                const subtotal = nights * nightlyRate;
-                const cleaningFee = 15000;
-                const serviceFee = 10000;
-                const total = subtotal + cleaningFee + serviceFee;
-                
-                document.getElementById('nightsCount').textContent = nights;
-                document.getElementById('subtotal').textContent = subtotal.toLocaleString();
-                document.getElementById('totalAmount').textContent = total.toLocaleString();
-                
-                // Update button text
-                const buttonText = document.getElementById('buttonText');
-                if (nights > 0) {
-                    buttonText.textContent = `Book ${nights} Nights - ₦${total.toLocaleString()}`;
+            document.getElementById('nightsCount').textContent = nights;
+            document.getElementById('subtotal').textContent = subtotal.toLocaleString();
+            document.getElementById('totalAmount').textContent = total.toLocaleString();
+            
+            // Update button text
+            const buttonText = document.getElementById('buttonText');
+            if (nights > 0) {
+                buttonText.textContent = `Book ${nights} Nights - ₦${total.toLocaleString()}`;
+            }
+        }
+    }
+
+    // Show processing modal
+    function showProcessingModal() {
+        document.getElementById('processingModal').classList.remove('hidden');
+    }
+
+    // Hide processing modal
+    function hideProcessingModal() {
+        document.getElementById('processingModal').classList.add('hidden');
+    }
+
+    // Show success modal
+    function showSuccessModal() {
+        document.getElementById('successModal').classList.remove('hidden');
+    }
+
+    // Close success modal
+    function closeSuccessModal() {
+        document.getElementById('successModal').classList.add('hidden');
+        // Reset form
+        document.getElementById('bookingForm').reset();
+        calculatePrice();
+    }
+
+    // Show error modal
+    function showErrorModal(title, message) {
+        document.getElementById('errorTitle').textContent = title;
+        document.getElementById('errorMessage').textContent = message;
+        document.getElementById('errorModal').classList.remove('hidden');
+    }
+
+    // Close error modal
+    function closeErrorModal() {
+        document.getElementById('errorModal').classList.add('hidden');
+    }
+
+    // Format date for better readability
+    function formatDate(date) {
+        return date.toLocaleDateString('en-US', {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
+    }
+
+    // Function to get all dates between two dates
+    function getDatesBetween(startDate, endDate) {
+        const dates = [];
+        const currentDate = new Date(startDate);
+        
+        while (currentDate <= endDate) {
+            dates.push(new Date(currentDate));
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+        
+        return dates;
+    }
+
+    // Helper function to get pretty names for emails
+    function getApartmentDisplayName(apartmentId) {
+        const names = {
+            'quicknest-apartment-1': 'QuickNest Apartment 1',
+            'quicknest-apartment-2': 'QuickNest Apartment 2', 
+            'fifth-nest-apartment-1': 'Fifth Nest Apartment 1',
+            'fifth-nest-apartment-2': 'Fifth Nest Apartment 2'
+        };
+        return names[apartmentId] || apartmentId;
+    }
+
+    // Enhanced date availability check
+    function checkDateAvailability(checkIn, checkOut, apartmentId = 'quicknest-apartment-1') {
+        const checkInDate = new Date(checkIn);
+        const checkOutDate = new Date(checkOut);
+        const datesToCheck = getDatesBetween(checkInDate, checkOutDate);
+        
+        // Load booked dates from localStorage
+        const saved = localStorage.getItem('lekkiletBookedDates');
+        if (!saved) {
+            return { available: true }; // No bookings yet
+        }
+        
+        const data = JSON.parse(saved);
+        const apartmentBookings = data[apartmentId] || [];
+        
+        // Check each date
+        for (const date of datesToCheck) {
+            const dateString = date.toISOString().split('T')[0];
+            const existingBooking = apartmentBookings.find(booking => booking.date === dateString);
+            
+            if (existingBooking) {
+                if (existingBooking.status === 'confirmed') {
+                    return { 
+                        available: false, 
+                        reason: 'This date is already booked and confirmed',
+                        type: 'confirmed'
+                    };
+                }
+                if (existingBooking.status === 'pending') {
+                    return { 
+                        available: false, 
+                        reason: 'This date is temporarily reserved (pending payment)',
+                        type: 'pending'
+                    };
                 }
             }
         }
+        
+        return { available: true };
+    }
 
-        // Set minimum dates
-        document.addEventListener('DOMContentLoaded', function() {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('checkIn').min = today;
-            document.getElementById('checkOut').min = today;
-            
-            // Add event listeners for date changes
-            document.getElementById('checkIn').addEventListener('change', function() {
-                const checkIn = new Date(this.value);
-                const nextDay = new Date(checkIn);
-                nextDay.setDate(nextDay.getDate() + 1);
-                document.getElementById('checkOut').min = nextDay.toISOString().split('T')[0];
-                calculatePrice();
-            });
-            
-            document.getElementById('checkOut').addEventListener('change', calculatePrice);
-            document.getElementById('guests').addEventListener('change', calculatePrice);
-            
-            // Initialize price calculation
-            calculatePrice();
+    // Create pending booking
+    function createPendingBooking(bookingData, userData, apartmentId = 'quicknest-apartment-1') {
+        const bookingId = 'BK' + Date.now() + Math.random().toString(36).substr(2, 5);
+        const checkIn = new Date(bookingData.checkIn);
+        const checkOut = new Date(bookingData.checkOut);
+        const datesToBook = getDatesBetween(checkIn, checkOut);
+
+        // Create pending booking
+        const pendingBooking = {
+            id: bookingId,
+            apartmentId: apartmentId,
+            userData: userData,
+            bookingData: bookingData,
+            dates: datesToBook.map(date => date.toISOString().split('T')[0]),
+            createdAt: new Date().toISOString(),
+            status: 'pending'
+        };
+
+        // Load existing data
+        const saved = localStorage.getItem('lekkiletBookedDates');
+        const data = saved ? JSON.parse(saved) : { 
+            pendingBookings: {},
+            'quicknest-apartment-1': []
+        };
+
+        // Add to pending bookings
+        data.pendingBookings[bookingId] = pendingBooking;
+
+        // Temporarily block dates
+        datesToBook.forEach(date => {
+            const dateString = date.toISOString().split('T')[0];
+            // Only add if date doesn't exist or isn't confirmed
+            const existingBooking = data[apartmentId]?.find(b => b.date === dateString);
+            if (!existingBooking || existingBooking.status !== 'confirmed') {
+                if (!data[apartmentId]) data[apartmentId] = [];
+                data[apartmentId].push({
+                    date: dateString,
+                    status: 'pending',
+                    bookingId: bookingId
+                });
+            }
         });
 
-        // Show processing modal
-        function showProcessingModal() {
-            document.getElementById('processingModal').classList.remove('hidden');
-        }
+        // Save to localStorage
+        localStorage.setItem('lekkiletBookedDates', JSON.stringify(data));
+        console.log('Created pending booking:', bookingId);
 
-        // Hide processing modal
-        function hideProcessingModal() {
-            document.getElementById('processingModal').classList.add('hidden');
-        }
+        return bookingId;
+    }
 
-        // Show success modal
-        function showSuccessModal() {
-            document.getElementById('successModal').classList.remove('hidden');
-        }
-
-        // Close success modal
-        function closeSuccessModal() {
-            document.getElementById('successModal').classList.add('hidden');
-            // Reset form
-            document.getElementById('bookingForm').reset();
-            calculatePrice();
-        }
-
-        // Show error modal
-        function showErrorModal(title, message) {
-            document.getElementById('errorTitle').textContent = title;
-            document.getElementById('errorMessage').textContent = message;
-            document.getElementById('errorModal').classList.remove('hidden');
-        }
-
-        // Close error modal
-        function closeErrorModal() {
-            document.getElementById('errorModal').classList.add('hidden');
-        }
-
-        // Format date for better readability
-        function formatDate(date) {
-            return date.toLocaleDateString('en-US', {
-                weekday: 'short',
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-            });
-        }
-
-        // Auto-send booking to WhatsApp
-        async function sendBookingToWhatsApp(bookingData, userData) {
-            try {
-                // Calculate booking details
-                const checkIn = new Date(bookingData.checkIn);
-                const checkOut = new Date(bookingData.checkOut);
-                const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
-                const nightlyRate = 180000;
-                const subtotal = nights * nightlyRate;
-                const cleaningFee = 15000;
-                const serviceFee = 10000;
-                const totalAmount = subtotal + cleaningFee + serviceFee;
-                
-                // Create comprehensive WhatsApp message
-                const message = `
-🏠 *LEKKILET - AUTOMATED BOOKING REQUEST* 🏠
-
-*CUSTOMER INFORMATION*
-👤 *Name:* ${userData.userName}
-📞 *Phone:* ${userData.userPhone}
-📧 *Email:* ${userData.userEmail || 'Not provided'}
-
-*APARTMENT DETAILS*
-🏢 *Apartment:* Kay's Full House
-📍 *Location:* Lekki Phase 1, Lagos
-💰 *Rate:* ₦180,000 per night
-⭐ *Rating:* 4.9/5 (124 reviews)
-
-*BOOKING INFORMATION*
-📅 *Check-in:* ${formatDate(checkIn)}
-📅 *Check-out:* ${formatDate(checkOut)}
-🕒 *Nights:* ${nights} nights
-👥 *Guests:* ${bookingData.guests} guest${bookingData.guests > 1 ? 's' : ''}
-
-*PRICE BREAKDOWN*
-• ${nights} nights × ₦180,000 = ₦${subtotal.toLocaleString()}
-• Cleaning fee = ₦15,000
-• Service fee = ₦10,000
-• *TOTAL = ₦${totalAmount.toLocaleString()}*
-
-*BOOKING STATUS*
-🟡 *Status:* Automated Booking Request
-⏰ *Received:* ${new Date().toLocaleString()}
-🌐 *Source:* Website Form
-
-*IMMEDIATE ACTION REQUIRED*
-Please contact the customer within 30 minutes to confirm availability and proceed with payment.
-
-*CONTACT DETAILS:*
-📞 ${userData.userPhone}
-${userData.userEmail ? `📧 ${userData.userEmail}` : ''}
-
-This is an automated booking request from the Lekkilet website.
-                `.trim();
-
-                // Encode message for WhatsApp URL
-                const encodedMessage = encodeURIComponent(message);
-                
-                // Your WhatsApp number
-                const whatsappNumber = '2349044282729'; // Replace with your actual number
-                
-                // Create WhatsApp URL
-                const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-                
-                // Create a hidden iframe to trigger WhatsApp
-                const iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                iframe.src = whatsappURL;
-                document.body.appendChild(iframe);
-                
-                // Wait a moment for the iframe to load
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                
-                // Remove the iframe
-                document.body.removeChild(iframe);
-                
-                return true;
-                
-            } catch (error) {
-                console.error('Error sending to WhatsApp:', error);
-                return false;
-            }
-        }
-
-        // Booking Form Submission
-        document.getElementById('bookingForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+    // Auto-send booking to Email
+    async function sendBookingEmail(bookingData, userData, bookingId = '', apartmentId = 'quicknest-apartment-1') {
+        try {
+            console.log('Starting email send with new template...');
             
-            // Get form data
-            const formData = new FormData(this);
-            const bookingData = {
-                checkIn: formData.get('checkIn'),
-                checkOut: formData.get('checkOut'),
-                guests: formData.get('guests')
-            };
-            
-            const userData = {
-                userName: formData.get('userName'),
-                userPhone: formData.get('userPhone'),
-                userEmail: formData.get('userEmail')
-            };
-            
-            // Validate dates
             const checkIn = new Date(bookingData.checkIn);
             const checkOut = new Date(bookingData.checkOut);
-            
-            if (!bookingData.checkIn || !bookingData.checkOut) {
-                showErrorModal('Missing Dates', 'Please select both check-in and check-out dates.');
-                return;
-            }
-            
-            if (checkOut <= checkIn) {
-                showErrorModal('Invalid Dates', 'Check-out date must be after check-in date.');
-                return;
-            }
-            
-            // Validate user information
-            if (!userData.userName || !userData.userPhone) {
-                showErrorModal('Missing Information', 'Please provide your full name and phone number.');
-                return;
-            }
-            
-            // Show processing state
-            const submitButton = document.getElementById('submitButton');
-            const buttonText = document.getElementById('buttonText');
-            const buttonSpinner = document.getElementById('buttonSpinner');
-            
-            submitButton.disabled = true;
-            buttonText.textContent = 'Processing...';
-            buttonSpinner.classList.remove('hidden');
-            
-            // Show processing modal
-            showProcessingModal();
-            
-            try {
-                // Send booking to WhatsApp
-                const success = await sendBookingToWhatsApp(bookingData, userData);
-                
-                // Hide processing modal
-                hideProcessingModal();
-                
-                if (success) {
-                    // Show success modal
-                    showSuccessModal();
-                } else {
-                    showErrorModal('Sending Failed', 'There was an error sending your booking request. Please try again or contact us directly.');
-                }
-                
-            } catch (error) {
-                hideProcessingModal();
-                showErrorModal('Unexpected Error', 'An unexpected error occurred. Please try again or contact us directly.');
-            } finally {
-                // Reset button state
-                submitButton.disabled = false;
-                buttonText.textContent = 'Check Availability & Book';
-                buttonSpinner.classList.add('hidden');
-                calculatePrice();
-            }
-        });
+            const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+            const nightlyRate = 160000;
+            const cautionFee = 100000;
+            const subtotal = nights * nightlyRate;
+            const totalAmount = subtotal + cautionFee;
 
-        // Phone number formatting
-        document.getElementById('userPhone').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.startsWith('0')) {
-                value = '234' + value.substring(1);
+            // Get apartment display name
+            const apartmentName = getApartmentDisplayName(apartmentId);
+
+            // Email template parameters
+            const templateParams = {
+                to_email: 'quicknestresidence@gmail.com',
+                customer_name: userData.userName,
+                customer_phone: userData.userPhone,
+                customer_email: userData.userEmail || 'Not provided',
+                apartment_name: apartmentName, 
+                apartment_location: " 5 Kola Motajo Cl ilasan, Ikate Lekki 106104, Lagos, Nigeria",
+                check_in: formatDate(checkIn),
+                check_out: formatDate(checkOut),
+                nights: nights,
+                guests: bookingData.guests,
+                nightly_rate: `₦${nightlyRate.toLocaleString()}`,
+                subtotal: `₦${subtotal.toLocaleString()}`,
+                caution_fee: `₦${cautionFee.toLocaleString()}`,
+                total_amount: `₦${totalAmount.toLocaleString()}`,
+                booking_time: new Date().toLocaleString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }),
+                booking_id: bookingId || 'N/A'
+            };
+
+            console.log('Using Service ID: service_qby0rem');
+            console.log('Using Template ID: template_ellj4gb');
+
+            // Send email using EmailJS
+            const response = await emailjs.send(
+                'service_qby0rem',
+                'template_ellj4gb',
+                templateParams
+            );
+
+            console.log('Email sent successfully:', response);
+            return response.status === 200;
+            
+        } catch (error) {
+            console.error('Email sending failed:', error);
+            return false;
+        }
+    }
+
+    // Enhanced real-time date validation
+    function setupDateValidation() {
+        const checkInInput = document.getElementById('checkIn');
+        const checkOutInput = document.getElementById('checkOut');
+        const submitButton = document.getElementById('submitButton');
+        const buttonText = document.getElementById('buttonText');
+        
+        function validateSelectedDates() {
+            const checkIn = checkInInput.value;
+            const checkOut = checkOutInput.value;
+            
+            if (checkIn && checkOut) {
+                const availability = checkDateAvailability(checkIn, checkOut);
+                
+                if (!availability.available) {
+                    // Disable booking and show error
+                    submitButton.disabled = true;
+                    submitButton.classList.add('bg-gray-400', 'cursor-not-allowed');
+                    submitButton.classList.remove('bg-custom-gold', 'hover:bg-amber-500');
+                    
+                    if (availability.type === 'confirmed') {
+                        buttonText.textContent = 'Dates Booked';
+                        buttonText.parentElement.title = availability.reason;
+                    } else {
+                        buttonText.textContent = 'Dates Reserved';
+                        buttonText.parentElement.title = availability.reason;
+                    }
+                } else {
+                    // Enable booking
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                    submitButton.classList.add('bg-custom-gold', 'hover:bg-amber-500');
+                    buttonText.textContent = 'Check Availability & Book';
+                    buttonText.parentElement.title = '';
+                    calculatePrice();
+                }
             }
-            if (value.length > 0 && !value.startsWith('+')) {
-                value = '+' + value;
+        }
+        
+        // Validate when dates change
+        checkInInput.addEventListener('change', validateSelectedDates);
+        checkOutInput.addEventListener('change', validateSelectedDates);
+        
+        // Also validate on page load if dates are already selected
+        setTimeout(validateSelectedDates, 100);
+    }
+
+    // Enhanced Booking Form Submission
+    document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Get apartment ID from hidden field
+        const apartmentId = document.getElementById('apartmentId').value;
+        
+        // Get form data
+        const formData = new FormData(this);
+        const bookingData = {
+            checkIn: formData.get('checkIn'),
+            checkOut: formData.get('checkOut'),
+            guests: formData.get('guests')
+        };
+        
+        const userData = {
+            userName: formData.get('userName'),
+            userPhone: formData.get('userPhone'),
+            userEmail: formData.get('userEmail')
+        };
+
+        // Validate dates first
+        const availability = checkDateAvailability(bookingData.checkIn, bookingData.checkOut, apartmentId);
+        if (!availability.available) {
+            if (availability.type === 'confirmed') {
+                showErrorModal('Dates Booked', 'These dates have already been confirmed for another guest. Please choose different dates.');
+            } else {
+                showErrorModal('Dates Reserved', 'These dates are temporarily reserved. Please check back later or choose different dates.');
             }
-            e.target.value = value;
+            return;
+        }
+        
+        // Continue with existing validation...
+        const checkIn = new Date(bookingData.checkIn);
+        const checkOut = new Date(bookingData.checkOut);
+        
+        if (!bookingData.checkIn || !bookingData.checkOut) {
+            showErrorModal('Missing Dates', 'Please select both check-in and check-out dates.');
+            return;
+        }
+        
+        if (checkOut <= checkIn) {
+            showErrorModal('Invalid Dates', 'Check-out date must be after check-in date.');
+            return;
+        }
+        
+        // Validate user information
+        if (!userData.userName || !userData.userPhone) {
+            showErrorModal('Missing Information', 'Please provide your full name and phone number.');
+            return;
+        }
+        
+        // Show processing state
+        const submitButton = document.getElementById('submitButton');
+        const buttonText = document.getElementById('buttonText');
+        const buttonSpinner = document.getElementById('buttonSpinner');
+        
+        submitButton.disabled = true;
+        buttonText.textContent = 'Sending Booking...';
+        buttonSpinner.classList.remove('hidden');
+        showProcessingModal();
+        
+        try {
+            // Create pending booking FIRST (to reserve dates)
+            const bookingId = createPendingBooking(bookingData, userData, apartmentId);
+            
+            // Then send email with booking ID
+            const emailSuccess = await sendBookingEmail(bookingData, userData, bookingId, apartmentId);
+            
+            hideProcessingModal();
+            
+            if (emailSuccess) {
+                showSuccessModal();
+            } else {
+                showErrorModal('Email Failed', 'Your booking request has been received! We will contact you shortly. Booking ID: ' + bookingId);
+            }
+            
+        } catch (error) {
+            hideProcessingModal();
+            showErrorModal('Connection Error', 'Your booking request has been recorded. We will contact you shortly.');
+        } finally {
+            submitButton.disabled = false;
+            buttonText.textContent = 'Check Availability & Book';
+            buttonSpinner.classList.add('hidden');
+            calculatePrice();
+        }
+    });
+
+    // Phone number formatting
+    document.getElementById('userPhone').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.startsWith('0')) {
+            value = '234' + value.substring(1);
+        }
+        if (value.length > 0 && !value.startsWith('+')) {
+            value = '+' + value;
+        }
+        e.target.value = value;
+    });
+
+    // Set minimum dates and initialize
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('checkIn').min = today;
+        document.getElementById('checkOut').min = today;
+        
+        // Setup date validation
+        setupDateValidation();
+        
+        // Add event listeners for date changes
+        document.getElementById('checkIn').addEventListener('change', function() {
+            const checkIn = new Date(this.value);
+            const nextDay = new Date(checkIn);
+            nextDay.setDate(nextDay.getDate() + 1);
+            document.getElementById('checkOut').min = nextDay.toISOString().split('T')[0];
+            calculatePrice();
         });
-    </script>
+        
+        document.getElementById('checkOut').addEventListener('change', calculatePrice);
+        document.getElementById('guests').addEventListener('change', calculatePrice);
+        
+        // Initialize price calculation
+        calculatePrice();
+    });
+</script>
+
+
+ 
+   
 </body>
 </html>

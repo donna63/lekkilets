@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekkilet - Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .booking-pending { border-left: 4px solid #f59e0b; }
+        .booking-confirmed { border-left: 4px solid #10b981; }
+        .booking-expired { border-left: 4px solid #ef4444; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Admin Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gray-800">🏠 Lekkilet Admin Panel</h1>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-600">Staff Dashboard</span>
+                    <button onclick="logout()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-4">
+                    <h3 class="font-semibold text-lg mb-4">Quick Actions</h3>
+                    <div class="space-y-2">
+                        <button onclick="showSection('pending')" class="w-full text-left p-3 rounded-lg hover:bg-gray-100 transition">
+                            📋 Pending Bookings
+                        </button>
+                        <button onclick="showSection('confirmed')" class="w-full text-left p-3 rounded-lg hover:bg-gray-100 transition">
+                            ✅ Confirmed Bookings
+                        </button>
+                        <button onclick="showSection('calendar')" class="w-full text-left p-3 rounded-lg hover:bg-gray-100 transition">
+                            📅 Calendar View
+                        </button>
+                        <button onclick="showSection('apartments')" class="w-full text-left p-3 rounded-lg hover:bg-gray-100 transition">
+                            🏢 Manage Apartments
+                        </button>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-yellow-50 rounded-lg">
+                        <h4 class="font-semibold text-sm mb-2">Stats</h4>
+                        <div class="space-y-1 text-sm">
+                            <div class="flex justify-between">
+                                <span>Pending:</span>
+                                <span id="pendingCount">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Confirmed:</span>
+                                <span id="confirmedCount">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Today:</span>
+                                <span id="todayCount">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="lg:col-span-3">
+                <!-- Pending Bookings Section -->
+                <div id="pendingSection" class="section">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">Pending Bookings</h2>
+                        <div class="flex space-x-2">
+                            <button onclick="refreshData()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                                🔄 Refresh
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="pendingBookingsList" class="space-y-4">
+                        <!-- Bookings will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Confirmed Bookings Section -->
+                <div id="confirmedSection" class="section hidden">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Confirmed Bookings</h2>
+                    <div id="confirmedBookingsList" class="space-y-4">
+                        <!-- Confirmed bookings will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Calendar View Section -->
+                <div id="calendarSection" class="section hidden">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Booking Calendar</h2>
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <div id="bookingCalendar" class="grid grid-cols-7 gap-2">
+                            <!-- Calendar will be generated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Apartments Management Section -->
+                <div id="apartmentsSection" class="section hidden">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Manage Apartments</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Apartment cards will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Details Modal -->
+    <div id="bookingModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold" id="modalTitle">Booking Details</h3>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="modalContent">
+                <!-- Modal content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Admin JavaScript
+        let allBookings = [];
+
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBookings();
+            showSection('pending');
+        });
+
+        // Load bookings from localStorage
+        function loadBookings() {
+            const saved = localStorage.getItem('lekkiletBookedDates');
+            if (saved) {
+                const data = JSON.parse(saved);
+                allBookings = Object.values(data.pendingBookings || {});
+                updateStats();
+                renderPendingBookings();
+                renderConfirmedBookings();
+            }
+        }
+
+        // Update statistics
+        function updateStats() {
+            const pending = allBookings.filter(b => b.status === 'pending').length;
+            const confirmed = allBookings.filter(b => b.status === 'confirmed').length;
+            const today = allBookings.filter(b => {
+                const today = new Date().toDateString();
+                const bookingDate = new Date(b.createdAt).toDateString();
+                return bookingDate === today;
+            }).length;
+
+            document.getElementById('pendingCount').textContent = pending;
+            document.getElementById('confirmedCount').textContent = confirmed;
+            document.getElementById('todayCount').textContent = today;
+        }
+
+        // Show different sections
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName + 'Section').classList.remove('hidden');
+        }
+
+        // Render pending bookings
+        function renderPendingBookings() {
+            const container = document.getElementById('pendingBookingsList');
+            const pendingBookings = allBookings.filter(b => b.status === 'pending');
+            
+            if (pendingBookings.length === 0) {
+                container.innerHTML = `
+                    <div class="bg-white rounded-lg shadow-sm p-8 text-center">
+                        <i class="fas fa-inbox text-4xl text-gray-300 mb-4"></i>
+                        <h3 class="text-lg font-semibold text-gray-600">No Pending Bookings</h3>
+                        <p class="text-gray-500">All bookings are processed.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = pendingBookings.map(booking => `
+                <div class="booking-pending bg-white rounded-lg shadow-sm p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="font-semibold text-lg">${booking.userData.userName}</h3>
+                            <p class="text-gray-600">${booking.userData.userPhone}</p>
+                            <p class="text-gray-600">${booking.userData.userEmail || 'No email'}</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-sm">Pending</span>
+                            <p class="text-sm text-gray-500 mt-1">${formatTime(booking.createdAt)}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <p class="text-sm text-gray-600">Apartment</p>
+                            <p class="font-medium">${booking.apartmentId}</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600">Dates</p>
+                            <p class="font-medium">${formatDate(new Date(booking.bookingData.checkIn))} - ${formatDate(new Date(booking.bookingData.checkOut))}</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600">Nights</p>
+                            <p class="font-medium">${booking.dates.length} nights</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600">Guests</p>
+                            <p class="font-medium">${booking.bookingData.guests}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-2">
+                        <button onclick="confirmBooking('${booking.id}')" 
+                                class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 flex items-center">
+                            <i class="fas fa-check mr-2"></i> Confirm
+                        </button>
+                        <button onclick="viewBookingDetails('${booking.id}')" 
+                                class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 flex items-center">
+                            <i class="fas fa-eye mr-2"></i> Details
+                        </button>
+                        <button onclick="rejectBooking('${booking.id}')" 
+                                class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 flex items-center">
+                            <i class="fas fa-times mr-2"></i> Reject
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render confirmed bookings
+        function renderConfirmedBookings() {
+            const container = document.getElementById('confirmedBookingsList');
+            const confirmedBookings = allBookings.filter(b => b.status === 'confirmed');
+            
+            if (confirmedBookings.length === 0) {
+                container.innerHTML = `
+                    <div class="bg-white rounded-lg shadow-sm p-8 text-center">
+                        <i class="fas fa-calendar-check text-4xl text-gray-300 mb-4"></i>
+                        <h3 class="text-lg font-semibold text-gray-600">No Confirmed Bookings</h3>
+                        <p class="text-gray-500">Confirmed bookings will appear here.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = confirmedBookings.map(booking => `
+                <div class="booking-confirmed bg-white rounded-lg shadow-sm p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="font-semibold text-lg">${booking.userData.userName}</h3>
+                            <p class="text-gray-600">${booking.userData.userPhone}</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">Confirmed</span>
+                            <p class="text-sm text-gray-500 mt-1">${formatTime(booking.createdAt)}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-sm text-gray-600">Dates</p>
+                            <p class="font-medium">${formatDate(new Date(booking.bookingData.checkIn))} - ${formatDate(new Date(booking.bookingData.checkOut))}</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600">Apartment</p>
+                            <p class="font-medium">${booking.apartmentId}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Confirm booking
+       // In admin.html - Update the confirmBooking function
+function confirmBooking(bookingId) {
+    const saved = localStorage.getItem('lekkiletBookedDates');
+    if (saved) {
+        const data = JSON.parse(saved);
+        
+        if (data.pendingBookings[bookingId]) {
+            const booking = data.pendingBookings[bookingId];
+            
+            // Update booking status to confirmed
+            data.pendingBookings[bookingId].status = 'confirmed';
+            
+            // Update dates status in apartment bookings
+            const apartmentBookings = data[booking.apartmentId] || [];
+            apartmentBookings.forEach(apartmentBooking => {
+                if (apartmentBooking.bookingId === bookingId) {
+                    apartmentBooking.status = 'confirmed';
+                }
+            });
+            
+            // Save back to localStorage
+            localStorage.setItem('lekkiletBookedDates', JSON.stringify(data));
+            
+            // Show success message
+            showNotification('Booking confirmed successfully! Dates are now permanently blocked.', 'success');
+            
+            // Reload data
+            loadBookings();
+        }
+    }
+}
+
+        // Reject booking
+        function rejectBooking(bookingId) {
+            if (confirm('Are you sure you want to reject this booking?')) {
+                const saved = localStorage.getItem('lekkiletBookedDates');
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    
+                    // Remove from pending bookings
+                    delete data.pendingBookings[bookingId];
+                    
+                    // Remove dates from apartment bookings
+                    const booking = allBookings.find(b => b.id === bookingId);
+                    if (booking) {
+                        data[booking.apartmentId] = data[booking.apartmentId].filter(
+                            b => b.bookingId !== bookingId
+                        );
+                    }
+                    
+                    localStorage.setItem('lekkiletBookedDates', JSON.stringify(data));
+                    alert('Booking rejected!');
+                    loadBookings(); // Reload data
+                }
+            }
+        }
+
+        // View booking details
+        function viewBookingDetails(bookingId) {
+            const booking = allBookings.find(b => b.id === bookingId);
+            if (booking) {
+                document.getElementById('modalTitle').textContent = 'Booking Details';
+                document.getElementById('modalContent').innerHTML = `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold mb-2">Customer Information</h4>
+                            <p><strong>Name:</strong> ${booking.userData.userName}</p>
+                            <p><strong>Phone:</strong> ${booking.userData.userPhone}</p>
+                            <p><strong>Email:</strong> ${booking.userData.userEmail || 'Not provided'}</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold mb-2">Booking Details</h4>
+                            <p><strong>Apartment:</strong> ${booking.apartmentId}</p>
+                            <p><strong>Check-in:</strong> ${formatDate(new Date(booking.bookingData.checkIn))}</p>
+                            <p><strong>Check-out:</strong> ${formatDate(new Date(booking.bookingData.checkOut))}</p>
+                            <p><strong>Nights:</strong> ${booking.dates.length}</p>
+                            <p><strong>Guests:</strong> ${booking.bookingData.guests}</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold mb-2">Booking Status</h4>
+                            <p><strong>Status:</strong> ${booking.status}</p>
+                            <p><strong>Created:</strong> ${formatTime(booking.createdAt)}</p>
+                            <p><strong>Booking ID:</strong> ${booking.id}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 flex space-x-2">
+                        ${booking.status === 'pending' ? `
+                            <button onclick="confirmBooking('${booking.id}')" 
+                                    class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
+                                Confirm Booking
+                            </button>
+                        ` : ''}
+                        <button onclick="closeModal()" 
+                                class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600">
+                            Close
+                        </button>
+                    </div>
+                `;
+                document.getElementById('bookingModal').classList.remove('hidden');
+            }
+        }
+
+        // Utility functions
+        function formatDate(date) {
+            return date.toLocaleDateString('en-US', {
+                weekday: 'short',
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        function formatTime(dateString) {
+            return new Date(dateString).toLocaleString('en-US');
+        }
+
+        function closeModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+        }
+
+        function refreshData() {
+            loadBookings();
+            alert('Data refreshed!');
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>
