@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews - Lekkilet Premium Shortlets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .fade-in { animation: fadeIn 0.6s ease-out; }
+        .slide-down { animation: slideDown 0.3s ease-out; }
+        
+        /* Custom colors */
+        .bg-custom-gold { background-color: #d4af37; }
+        .text-custom-gold { color: #d4af37; }
+        .border-custom-gold { border-color: #d4af37; }
+        
+        /* Hover effects */
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Button Animation */
+        .btn-animate {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-animate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Star Rating */
+        .star-rating {
+            color: #d4af37;
+        }
+        
+        /* Review Cards */
+        .review-card {
+            transition: all 0.3s ease;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            height: 8px;
+            background-color: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #d4af37;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header/Navigation -->
+    <header id="main-header" class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-2 py-2">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <h1 class="brand-font text-2xl font-bold text-indigo-700">
+                        <a href="index.html">
+                            <img style="width: 150px;" src="image/new-removebg-preview.png" alt="Lekkilet Logo" class="transition-transform duration-300 hover:scale-105">
+                        </a>
+                    </h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">HOME</a>
+                    <a href="apart.html" class="text-gray-700 hover:text-black font-medium transition transform hover:-translate-y-1">APARTMENTS</a>
+                    <a href="about.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">ABOUT US</a>
+                    <!-- <a href="booking.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">BOOKING</a> -->
+                    <a href="reviews.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">REVIEWS</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-indigo-600 font-medium transition transform hover:-translate-y-1">CONTACT</a>
+                </nav>
+                
+                <!-- Book Now button -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="apart.html" class="bg-black text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-medium btn-animate">BOOK NOW</a>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none transition-transform hover:scale-110">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="mobile-menu md:hidden">
+                <div class="flex flex-col h-full">
+                    <div class="flex justify-between items-center p-4 border-b">
+                        <img style="width: 150px;" src="image/new-removebg-preview.png" alt="Lekkilet Logo">
+                        <button id="close-mobile-menu" class="text-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex-1 p-6 space-y-4 overflow-y-auto">
+                        <a href="index.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">HOME</a>
+                        <a href="apart.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">APARTMENTS</a>
+                        <a href="about.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">ABOUT US</a>
+                        <!-- <a href="booking.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">BOOKING</a> -->
+                        <a href="reviews.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">REVIEWS</a>
+                        <a href="contact.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-600 transition duration-300 py-2">CONTACT</a>
+                        
+                        <div class="pt-6">
+                            <a href="apart.html" class="w-full bg-black text-white py-3 rounded-md hover:bg-indigo-700 transition font-medium text-center block">BOOK NOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 bg-gradient-to-r from-blue-900 to-purple-900 text-white overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 brand-font fade-in">Customer Reviews</h1>
+                <p class="text-xl text-gray-200 max-w-2xl mx-auto fade-in">
+                    See what our guests are saying about their stay at Lekkilet Premium Shortlets
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overall Rating Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-lg p-8 mb-12">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                        <!-- Overall Rating -->
+                        <div class="text-center">
+                            <div class="text-5xl font-bold text-gray-900 mb-2">4.8</div>
+                            <div class="flex justify-center mb-2">
+                                <div class="star-rating text-2xl">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                            <p class="text-gray-600">Based on 127 reviews</p>
+                        </div>
+                        
+                        <!-- Rating Breakdown -->
+                        <div class="md:col-span-2">
+                            <div class="space-y-3">
+                                <!-- 5 Stars -->
+                                <div class="flex items-center">
+                                    <span class="text-sm text-gray-600 w-16">5 stars</span>
+                                    <div class="progress-bar flex-1 mx-4">
+                                        <div class="progress-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span class="text-sm text-gray-600 w-8">85%</span>
+                                </div>
+                                
+                                <!-- 4 Stars -->
+                                <div class="flex items-center">
+                                    <span class="text-sm text-gray-600 w-16">4 stars</span>
+                                    <div class="progress-bar flex-1 mx-4">
+                                        <div class="progress-fill" style="width: 12%"></div>
+                                    </div>
+                                    <span class="text-sm text-gray-600 w-8">12%</span>
+                                </div>
+                                
+                                <!-- 3 Stars -->
+                                <div class="flex items-center">
+                                    <span class="text-sm text-gray-600 w-16">3 stars</span>
+                                    <div class="progress-bar flex-1 mx-4">
+                                        <div class="progress-fill" style="width: 2%"></div>
+                                    </div>
+                                    <span class="text-sm text-gray-600 w-8">2%</span>
+                                </div>
+                                
+                                <!-- 2 Stars -->
+                                <div class="flex items-center">
+                                    <span class="text-sm text-gray-600 w-16">2 stars</span>
+                                    <div class="progress-bar flex-1 mx-4">
+                                        <div class="progress-fill" style="width: 1%"></div>
+                                    </div>
+                                    <span class="text-sm text-gray-600 w-8">1%</span>
+                                </div>
+                                
+                                <!-- 1 Star -->
+                                <div class="flex items-center">
+                                    <span class="text-sm text-gray-600 w-16">1 star</span>
+                                    <div class="progress-bar flex-1 mx-4">
+                                        <div class="progress-fill" style="width: 0%"></div>
+                                    </div>
+                                    <span class="text-sm text-gray-600 w-8">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Filters -->
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <button class="px-4 py-2 bg-custom-gold text-gray-900 rounded-lg font-medium btn-animate active">All Reviews</button>
+                    <button class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg font-medium btn-animate hover:bg-gray-50">QuickNest Apartments</button>
+                    <button class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg font-medium btn-animate hover:bg-gray-50">FifthNest Apartments</button>
+                    <button class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg font-medium btn-animate hover:bg-gray-50">5 Stars</button>
+                    <button class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg font-medium btn-animate hover:bg-gray-50">Recent</button>
+                </div>
+
+                <!-- Reviews Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Review 1 -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6 review-card fade-in">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-custom-gold rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
+                                AO
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900">Adeola O.</h3>
+                                <div class="flex items-center">
+                                    <div class="star-rating mr-2">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <!-- <span class="text-sm text-gray-500">2 weeks ago</span> -->
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">QuickNest Apartment 1</h4>
+                        <p class="text-gray-600 mb-4">
+                            Absolutely loved our stay! The apartment was even better than the photos. Everything was clean, modern, and the location was perfect. Will definitely book again!
+                        </p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-check-circle text-green-500 mr-1"></i>
+                            <span>Verified Stay</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6 review-card fade-in">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
+                                CK
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900">Chinedu K.</h3>
+                                <div class="flex items-center">
+                                    <div class="star-rating mr-2">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <!-- <span class="text-sm text-gray-500">1 month ago</span> -->
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">FifthNest Apartment 2</h4>
+                        <p class="text-gray-600 mb-4">
+                            The luxury experience was worth every naira! Spacious rooms, amazing amenities, and the staff were incredibly helpful. Perfect for our family vacation.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-check-circle text-green-500 mr-1"></i>
+                            <span>Verified Stay</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6 review-card fade-in">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
+                                FB
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900">Funke B.</h3>
+                                <div class="flex items-center">
+                                    <div class="star-rating mr-2">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <!-- <span class="text-sm text-gray-500">3 weeks ago</span> -->
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">QuickNest Apartment 2</h4>
+                        <p class="text-gray-600 mb-4">
+                            Great value for money! The apartment had everything we needed for a comfortable stay. The WiFi was fast and the kitchen was well-equipped.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-check-circle text-green-500 mr-1"></i>
+                            <span>Verified Stay</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 4 -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6 review-card fade-in">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
+                                TE
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900">Tunde E.</h3>
+                                <div class="flex items-center">
+                                    <div class="star-rating mr-2">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <!-- <span class="text-sm text-gray-500">2 months ago</span> -->
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">FifthNest Apartment 1</h4>
+                        <p class="text-gray-600 mb-4">
+                            Excellent service from booking to check-out. The apartment was spotless and the amenities were top-notch. Highly recommended for business travelers.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-check-circle text-green-500 mr-1"></i>
+                            <span>Verified Stay</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 5 -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6 review-card fade-in">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
+                                MA
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900">Maria A.</h3>
+                                <div class="flex items-center">
+                                    <div class="star-rating mr-2">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <!-- <span class="text-sm text-gray-500">1 week ago</span> -->
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">QuickNest Apartment 1</h4>
+                        <p class="text-gray-600 mb-4">
+                            The attention to detail was impressive! From the quality linens to the fully stocked kitchen, everything was perfect. Will definitely be returning.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-check-circle text-green-500 mr-1"></i>
+                            <span>Verified Stay</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 6 -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6 review-card fade-in">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
+                                DJ
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900">David J.</h3>
+                                <div class="flex items-center">
+                                    <div class="star-rating mr-2">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <!-- <span class="text-sm text-gray-500">3 months ago</span> -->
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">FifthNest Apartment 2</h4>
+                        <p class="text-gray-600 mb-4">
+                            Beautiful property with amazing views. The only minor issue was the water pressure in one bathroom, but everything else was fantastic.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-check-circle text-green-500 mr-1"></i>
+                            <span>Verified Stay</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Load More Button -->
+                <!-- <div class="text-center mt-12">
+                    <button class="bg-custom-gold text-gray-900 font-semibold px-8 py-3 rounded-lg hover:bg-amber-500 transition duration-300 btn-animate">
+                        Load More Reviews
+                    </button>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Highlights -->
+    <section class="py-16 bg-gradient-to-r from-indigo-50 to-purple-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What Our Guests Love</h2>
+                <p class="text-xl text-gray-600">The features that make our apartments stand out</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover-lift">
+                    <div class="w-16 h-16 bg-custom-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-spa text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Cleanliness</h3>
+                    <p class="text-gray-600">"Spotless apartments with attention to every detail"</p>
+                    <div class="mt-4">
+                        <div class="star-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover-lift">
+                    <div class="w-16 h-16 bg-custom-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-wifi text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Fast WiFi</h3>
+                    <p class="text-gray-600">"Reliable high-speed internet for work and streaming"</p>
+                    <div class="mt-4">
+                        <div class="star-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover-lift">
+                    <div class="w-16 h-16 bg-custom-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-headset text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Customer Service</h3>
+                    <p class="text-gray-600">"Responsive and helpful support team available 24/7"</p>
+                    <div class="mt-4">
+                        <div class="star-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Experience Lekkilet?</h2>
+            <p class="text-xl text-indigo-100 mb-8 max-w-2xl mx-auto">
+                Join our satisfied guests and book your stay today
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="apart.html" class="bg-white text-indigo-600 font-semibold px-8 py-4 rounded-lg hover:bg-gray-100 transition duration-300 btn-animate">
+                    View Apartments
+                </a>
+                <!-- <a href="booking.html" class="border border-white text-white font-semibold px-8 py-4 rounded-lg hover:bg-white hover:text-indigo-600 transition duration-300 btn-animate">
+                    Book Now
+                </a> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="brand-font text-2xl font-bold mb-4">
+                        <img style="width: 200px; background-color: black;" src="image/new-removebg-preview.png" alt="Lekkilet Logo">
+                    </h3>
+                    <p class="text-gray-400 mb-4">Premium shortlet apartments for business and leisure travelers.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="apart.html" class="text-gray-400 hover:text-white transition duration-300">Apartments</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition duration-300">About Us</a></li>
+                        <!-- <li><a href="booking.html" class="text-gray-400 hover:text-white transition duration-300">Booking</a></li> -->
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition duration-300">Contact Us</a></li>
+                        <!-- <li><a href="faq.html" class="text-gray-400 hover:text-white transition duration-300">FAQs</a></li> -->
+                        <li><a href="privacypolicy.html" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="text-gray-400 hover:text-white transition duration-300">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-2 text-amber-400"></i>
+                            <span>+234 911 346 6296 or +234 916 631 4718</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-amber-400"></i>
+                            <span>Quicknestresidence@gmail.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-amber-400"></i>
+                            <span>5 Kola Motajo Cl ilasan, Ikate Lekki 106104, Lagos, Nigeria</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Lekkilet. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Mobile Menu Toggle
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.add('open');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            });
+        }
+
+        if (closeMobileMenu) {
+            closeMobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+        }
+
+        // Close mobile menu when clicking on links
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target) && mobileMenu.classList.contains('open')) {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        });
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        });
+
+        // Review filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.flex-wrap button');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('bg-custom-gold', 'text-gray-900');
+                        btn.classList.add('bg-white', 'border', 'border-gray-300', 'text-gray-700');
+                    });
+                    
+                    // Add active class to clicked button
+                    this.classList.remove('bg-white', 'border', 'border-gray-300', 'text-gray-700');
+                    this.classList.add('bg-custom-gold', 'text-gray-900');
+                    
+                    // In a real implementation, you would filter reviews here
+                    console.log('Filtering reviews by:', this.textContent);
+                });
+            });
+            
+            // Load more reviews functionality
+            const loadMoreButton = document.querySelector('.text-center button');
+            if (loadMoreButton) {
+                loadMoreButton.addEventListener('click', function() {
+                    // In a real implementation, you would load more reviews here
+                    console.log('Loading more reviews...');
+                    this.textContent = 'Loading...';
+                    setTimeout(() => {
+                        this.textContent = 'No More Reviews';
+                        this.disabled = true;
+                    }, 1000);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
