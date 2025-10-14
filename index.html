@@ -522,6 +522,19 @@
             user-select: none;
         }
 
+        @media (max-width: 360px){
+          .new h1{
+            font-size: 20px;
+          }
+
+          .new p{
+            font-size: 15px;
+          }
+
+          .new-one h1{
+            font-size: 20px;
+          }
+        }
        
    
   </style>
@@ -731,10 +744,10 @@
 
   <!-- Centered Short Entry -->
   <div class="relative flex flex-col new justify-center items-center h-full text-center px-4">
-    <h1 class="text-3xl md:text-5xl font-bold text-white animate-floatIn">
+    <h1 class="text-3xl md:text-5xl font-bold text-white animate-floatIn ">
       Book your stay with <span class="text-amber-400">Lekkilet</span>
     </h1>
-    <p class="mt-4 text-lg md:text-xl text-gray-200 max-w-2xl animate-floatIn">
+    <p class="mt-4 text-lg md:text-xl text-gray-200 max-w-2xl animate-floatIn ">
       Experience luxury and comfort in the heart of Lekki stylish shortlets, premium amenities, and seamless stays.
     </p>
     <a href="apart.html" class="mt-6 bg-amber-400 text-black font-semibold px-6 py-3 shadow-lg hover:bg-amber-500 transition transform hover:-translate-y-0.5 animate-floatIn">
@@ -742,19 +755,19 @@
     </a>
   </div>
 
-  <!-- Booking Form -->
+   <!-- Booking Form -->
   <div class="absolute bottom-10 w-full flex justify-center nform px-4">
     <div class="bg-white shadow-xl p-6 md:p-8 w-full max-w-5xl animate-floatIn">
-      <form class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <form id="bookingForm" class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <!-- Check In -->
         <div>
           <label class="text-gray-600 font-semibold text-sm">Check In</label>
-          <input type="date" class="w-full mt-2 p-3 border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+          <input type="date" id="checkIn" class="w-full mt-2 p-3 border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none" required>
         </div>
         <!-- Check Out -->
         <div>
           <label class="text-gray-600 font-semibold text-sm">Check Out</label>
-          <input type="date" class="w-full mt-2 p-3 border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+          <input type="date" id="checkOut" class="w-full mt-2 p-3 border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none" required>
         </div>
         <!-- Guests -->
         <div class="relative">
@@ -790,12 +803,21 @@
           </div>
         </div>
         <!-- Search Button -->
-        
-          <div class="flex items-end">
-              <a href="apart.html" type="submit" class="w-full bg-black text-white text-center font-semibold py-3 px-4 hover:bg-indigo-600 transition">Search Room
-                
-              </a>
+        <div class="flex items-end">
+          <button type="submit" class="w-full bg-black text-white text-center font-semibold py-3 px-4 hover:bg-indigo-600 transition">Search Room</button>
         </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal for date validation error -->
+  <!-- <div id="dateModal" class="modal">
+    <div class="modal-content">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">Date Required</h3>
+      <p class="text-gray-600">Please select both check-in and check-out dates to continue.</p>
+      <button id="modalClose" class="modal-close">OK</button>
+    </div>
+  </div> -->
       
       </form>
     </div>
@@ -805,7 +827,7 @@
   <!-- Rooms & Rates Section -->
   <div class="max-w-7xl mx-auto px-4 mt-[150px]">
     <!-- Header -->
-    <div class="text-center mb-12 scroll-animate">
+    <div class="text-center mb-12 scroll-animate new-one">
       <h1 class="text-4xl font-bold text-gray-800 mb-4">Our Rooms & Rates</h1>
       <p class="text-gray-600">Premium accommodations at competitive prices</p>
     </div>
@@ -878,7 +900,7 @@
 
                           <!-- Card 4 -->
                           <div class="card bg-white rounded-2xl shadow-lg p-6">
-                              <div style="background-image: url(image/DSC_03.JPG);" class=" bg-center bg-cover h-[200px] rounded-xl mb-4 flex items-center justify-center">
+                              <div style="background-image: url(image/WhatsApp\ Image\ 2025-10-13\ at\ 08.01.57.jpeg);" class=" bg-center bg-cover h-[200px] rounded-xl mb-4 flex items-center justify-center">
                               <i class="fas  text-white text-5xl"></i>
                               </div>
                             <h3 class="text-xl font-bold text-gray-800 mb-3">The Fifth Nest </h3>
@@ -910,7 +932,7 @@
 
                           <!-- Card 3 -->
                           <div class="card bg-white rounded-2xl shadow-lg p-6">
-                              <div style="background-image: url(image/DSC_17.JPG);" class=" bg-center bg-cover h-[200px] rounded-xl mb-4 flex items-center justify-center">
+                              <div style="background-image: url(image/WhatsApp\ Image\ 2025-10-13\ at\ 08.01.57\ \(30\).jpeg);" class=" bg-center bg-cover h-[200px] rounded-xl mb-4 flex items-center justify-center">
                               <i class="fas  text-white text-5xl"></i>
                               </div>
                             <h3 class="text-xl font-bold text-gray-800 mb-3">The Fifth Nest 2</h3>
@@ -2017,7 +2039,7 @@
     checkScroll();
   </script>
 
-   <script>
+   <!-- <script>
     const guestBtn = document.getElementById('guestBtn');
     const guestDropdown = document.getElementById('guestDropdown');
     const guestText = document.getElementById('guestText');
@@ -2037,7 +2059,7 @@
       }
       guestText.textContent = `Adults ${adults}, Children ${children}`;
     }
-  </script>
+  </script> -->
    <script>
         // Desktop Apartments Dropdown
         const apartmentsToggle = document.getElementById('apartments-toggle');
@@ -2104,6 +2126,69 @@
                 mobileMenu.classList.remove('open');
             });
         });
+
+        
+    </script>
+
+    <script>
+       // Form validation
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent form submission
+      
+      const checkIn = document.getElementById('checkIn').value;
+      const checkOut = document.getElementById('checkOut').value;
+      
+      // Check if both dates are selected
+      if (!checkIn || !checkOut) {
+        // Show modal if dates are not selected
+        document.getElementById('dateModal').style.display = 'flex';
+        return false;
+      }
+      
+      // If dates are selected, proceed to the next page
+      window.location.href = 'apart.html';
+    });
+    
+    // Close modal functionality
+    document.getElementById('modalClose').addEventListener('click', function() {
+      document.getElementById('dateModal').style.display = 'none';
+    });
+    
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', function(e) {
+      const modal = document.getElementById('dateModal');
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    // Guest dropdown functionality
+    const guestBtn = document.getElementById('guestBtn');
+    const guestDropdown = document.getElementById('guestDropdown');
+    const guestText = document.getElementById('guestText');
+    let adults = 2, children = 0;
+
+    guestBtn.addEventListener('click', () => {
+      guestDropdown.classList.toggle('hidden');
+    });
+
+    function updateGuests(type, change) {
+      if (type === 'adults') {
+        adults = Math.max(1, adults + change);
+        document.getElementById('adultsCount').textContent = adults;
+      } else {
+        children = Math.max(0, children + change);
+        document.getElementById('childrenCount').textContent = children;
+      }
+      guestText.textContent = `Adults ${adults}, Children ${children}`;
+    }
+
+    // Close guest dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!guestBtn.contains(e.target) && !guestDropdown.contains(e.target)) {
+        guestDropdown.classList.add('hidden');
+      }
+    });
     </script>
 </body>
 </html>
