@@ -13,7 +13,7 @@
     <script>
         // Initialize EmailJS
         (function() {
-            emailjs.init("vRgGNPAWHSIJOJW2P"); // ← REPLACE WITH YOUR ACTUAL PUBLIC KEY
+            emailjs.init("vRgGNPAWHSIJOJW2P");
             console.log('EmailJS initialized');
         })();
     </script>
@@ -415,13 +415,13 @@ Lekkilet Team</textarea>
                 document.getElementById('emailApartment').value = booking.apartmentId;
                 document.getElementById('emailNights').value = `${booking.dates.length} nights`;
                 
-                // Customize message with booking details
+                // Customize message with booking details - USE RAW DATES
                 let message = document.getElementById('emailMessage').value;
                 message = message.replace('{client_name}', booking.userData.userName);
                 message = message.replace('{apartment_name}', booking.apartmentId);
                 message = message.replace('{nights}', `${booking.dates.length} nights`);
-                message = message.replace('{check_in}', formatDate(new Date(booking.bookingData.checkIn)));
-                message = message.replace('{check_out}', formatDate(new Date(booking.bookingData.checkOut)));
+                message = message.replace('{check_in}', formatDateForEmail(booking.bookingData.checkIn));
+                message = message.replace('{check_out}', formatDateForEmail(booking.bookingData.checkOut));
                 message = message.replace('{guests}', booking.bookingData.guests);
                 document.getElementById('emailMessage').value = message;
                 
@@ -484,7 +484,7 @@ Lekkilet Team</textarea>
                 });
         }
 
-        // REAL Email sending function for CLIENT confirmations
+        // REAL Email sending function for CLIENT confirmations - FIXED DATE ISSUE
         function sendRealConfirmationEmail(clientEmail, subject, message, booking) {
             return new Promise((resolve, reject) => {
                 // FIXED: Correct apartment names mapping
@@ -506,23 +506,29 @@ Lekkilet Team</textarea>
                 const apartmentLocation = apartmentLocations[booking.apartmentId] || 'Lagos, Nigeria';
                 const totalAmount = (booking.dates.length * 160000 + 100000).toLocaleString();
 
-                // Template parameters for the NEW HTML template
+                // FIXED: Use the raw date strings directly to avoid timezone issues
                 const templateParams = {
-                    to_email: clientEmail, // ← FIXED: This should be the CLIENT's email, not yours
+                    to_email: clientEmail,
                     to_name: booking.userData.userName,
                     client_name: booking.userData.userName,
                     apartment_name: apartmentName,
                     apartment_location: apartmentLocation,
-                    check_in: formatDate(new Date(booking.bookingData.checkIn)),
-                    check_out: formatDate(new Date(booking.bookingData.checkOut)),
+                    check_in: formatDateForEmail(booking.bookingData.checkIn), // Use raw date string
+                    check_out: formatDateForEmail(booking.bookingData.checkOut), // Use raw date string
                     nights: booking.dates.length,
                     guests: booking.bookingData.guests,
                     total_amount: `₦${totalAmount}`,
                     booking_id: booking.id
                 };
 
+                console.log('DEBUG - Original dates:', {
+                    rawCheckIn: booking.bookingData.checkIn,
+                    rawCheckOut: booking.bookingData.checkOut,
+                    formattedCheckIn: templateParams.check_in,
+                    formattedCheckOut: templateParams.check_out
+                });
+
                 console.log('Sending confirmation email TO CLIENT:', clientEmail);
-                console.log('Template params:', templateParams);
 
                 // Use your NEW template ID for client confirmations
                 emailjs.send(
@@ -539,6 +545,37 @@ Lekkilet Team</textarea>
                     reject(error);
                 });
             });
+        }
+
+        // NEW: Safe date formatting function that preserves the original date
+        function formatDateForEmail(dateString) {
+            // If it's already in a readable format, use it directly
+            if (dateString.includes(',') || dateString.includes('/')) {
+                return dateString;
+            }
+            
+            // If it's in ISO format (YYYY-MM-DD), parse it safely
+            if (dateString.includes('-')) {
+                const parts = dateString.split('-');
+                if (parts.length === 3) {
+                    const year = parts[0];
+                    const month = parts[1];
+                    const day = parts[2];
+                    
+                    // Create date in UTC to avoid timezone shifts
+                    const date = new Date(Date.UTC(year, month - 1, day));
+                    return date.toLocaleDateString('en-US', {
+                        timeZone: 'UTC', // Use UTC to preserve the exact date
+                        weekday: 'short',
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+                }
+            }
+            
+            // Fallback: return the original string
+            return dateString;
         }
 
         // Confirm without sending email
@@ -663,9 +700,13 @@ Lekkilet Team</textarea>
             }
         }
 
-        // Utility functions
+        // Utility functions - FIXED DATE FORMATTING
         function formatDate(date) {
-            return date.toLocaleDateString('en-US', {
+            // Handle both Date objects and date strings
+            const dateObj = typeof date === 'string' ? new Date(date) : date;
+            
+            return dateObj.toLocaleDateString('en-US', {
+                timeZone: 'Africa/Lagos', // Use Lagos timezone
                 weekday: 'short',
                 year: 'numeric',
                 month: 'short',
@@ -674,7 +715,9 @@ Lekkilet Team</textarea>
         }
 
         function formatTime(dateString) {
-            return new Date(dateString).toLocaleString('en-US');
+            return new Date(dateString).toLocaleString('en-US', {
+                timeZone: 'Africa/Lagos'
+            });
         }
 
         function closeModal() {
