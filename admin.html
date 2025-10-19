@@ -7,14 +7,124 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- ADD EMAILJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("vRgGNPAWHSIJOJW2P"); // ← REPLACE WITH YOUR ACTUAL PUBLIC KEY
+            console.log('EmailJS initialized');
+        })();
+    </script>
+
     <style>
         body { font-family: 'Poppins', sans-serif; }
         .booking-pending { border-left: 4px solid #f59e0b; }
         .booking-confirmed { border-left: 4px solid #10b981; }
         .booking-expired { border-left: 4px solid #ef4444; }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            z-index: 1000;
+            display: none;
+            max-width: 400px;
+        }
+        .notification.success { background-color: #10b981; }
+        .notification.error { background-color: #ef4444; }
+        .notification.info { background-color: #3b82f6; }
     </style>
 </head>
 <body class="bg-gray-50">
+    <!-- Notification System -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Email Confirmation Modal -->
+    <div id="emailModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold">Send Confirmation Email</h3>
+                <button onclick="closeEmailModal()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Client Name</label>
+                        <input type="text" id="emailClientName" readonly class="w-full p-2 border border-gray-300 rounded-lg bg-gray-50">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Client Email</label>
+                        <input type="email" id="emailClientEmail" readonly class="w-full p-2 border border-gray-300 rounded-lg bg-gray-50">
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Apartment</label>
+                        <input type="text" id="emailApartment" readonly class="w-full p-2 border border-gray-300 rounded-lg bg-gray-50">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nights</label>
+                        <input type="text" id="emailNights" readonly class="w-full p-2 border border-gray-300 rounded-lg bg-gray-50">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                    <input type="text" id="emailSubject" value="Booking Confirmation - Lekkilet Apartments" class="w-full p-2 border border-gray-300 rounded-lg">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Confirmation Message</label>
+                    <textarea id="emailMessage" rows="12" class="w-full p-2 border border-gray-300 rounded-lg">Dear {client_name},
+
+We are pleased to inform you that your booking has been confirmed!
+
+📧 Booking Details
+- Apartment: {apartment_name}
+- Check-in: {check_in}
+- Check-out: {check_out}
+- Nights: {nights} nights
+- Guests: {guests}
+- Total Amount: {total_amount}
+- Booking ID: {booking_id}
+
+📍 Location
+{apartment_location}
+
+📞 Contact Information
+If you have any questions, please contact us:
+
+Phone: +234 911 346 6296
+Email: quicknestresidence@gmail.com
+
+We look forward to hosting you!
+
+Best regards,
+Lekkilet Team</textarea>
+                </div>
+
+                <div class="flex space-x-2 pt-4">
+                    <button onclick="sendConfirmationEmail()" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 flex items-center flex-1 justify-center">
+                        <i class="fas fa-paper-plane mr-2"></i> Send Confirmation Email
+                    </button>
+                    <button onclick="confirmWithoutEmail()" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 flex items-center">
+                        <i class="fas fa-check mr-2"></i> Confirm Only
+                    </button>
+                    <button onclick="closeEmailModal()" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Admin Header -->
     <header class="bg-white shadow-sm border-b">
         <div class="container mx-auto px-4 py-4">
@@ -137,6 +247,7 @@
     <script>
         // Admin JavaScript
         let allBookings = [];
+        let currentBookingId = null;
 
         // Load data on page load
         document.addEventListener('DOMContentLoaded', function() {
@@ -232,7 +343,7 @@
                     </div>
 
                     <div class="flex space-x-2">
-                        <button onclick="confirmBooking('${booking.id}')" 
+                        <button onclick="openEmailModal('${booking.id}')" 
                                 class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 flex items-center">
                             <i class="fas fa-check mr-2"></i> Confirm
                         </button>
@@ -292,38 +403,192 @@
             `).join('');
         }
 
-        // Confirm booking
-       // In admin.html - Update the confirmBooking function
-function confirmBooking(bookingId) {
-    const saved = localStorage.getItem('lekkiletBookedDates');
-    if (saved) {
-        const data = JSON.parse(saved);
-        
-        if (data.pendingBookings[bookingId]) {
-            const booking = data.pendingBookings[bookingId];
-            
-            // Update booking status to confirmed
-            data.pendingBookings[bookingId].status = 'confirmed';
-            
-            // Update dates status in apartment bookings
-            const apartmentBookings = data[booking.apartmentId] || [];
-            apartmentBookings.forEach(apartmentBooking => {
-                if (apartmentBooking.bookingId === bookingId) {
-                    apartmentBooking.status = 'confirmed';
-                }
-            });
-            
-            // Save back to localStorage
-            localStorage.setItem('lekkiletBookedDates', JSON.stringify(data));
-            
-            // Show success message
-            showNotification('Booking confirmed successfully! Dates are now permanently blocked.', 'success');
-            
-            // Reload data
-            loadBookings();
+        // Open email confirmation modal
+        function openEmailModal(bookingId) {
+            const booking = allBookings.find(b => b.id === bookingId);
+            if (booking && booking.userData.userEmail) {
+                currentBookingId = bookingId;
+                
+                // Fill email form with booking data
+                document.getElementById('emailClientName').value = booking.userData.userName;
+                document.getElementById('emailClientEmail').value = booking.userData.userEmail;
+                document.getElementById('emailApartment').value = booking.apartmentId;
+                document.getElementById('emailNights').value = `${booking.dates.length} nights`;
+                
+                // Customize message with booking details
+                let message = document.getElementById('emailMessage').value;
+                message = message.replace('{client_name}', booking.userData.userName);
+                message = message.replace('{apartment_name}', booking.apartmentId);
+                message = message.replace('{nights}', `${booking.dates.length} nights`);
+                message = message.replace('{check_in}', formatDate(new Date(booking.bookingData.checkIn)));
+                message = message.replace('{check_out}', formatDate(new Date(booking.bookingData.checkOut)));
+                message = message.replace('{guests}', booking.bookingData.guests);
+                document.getElementById('emailMessage').value = message;
+                
+                document.getElementById('emailModal').classList.remove('hidden');
+            } else {
+                // If no email, confirm directly
+                confirmBookingDirect(bookingId);
+            }
         }
-    }
-}
+
+        // Close email modal
+        function closeEmailModal() {
+            document.getElementById('emailModal').classList.add('hidden');
+            currentBookingId = null;
+        }
+
+        function sendConfirmationEmail() {
+            if (!currentBookingId) return;
+            
+            const booking = allBookings.find(b => b.id === currentBookingId);
+            
+            if (!booking.userData.userEmail || booking.userData.userEmail === 'No email') {
+                showNotification('No email address provided by client.', 'error');
+                return;
+            }
+            
+            const subject = document.getElementById('emailSubject').value;
+            
+            // Show sending notification
+            showNotification('Sending confirmation email...', 'info');
+            
+            // Disable buttons to prevent multiple clicks
+            const sendBtn = document.querySelector('button[onclick="sendConfirmationEmail()"]');
+            const confirmBtn = document.querySelector('button[onclick="confirmWithoutEmail()"]');
+            sendBtn.disabled = true;
+            confirmBtn.disabled = true;
+            sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
+            
+            // Use real email service with NEW template
+            sendRealConfirmationEmail(booking.userData.userEmail, subject, "", booking)
+                .then(() => {
+                    // Confirm booking after email is sent
+                    confirmBookingDirect(currentBookingId);
+                    showNotification('Confirmation email sent successfully! Booking confirmed.', 'success');
+                    closeEmailModal();
+                })
+                .catch(error => {
+                    // Offer choice: confirm without email or try again
+                    sendBtn.disabled = false;
+                    confirmBtn.disabled = false;
+                    sendBtn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i> Send Confirmation Email';
+                    
+                    if (confirm('Email failed to send. Do you want to confirm the booking anyway and contact the client manually?')) {
+                        confirmBookingDirect(currentBookingId);
+                        showNotification('Booking confirmed. Please contact client manually.', 'info');
+                        closeEmailModal();
+                    } else {
+                        showNotification('Email failed. Please try again or contact client manually.', 'error');
+                    }
+                });
+        }
+
+        // REAL Email sending function for CLIENT confirmations
+        function sendRealConfirmationEmail(clientEmail, subject, message, booking) {
+            return new Promise((resolve, reject) => {
+                // FIXED: Correct apartment names mapping
+                const apartmentNames = {
+                    'quicknest-apartment-1': 'QuickNest Apartment 1',
+                    'quicknest-apartment-2': 'QuickNest Apartment 2',
+                    'fifth-nest-apartment-1': 'Fifth Nest Apartment 1', 
+                    'fifth-nest-apartment-2': 'Fifth Nest Apartment 2'
+                };
+                
+                const apartmentLocations = {
+                    'quicknest-apartment-1': '5 Kola Motajo Cl ilasan, Ikate Lekki 106104, Lagos, Nigeria',
+                    'quicknest-apartment-2': '5 Kola Motajo Cl ilasan, Ikate Lekki 106104, Lagos, Nigeria',
+                    'fifth-nest-apartment-1': 'Fifth Nest Location, Lagos, Nigeria',
+                    'fifth-nest-apartment-2': 'Fifth Nest Location, Lagos, Nigeria'
+                };
+                
+                const apartmentName = apartmentNames[booking.apartmentId] || booking.apartmentId;
+                const apartmentLocation = apartmentLocations[booking.apartmentId] || 'Lagos, Nigeria';
+                const totalAmount = (booking.dates.length * 160000 + 100000).toLocaleString();
+
+                // Template parameters for the NEW HTML template
+                const templateParams = {
+                    to_email: clientEmail, // ← FIXED: This should be the CLIENT's email, not yours
+                    to_name: booking.userData.userName,
+                    client_name: booking.userData.userName,
+                    apartment_name: apartmentName,
+                    apartment_location: apartmentLocation,
+                    check_in: formatDate(new Date(booking.bookingData.checkIn)),
+                    check_out: formatDate(new Date(booking.bookingData.checkOut)),
+                    nights: booking.dates.length,
+                    guests: booking.bookingData.guests,
+                    total_amount: `₦${totalAmount}`,
+                    booking_id: booking.id
+                };
+
+                console.log('Sending confirmation email TO CLIENT:', clientEmail);
+                console.log('Template params:', templateParams);
+
+                // Use your NEW template ID for client confirmations
+                emailjs.send(
+                    'service_qby0rem',           // Your EmailJS service ID
+                    'template_b5sb7sy',          // Your NEW client confirmation template ID
+                    templateParams
+                )
+                .then((response) => {
+                    console.log('Client confirmation email sent successfully to:', clientEmail);
+                    resolve(response);
+                })
+                .catch((error) => {
+                    console.error('Client email failed to send to:', clientEmail, error);
+                    reject(error);
+                });
+            });
+        }
+
+        // Confirm without sending email
+        function confirmWithoutEmail() {
+            if (!currentBookingId) return;
+            confirmBookingDirect(currentBookingId);
+            showNotification('Booking confirmed successfully!', 'success');
+            closeEmailModal();
+        }
+
+        // Confirm booking directly (original functionality + email integration)
+        function confirmBookingDirect(bookingId) {
+            const saved = localStorage.getItem('lekkiletBookedDates');
+            if (saved) {
+                const data = JSON.parse(saved);
+                
+                if (data.pendingBookings[bookingId]) {
+                    const booking = data.pendingBookings[bookingId];
+                    
+                    // Update booking status to confirmed
+                    data.pendingBookings[bookingId].status = 'confirmed';
+                    
+                    // Update dates status in apartment bookings
+                    const apartmentBookings = data[booking.apartmentId] || [];
+                    apartmentBookings.forEach(apartmentBooking => {
+                        if (apartmentBooking.bookingId === bookingId) {
+                            apartmentBooking.status = 'confirmed';
+                        }
+                    });
+                    
+                    // Save back to localStorage
+                    localStorage.setItem('lekkiletBookedDates', JSON.stringify(data));
+                    
+                    // Reload data
+                    loadBookings();
+                }
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000);
+        }
 
         // Reject booking
         function rejectBooking(bookingId) {
@@ -344,7 +609,7 @@ function confirmBooking(bookingId) {
                     }
                     
                     localStorage.setItem('lekkiletBookedDates', JSON.stringify(data));
-                    alert('Booking rejected!');
+                    showNotification('Booking rejected successfully!', 'success');
                     loadBookings(); // Reload data
                 }
             }
@@ -383,7 +648,7 @@ function confirmBooking(bookingId) {
                     
                     <div class="mt-6 flex space-x-2">
                         ${booking.status === 'pending' ? `
-                            <button onclick="confirmBooking('${booking.id}')" 
+                            <button onclick="openEmailModal('${booking.id}')" 
                                     class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
                                 Confirm Booking
                             </button>
@@ -418,7 +683,7 @@ function confirmBooking(bookingId) {
 
         function refreshData() {
             loadBookings();
-            alert('Data refreshed!');
+            showNotification('Data refreshed!', 'info');
         }
 
         function logout() {
