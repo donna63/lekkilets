@@ -1209,6 +1209,572 @@
 
 
 
+
+    <script>
+    // Mobile Menu Functionality
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const closeMobileMenu = document.getElementById('close-mobile-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileApartmentsToggle = document.getElementById('mobile-apartments-toggle');
+    const mobileApartmentsDropdown = document.getElementById('mobile-apartments-dropdown');
+    const mobileDropdownToggle = mobileApartmentsToggle?.querySelector('.dropdown-toggle');
+
+    // Desktop Apartments Dropdown
+    const apartmentsToggle = document.getElementById('apartments-toggle');
+    const apartmentsDropdown = document.getElementById('apartments-dropdown');
+    const dropdownToggle = apartmentsToggle?.querySelector('.dropdown-toggle');
+
+    if (apartmentsToggle) {
+        apartmentsToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            apartmentsDropdown.classList.toggle('show');
+            dropdownToggle.classList.toggle('rotated');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            apartmentsDropdown.classList.remove('show');
+            dropdownToggle.classList.remove('rotated');
+        });
+
+        // Prevent dropdown from closing when clicking inside
+        apartmentsDropdown.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+
+    // Mobile Menu Toggle
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+        });
+    }
+
+    if (closeMobileMenu) {
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+        });
+    }
+
+    // Mobile Apartments Dropdown
+    if (mobileApartmentsToggle) {
+        mobileApartmentsToggle.addEventListener('click', function() {
+            mobileApartmentsDropdown.classList.toggle('hidden');
+            mobileDropdownToggle.classList.toggle('rotated');
+        });
+    }
+
+    // Close mobile menu when clicking on links
+    const mobileMenuLinks = mobileMenu?.querySelectorAll('a');
+    if (mobileMenuLinks) {
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        });
+    }
+
+    // Check if booking is in December
+    function isDecemberBooking(checkIn, checkOut) {
+        const checkInDate = new Date(checkIn);
+        const checkOutDate = new Date(checkOut);
+        
+        // Check if either check-in or check-out falls in December
+        return checkInDate.getMonth() === 11 || checkOutDate.getMonth() === 11; // December is month 11 (0-indexed)
+    }
+
+    // Updated Price Calculation with December pricing
+    function calculatePrice() {
+        const checkIn = document.getElementById('checkIn').value;
+        const checkOut = document.getElementById('checkOut').value;
+        
+        if (checkIn && checkOut) {
+            const checkInDate = new Date(checkIn);
+            const checkOutDate = new Date(checkOut);
+            
+            if (checkOutDate > checkInDate) {
+                const nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+                
+                // Check if it's a December booking
+                const isDecember = isDecemberBooking(checkIn, checkOut);
+                
+                // Set price based on month
+                const nightlyRate = isDecember ? 300000 : 180000;
+                const cautionFee = 100000;
+                const subtotal = nights * nightlyRate;
+                const total = subtotal + cautionFee;
+                
+                // Update price display
+                document.getElementById('nightsCount').textContent = nights;
+                document.getElementById('subtotal').textContent = subtotal.toLocaleString();
+                document.getElementById('totalAmount').textContent = total.toLocaleString();
+                
+                // Update the main price display
+                const priceDisplay = document.querySelector('.price-display .text-2xl');
+                if (priceDisplay) {
+                    priceDisplay.textContent = `₦${nightlyRate.toLocaleString()}`;
+                }
+                
+                // Update price breakdown text
+                const priceBreakdown = document.querySelector('.flex.justify-between.text-sm span:first-child');
+                if (priceBreakdown) {
+                    priceBreakdown.textContent = `₦${nightlyRate.toLocaleString()} x ${nights} day`;
+                }
+                
+                // Update button text
+                const buttonText = document.getElementById('buttonText');
+                if (nights > 0) {
+                    const monthText = isDecember ? ' (December Rate)' : '';
+                    buttonText.textContent = `Book ${nights} Nights - ₦${total.toLocaleString()}${monthText}`;
+                }
+                
+                // Show notice for December pricing
+                showDecemberNotice(isDecember);
+            }
+        }
+    }
+
+    // Show notice for December pricing
+    function showDecemberNotice(isDecember) {
+        // Remove existing notice if any
+        const existingNotice = document.getElementById('decemberNotice');
+        if (existingNotice) {
+            existingNotice.remove();
+        }
+        
+        if (isDecember) {
+            const bookingCard = document.querySelector('.bg-white.rounded-2xl.shadow-lg.p-6');
+            const notice = document.createElement('div');
+            notice.id = 'decemberNotice';
+            notice.className = 'mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg';
+            notice.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-info-circle text-amber-500 mr-2"></i>
+                    <span class="text-sm text-amber-800">
+                        <strong>December Rate:</strong> Special pricing applies for December bookings
+                    </span>
+                </div>
+            `;
+            
+            // Insert after the price display
+            const priceDisplay = bookingCard.querySelector('.price-display');
+            if (priceDisplay && priceDisplay.parentNode) {
+                priceDisplay.parentNode.insertBefore(notice, priceDisplay.nextSibling);
+            }
+        }
+    }
+
+    // Show processing modal
+    function showProcessingModal() {
+        document.getElementById('processingModal').classList.remove('hidden');
+    }
+
+    // Hide processing modal
+    function hideProcessingModal() {
+        document.getElementById('processingModal').classList.add('hidden');
+    }
+
+    // Show success modal
+    function showSuccessModal() {
+        document.getElementById('successModal').classList.remove('hidden');
+    }
+
+    // Close success modal
+    function closeSuccessModal() {
+        document.getElementById('successModal').classList.add('hidden');
+        // Reset form
+        document.getElementById('bookingForm').reset();
+        calculatePrice();
+    }
+
+    // Show error modal
+    function showErrorModal(title, message) {
+        document.getElementById('errorTitle').textContent = title;
+        document.getElementById('errorMessage').textContent = message;
+        document.getElementById('errorModal').classList.remove('hidden');
+    }
+
+    // Close error modal
+    function closeErrorModal() {
+        document.getElementById('errorModal').classList.add('hidden');
+    }
+
+    // Format date for better readability
+    function formatDate(date) {
+        return date.toLocaleDateString('en-US', {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
+    }
+
+    // Function to get all dates between two dates
+    function getDatesBetween(startDate, endDate) {
+        const dates = [];
+        const currentDate = new Date(startDate);
+        
+        while (currentDate <= endDate) {
+            dates.push(new Date(currentDate));
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+        
+        return dates;
+    }
+
+    // Helper function to get pretty names for emails
+    function getApartmentDisplayName(apartmentId) {
+        const names = {
+            'quicknest-apartment-1': 'QuickNest Apartment 1',
+            'quicknest-apartment-2': 'QuickNest Apartment 2', 
+            'fifth-nest-apartment-1': 'Fifth Nest Apartment 1',
+            'fifth-nest-apartment-2': 'Fifth Nest Apartment 2'
+        };
+        return names[apartmentId] || apartmentId;
+    }
+
+    // Enhanced date availability check
+    function checkDateAvailability(checkIn, checkOut, apartmentId = 'quicknest-apartment-2') {
+        const checkInDate = new Date(checkIn);
+        const checkOutDate = new Date(checkOut);
+        const datesToCheck = getDatesBetween(checkInDate, checkOutDate);
+        
+        // Load booked dates from localStorage
+        const saved = localStorage.getItem('lekkiletBookedDates');
+        if (!saved) {
+            return { available: true }; // No bookings yet
+        }
+        
+        const data = JSON.parse(saved);
+        const apartmentBookings = data[apartmentId] || [];
+        
+        // Check each date
+        for (const date of datesToCheck) {
+            const dateString = date.toISOString().split('T')[0];
+            const existingBooking = apartmentBookings.find(booking => booking.date === dateString);
+            
+            if (existingBooking) {
+                if (existingBooking.status === 'confirmed') {
+                    return { 
+                        available: false, 
+                        reason: 'This date is already booked and confirmed',
+                        type: 'confirmed'
+                    };
+                }
+                if (existingBooking.status === 'pending') {
+                    return { 
+                        available: false, 
+                        reason: 'This date is temporarily reserved (pending payment)',
+                        type: 'pending'
+                    };
+                }
+            }
+        }
+        
+        return { available: true };
+    }
+
+    // Create pending booking
+    function createPendingBooking(bookingData, userData, apartmentId = 'quicknest-apartment-2') {
+        const bookingId = 'BK' + Date.now() + Math.random().toString(36).substr(2, 5);
+        const checkIn = new Date(bookingData.checkIn);
+        const checkOut = new Date(bookingData.checkOut);
+        const datesToBook = getDatesBetween(checkIn, checkOut);
+
+        // Create pending booking
+        const pendingBooking = {
+            id: bookingId,
+            apartmentId: apartmentId,
+            userData: userData,
+            bookingData: bookingData,
+            dates: datesToBook.map(date => date.toISOString().split('T')[0]),
+            createdAt: new Date().toISOString(),
+            status: 'pending'
+        };
+
+        // Load existing data
+        const saved = localStorage.getItem('lekkiletBookedDates');
+        const data = saved ? JSON.parse(saved) : { 
+            pendingBookings: {},
+            'quicknest-apartment-2': []
+        };
+
+        // Add to pending bookings
+        data.pendingBookings[bookingId] = pendingBooking;
+
+        // Temporarily block dates
+        datesToBook.forEach(date => {
+            const dateString = date.toISOString().split('T')[0];
+            // Only add if date doesn't exist or isn't confirmed
+            const existingBooking = data[apartmentId]?.find(b => b.date === dateString);
+            if (!existingBooking || existingBooking.status !== 'confirmed') {
+                if (!data[apartmentId]) data[apartmentId] = [];
+                data[apartmentId].push({
+                    date: dateString,
+                    status: 'pending',
+                    bookingId: bookingId
+                });
+            }
+        });
+
+        // Save to localStorage
+        localStorage.setItem('lekkiletBookedDates', JSON.stringify(data));
+        console.log('Created pending booking:', bookingId);
+
+        return bookingId;
+    }
+
+    // Auto-send booking to Email with December pricing
+    async function sendBookingEmail(bookingData, userData, bookingId = '', apartmentId = 'quicknest-apartment-2') {
+        try {
+            console.log('Starting email send with December pricing...');
+            
+            const checkIn = new Date(bookingData.checkIn);
+            const checkOut = new Date(bookingData.checkOut);
+            const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+            
+            // Check if December booking
+            const isDecember = isDecemberBooking(bookingData.checkIn, bookingData.checkOut);
+            const nightlyRate = isDecember ? 300000 : 180000;
+            const cautionFee = 100000;
+            const subtotal = nights * nightlyRate;
+            const totalAmount = subtotal + cautionFee;
+
+            // Get apartment display name
+            const apartmentName = getApartmentDisplayName(apartmentId);
+
+            // Format date for email
+            const formatDateForEmail = (dateString) => {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', {
+                    timeZone: 'UTC',
+                    weekday: 'short',
+                    year: 'numeric', 
+                    month: 'short',
+                    day: 'numeric'
+                });
+            };
+
+            // Email template parameters
+            const templateParams = {
+                to_email: 'quicknestresidence@gmail.com',
+                customer_name: userData.userName,
+                customer_phone: userData.userPhone,
+                customer_email: userData.userEmail || 'Not provided',
+                apartment_name: apartmentName, 
+                apartment_location: "5 Kola Motajo Cl ilasan, Ikate Lekki 106104, Lagos, Nigeria",
+                check_in: formatDateForEmail(bookingData.checkIn),
+                check_out: formatDateForEmail(bookingData.checkOut),
+                nights: nights,
+                guests: bookingData.guests,
+                nightly_rate: `₦${nightlyRate.toLocaleString()}`,
+                subtotal: `₦${subtotal.toLocaleString()}`,
+                caution_fee: `₦${cautionFee.toLocaleString()}`,
+                total_amount: `₦${totalAmount.toLocaleString()}`,
+                booking_time: new Date().toLocaleString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }),
+                booking_id: bookingId || 'N/A',
+                season_note: isDecember ? 'December Seasonal Rate Applied' : 'Standard Rate'
+            };
+
+            console.log('Using Service ID: service_qby0rem');
+            console.log('Using Template ID: template_ellj4gb');
+
+            // Send email using EmailJS
+            const response = await emailjs.send(
+                'service_qby0rem',
+                'template_ellj4gb',
+                templateParams
+            );
+
+            console.log('Email sent successfully:', response);
+            return response.status === 200;
+            
+        } catch (error) {
+            console.error('Email sending failed:', error);
+            return false;
+        }
+    }
+
+    // Enhanced real-time date validation
+    function setupDateValidation() {
+        const checkInInput = document.getElementById('checkIn');
+        const checkOutInput = document.getElementById('checkOut');
+        const submitButton = document.getElementById('submitButton');
+        const buttonText = document.getElementById('buttonText');
+        
+        function validateSelectedDates() {
+            const checkIn = checkInInput.value;
+            const checkOut = checkOutInput.value;
+            
+            if (checkIn && checkOut) {
+                const availability = checkDateAvailability(checkIn, checkOut);
+                
+                if (!availability.available) {
+                    // Disable booking and show error
+                    submitButton.disabled = true;
+                    submitButton.classList.add('bg-gray-400', 'cursor-not-allowed');
+                    submitButton.classList.remove('bg-custom-gold', 'hover:bg-amber-500');
+                    
+                    if (availability.type === 'confirmed') {
+                        buttonText.textContent = 'Dates Booked';
+                        buttonText.parentElement.title = availability.reason;
+                    } else {
+                        buttonText.textContent = 'Dates Reserved';
+                        buttonText.parentElement.title = availability.reason;
+                    }
+                } else {
+                    // Enable booking
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                    submitButton.classList.add('bg-custom-gold', 'hover:bg-amber-500');
+                    buttonText.textContent = 'Check Availability & Book';
+                    buttonText.parentElement.title = '';
+                    calculatePrice();
+                }
+            }
+        }
+        
+        // Validate when dates change
+        checkInInput.addEventListener('change', validateSelectedDates);
+        checkOutInput.addEventListener('change', validateSelectedDates);
+        
+        // Also validate on page load if dates are already selected
+        setTimeout(validateSelectedDates, 100);
+    }
+
+    // Enhanced Booking Form Submission
+    document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Get apartment ID from hidden field
+        const apartmentId = document.getElementById('apartmentId').value;
+        
+        // Get form data
+        const formData = new FormData(this);
+        const bookingData = {
+            checkIn: formData.get('checkIn'),
+            checkOut: formData.get('checkOut'),
+            guests: formData.get('guests')
+        };
+        
+        const userData = {
+            userName: formData.get('userName'),
+            userPhone: formData.get('userPhone'),
+            userEmail: formData.get('userEmail')
+        };
+
+        // Validate dates first
+        const availability = checkDateAvailability(bookingData.checkIn, bookingData.checkOut, apartmentId);
+        if (!availability.available) {
+            if (availability.type === 'confirmed') {
+                showErrorModal('Dates Booked', 'These dates have already been confirmed for another guest. Please choose different dates.');
+            } else {
+                showErrorModal('Dates Reserved', 'These dates are temporarily reserved. Please check back later or choose different dates.');
+            }
+            return;
+        }
+        
+        // Continue with existing validation...
+        const checkIn = new Date(bookingData.checkIn);
+        const checkOut = new Date(bookingData.checkOut);
+        
+        if (!bookingData.checkIn || !bookingData.checkOut) {
+            showErrorModal('Missing Dates', 'Please select both check-in and check-out dates.');
+            return;
+        }
+        
+        if (checkOut <= checkIn) {
+            showErrorModal('Invalid Dates', 'Check-out date must be after check-in date.');
+            return;
+        }
+        
+        // Validate user information
+        if (!userData.userName || !userData.userPhone) {
+            showErrorModal('Missing Information', 'Please provide your full name and phone number.');
+            return;
+        }
+        
+        // Show processing state
+        const submitButton = document.getElementById('submitButton');
+        const buttonText = document.getElementById('buttonText');
+        const buttonSpinner = document.getElementById('buttonSpinner');
+        
+        submitButton.disabled = true;
+        buttonText.textContent = 'Sending Booking...';
+        buttonSpinner.classList.remove('hidden');
+        showProcessingModal();
+        
+        try {
+            // Create pending booking FIRST (to reserve dates)
+            const bookingId = createPendingBooking(bookingData, userData, apartmentId);
+            
+            // Then send email with booking ID
+            const emailSuccess = await sendBookingEmail(bookingData, userData, bookingId, apartmentId);
+            
+            hideProcessingModal();
+            
+            if (emailSuccess) {
+                showSuccessModal();
+            } else {
+                showErrorModal('Email Failed', 'Your booking request has been received! We will contact you shortly. Booking ID: ' + bookingId);
+            }
+            
+        } catch (error) {
+            hideProcessingModal();
+            showErrorModal('Connection Error', 'Your booking request has been recorded. We will contact you shortly.');
+        } finally {
+            submitButton.disabled = false;
+            buttonText.textContent = 'Check Availability & Book';
+            buttonSpinner.classList.add('hidden');
+            calculatePrice();
+        }
+    });
+
+    // Phone number formatting
+    document.getElementById('userPhone').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.startsWith('0')) {
+            value = '234' + value.substring(1);
+        }
+        if (value.length > 0 && !value.startsWith('+')) {
+            value = '+' + value;
+        }
+        e.target.value = value;
+    });
+
+    // Set minimum dates and initialize
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('checkIn').min = today;
+        document.getElementById('checkOut').min = today;
+        
+        // Setup date validation
+        setupDateValidation();
+        
+        // Add event listeners for date changes
+        document.getElementById('checkIn').addEventListener('change', function() {
+            const checkIn = new Date(this.value);
+            const nextDay = new Date(checkIn);
+            nextDay.setDate(nextDay.getDate() + 1);
+            document.getElementById('checkOut').min = nextDay.toISOString().split('T')[0];
+            calculatePrice();
+        });
+        
+        document.getElementById('checkOut').addEventListener('change', calculatePrice);
+        document.getElementById('guests').addEventListener('change', calculatePrice);
+        
+        // Initialize price calculation
+        calculatePrice();
+    });
+</script>
+<!-- 
     <script>
     // Mobile Menu Functionality
     const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -1456,6 +2022,187 @@
 
         return bookingId;
     }
+
+
+    // Check if booking is in December
+function isDecemberBooking(checkIn, checkOut) {
+    const checkInDate = new Date(checkIn);
+    const checkOutDate = new Date(checkOut);
+    
+    // Check if either check-in or check-out falls in December
+    return checkInDate.getMonth() === 11 || checkOutDate.getMonth() === 11; // December is month 11 (0-indexed)
+}
+
+// Updated Price Calculation
+function calculatePrice() {
+    const checkIn = document.getElementById('checkIn').value;
+    const checkOut = document.getElementById('checkOut').value;
+    
+    if (checkIn && checkOut) {
+        const checkInDate = new Date(checkIn);
+        const checkOutDate = new Date(checkOut);
+        
+        if (checkOutDate > checkInDate) {
+            const nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+            
+            // Check if it's a December booking
+            const isDecember = isDecemberBooking(checkIn, checkOut);
+            
+            // Set price based on month
+            const nightlyRate = isDecember ? 300000 : 180000;
+            const cautionFee = 100000;
+            const subtotal = nights * nightlyRate;
+            const total = subtotal + cautionFee;
+            
+            // Update price display
+            document.getElementById('nightsCount').textContent = nights;
+            document.getElementById('subtotal').textContent = subtotal.toLocaleString();
+            document.getElementById('totalAmount').textContent = total.toLocaleString();
+            
+            // Update the main price display
+            const priceDisplay = document.querySelector('.price-display .text-2xl');
+            if (priceDisplay) {
+                priceDisplay.textContent = `₦${nightlyRate.toLocaleString()}`;
+            }
+            
+            // Update price breakdown text
+            const priceBreakdown = document.querySelector('.flex.justify-between.text-sm span:first-child');
+            if (priceBreakdown) {
+                priceBreakdown.textContent = `₦${nightlyRate.toLocaleString()} x ${nights} day`;
+            }
+            
+            // Update button text
+            const buttonText = document.getElementById('buttonText');
+            if (nights > 0) {
+                const monthText = isDecember ? ' (December Rate)' : '';
+                buttonText.textContent = `Book ${nights} Nights - ₦${total.toLocaleString()}${monthText}`;
+            }
+            
+            // Optional: Show a notice for December pricing
+            showDecemberNotice(isDecember);
+        }
+    }
+}
+
+// Optional: Show notice for December pricing
+function showDecemberNotice(isDecember) {
+    // Remove existing notice if any
+    const existingNotice = document.getElementById('decemberNotice');
+    if (existingNotice) {
+        existingNotice.remove();
+    }
+    
+    if (isDecember) {
+        const bookingCard = document.querySelector('.bg-white.rounded-2xl.shadow-lg.p-6');
+        const notice = document.createElement('div');
+        notice.id = 'decemberNotice';
+        notice.className = 'mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg';
+        notice.innerHTML = `
+            <div class="flex items-center">
+                <i class="fas fa-info-circle text-amber-500 mr-2"></i>
+                <span class="text-sm text-amber-800">
+                    <strong>December Rate:</strong> Special pricing applies for December bookings
+                </span>
+            </div>
+        `;
+        
+        // Insert after the price display
+        const priceDisplay = bookingCard.querySelector('.price-display');
+        if (priceDisplay && priceDisplay.parentNode) {
+            priceDisplay.parentNode.insertBefore(notice, priceDisplay.nextSibling);
+        }
+    }
+}
+
+
+// CORRECTED: Auto-send booking to Email with December pricing
+async function sendBookingEmail(bookingData, userData, bookingId = '', apartmentId = 'quicknest-apartment-2') {
+    try {
+        console.log('Starting email send with December pricing...');
+        
+        const checkIn = new Date(bookingData.checkIn);
+        const checkOut = new Date(bookingData.checkOut);
+        const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+        
+        // Check if December booking
+        const isDecember = isDecemberBooking(bookingData.checkIn, bookingData.checkOut);
+        const nightlyRate = isDecember ? 300000 : 180000;
+        const cautionFee = 100000;
+        const subtotal = nights * nightlyRate;
+        const totalAmount = subtotal + cautionFee;
+
+        // Get apartment display name
+        const apartmentName = getApartmentDisplayName(apartmentId);
+
+        // Format date for email
+        const formatDateForEmail = (dateString) => {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                timeZone: 'UTC',
+                weekday: 'short',
+                year: 'numeric', 
+                month: 'short',
+                day: 'numeric'
+            });
+        };
+
+        // Email template parameters
+        const templateParams = {
+            to_email: 'quicknestresidence@gmail.com',
+            customer_name: userData.userName,
+            customer_phone: userData.userPhone,
+            customer_email: userData.userEmail || 'Not provided',
+            apartment_name: apartmentName, 
+            apartment_location: "5 Kola Motajo Cl ilasan, Ikate Lekki 106104, Lagos, Nigeria",
+            check_in: formatDateForEmail(bookingData.checkIn),
+            check_out: formatDateForEmail(bookingData.checkOut),
+            nights: nights,
+            guests: bookingData.guests,
+            nightly_rate: `₦${nightlyRate.toLocaleString()}`,
+            subtotal: `₦${subtotal.toLocaleString()}`,
+            caution_fee: `₦${cautionFee.toLocaleString()}`,
+            total_amount: `₦${totalAmount.toLocaleString()}`,
+            booking_time: new Date().toLocaleString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            }),
+            booking_id: bookingId || 'N/A',
+            season_note: isDecember ? 'December Seasonal Rate Applied' : 'Standard Rate'
+        };
+
+        console.log('Using Service ID: service_qby0rem');
+        console.log('Using Template ID: template_ellj4gb');
+
+        // Send email using EmailJS
+        const response = await emailjs.send(
+            'service_qby0rem',
+            'template_ellj4gb',
+            templateParams
+        );
+
+        console.log('Email sent successfully:', response);
+        return response.status === 200;
+        
+    } catch (error) {
+        console.error('Email sending failed:', error);
+        return false;
+    }
+}
+
+// Helper function to get pretty names for emails
+function getApartmentDisplayName(apartmentId) {
+    const names = {
+        'quicknest-apartment-1': 'QuickNest Apartment 1',
+        'quicknest-apartment-2': 'QuickNest Apartment 2', 
+        'fifth-nest-apartment-1': 'Fifth Nest Apartment 1',
+        'fifth-nest-apartment-2': 'Fifth Nest Apartment 2'
+    };
+    return names[apartmentId] || apartmentId;
+}
 
     // Auto-send booking to Email
 //     async function sendBookingEmail(bookingData, userData, bookingId = '', apartmentId = 'quicknest-apartment-2') {
@@ -1808,7 +2555,7 @@ function formatDate(date) {
         // Initialize price calculation
         calculatePrice();
     });
-</script>
+</script> -->
 
 
  
