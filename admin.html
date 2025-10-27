@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lekkilet - Admin Panel</title>
+    <title>Lekkilet - Admin Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" href="/image/new-removebg-preview.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -38,52 +38,92 @@
         .notification.success { background-color: #10b981; }
         .notification.error { background-color: #ef4444; }
         .notification.info { background-color: #3b82f6; }
+        .login-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
     </style>
 </head>
-<body class="bg-gray-50">
-    <!-- Notification System -->
-    <div id="notification" class="notification"></div>
-
-    <!-- Email Confirmation Modal -->
-    <div id="emailModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-2xl p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold">Send Confirmation Email</h3>
-                <button onclick="closeEmailModal()" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-times"></i>
-                </button>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">🏠 Lekkilet</h1>
+                <p class="text-gray-600">Admin Panel Login</p>
             </div>
-            <div class="space-y-4">
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Client Name</label>
-                        <input type="text" id="emailClientName" readonly class="w-full p-2 border border-gray-300 rounded-lg bg-gray-50">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Client Email</label>
-                        <input type="email" id="emailClientEmail" readonly class="w-full p-2 border border-gray-300 rounded-lg bg-gray-50">
-                    </div>
+            
+            <form id="loginForm" class="space-y-6">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                    <input type="text" id="username" name="username" required 
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Apartment</label>
-                        <input type="text" id="emailApartment" readonly class="w-full p-2 border border-gray-300 rounded-lg bg-gray-50">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Nights</label>
-                        <input type="text" id="emailNights" readonly class="w-full p-2 border border-gray-300 rounded-lg bg-gray-50">
-                    </div>
-                </div>
-
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
-                    <input type="text" id="emailSubject" value="Booking Confirmation - Lekkilet Apartments" class="w-full p-2 border border-gray-300 rounded-lg">
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input type="password" id="password" name="password" required 
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 </div>
+                
+                <button type="submit" 
+                        class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition font-medium">
+                    Sign In
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center text-sm text-gray-500">
+                <!-- <p>Default credentials: admin / admin123</p> -->
+                <!-- <p class="mt-2">Change these in production!</p> -->
+            </div>
+        </div>
+    </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Confirmation Message</label>
-                    <textarea id="emailMessage" rows="12" class="w-full p-2 border border-gray-300 rounded-lg">Dear {client_name},
+    <!-- Admin Panel (Hidden until login) -->
+    <div id="adminPanel" class="hidden">
+        <!-- Notification System -->
+        <div id="notification" class="notification"></div>
+
+        <!-- Email Confirmation Modal -->
+        <div id="emailModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-2xl p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold">Send Confirmation Email</h3>
+                    <button onclick="closeEmailModal()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Client Name</label>
+                            <input type="text" id="emailClientName" readonly class="w-full p-2 border border-gray-300 rounded-lg bg-gray-50">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Client Email</label>
+                            <input type="email" id="emailClientEmail" readonly class="w-full p-2 border border-gray-300 rounded-lg bg-gray-50">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Apartment</label>
+                            <input type="text" id="emailApartment" readonly class="w-full p-2 border border-gray-300 rounded-lg bg-gray-50">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Nights</label>
+                            <input type="text" id="emailNights" readonly class="w-full p-2 border border-gray-300 rounded-lg bg-gray-50">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                        <input type="text" id="emailSubject" value="Booking Confirmation - Lekkilet Apartments" class="w-full p-2 border border-gray-300 rounded-lg">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Confirmation Message</label>
+                        <textarea id="emailMessage" rows="12" class="w-full p-2 border border-gray-300 rounded-lg">Dear {client_name},
 
 We are pleased to inform you that your booking has been confirmed!
 
@@ -109,154 +149,213 @@ We look forward to hosting you!
 
 Best regards,
 Lekkilet Team</textarea>
-                </div>
-
-                <div class="flex space-x-2 pt-4">
-                    <button onclick="sendConfirmationEmail()" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 flex items-center flex-1 justify-center">
-                        <i class="fas fa-paper-plane mr-2"></i> Send Confirmation Email
-                    </button>
-                    <button onclick="confirmWithoutEmail()" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 flex items-center">
-                        <i class="fas fa-check mr-2"></i> Confirm Only
-                    </button>
-                    <button onclick="closeEmailModal()" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600">
-                        Cancel
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Admin Header -->
-    <header class="bg-white shadow-sm border-b">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <h1 class="text-2xl font-bold text-gray-800">🏠 Lekkilet Admin Panel</h1>
-                <div class="flex items-center space-x-4">
-                    <span class="text-sm text-gray-600">Staff Dashboard</span>
-                    <button onclick="logout()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
-                        Logout
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <div class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            <!-- Sidebar -->
-            <div class="lg:col-span-1">
-                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-4">
-                    <h3 class="font-semibold text-lg mb-4">Quick Actions</h3>
-                    <div class="space-y-2">
-                        <button onclick="showSection('pending')" class="w-full text-left p-3 rounded-lg hover:bg-gray-100 transition">
-                            📋 Pending Bookings
-                        </button>
-                        <button onclick="showSection('confirmed')" class="w-full text-left p-3 rounded-lg hover:bg-gray-100 transition">
-                            ✅ Confirmed Bookings
-                        </button>
-                        <button onclick="showSection('calendar')" class="w-full text-left p-3 rounded-lg hover:bg-gray-100 transition">
-                            📅 Calendar View
-                        </button>
-                        <button onclick="showSection('apartments')" class="w-full text-left p-3 rounded-lg hover:bg-gray-100 transition">
-                            🏢 Manage Apartments
-                        </button>
                     </div>
-                    
-                    <div class="mt-6 p-4 bg-yellow-50 rounded-lg">
-                        <h4 class="font-semibold text-sm mb-2">Stats</h4>
-                        <div class="space-y-1 text-sm">
-                            <div class="flex justify-between">
-                                <span>Pending:</span>
-                                <span id="pendingCount">0</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>Confirmed:</span>
-                                <span id="confirmedCount">0</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>Today:</span>
-                                <span id="todayCount">0</span>
-                            </div>
-                        </div>
+
+                    <div class="flex space-x-2 pt-4">
+                        <button onclick="sendConfirmationEmail()" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 flex items-center flex-1 justify-center">
+                            <i class="fas fa-paper-plane mr-2"></i> Send Confirmation Email
+                        </button>
+                        <button onclick="confirmWithoutEmail()" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 flex items-center">
+                            <i class="fas fa-check mr-2"></i> Confirm Only
+                        </button>
+                        <button onclick="closeEmailModal()" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600">
+                            Cancel
+                        </button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Main Content Area -->
-            <div class="lg:col-span-3">
-                <!-- Pending Bookings Section -->
-                <div id="pendingSection" class="section">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold text-gray-800">Pending Bookings</h2>
-                        <div class="flex space-x-2">
-                            <button onclick="refreshData()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
-                                🔄 Refresh
+        <!-- Admin Header -->
+        <header class="bg-white shadow-sm border-b">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-2xl font-bold text-gray-800">🏠 Lekkilet Admin Panel</h1>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm text-gray-600" id="userDisplay">Welcome, Admin</span>
+                        <button onclick="logout()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- Sidebar -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg shadow-sm p-6 sticky top-4">
+                        <h3 class="font-semibold text-lg mb-4">Quick Actions</h3>
+                        <div class="space-y-2">
+                            <button onclick="showSection('pending')" class="w-full text-left p-3 rounded-lg hover:bg-gray-100 transition">
+                                📋 Pending Bookings
+                            </button>
+                            <button onclick="showSection('confirmed')" class="w-full text-left p-3 rounded-lg hover:bg-gray-100 transition">
+                                ✅ Confirmed Bookings
+                            </button>
+                            <button onclick="showSection('calendar')" class="w-full text-left p-3 rounded-lg hover:bg-gray-100 transition">
+                                📅 Calendar View
+                            </button>
+                            <button onclick="showSection('apartments')" class="w-full text-left p-3 rounded-lg hover:bg-gray-100 transition">
+                                🏢 Manage Apartments
                             </button>
                         </div>
-                    </div>
-
-                    <div id="pendingBookingsList" class="space-y-4">
-                        <!-- Bookings will be loaded here -->
-                    </div>
-                </div>
-
-                <!-- Confirmed Bookings Section -->
-                <div id="confirmedSection" class="section hidden">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Confirmed Bookings</h2>
-                    <div id="confirmedBookingsList" class="space-y-4">
-                        <!-- Confirmed bookings will be loaded here -->
-                    </div>
-                </div>
-
-                <!-- Calendar View Section -->
-                <div id="calendarSection" class="section hidden">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Booking Calendar</h2>
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <div id="bookingCalendar" class="grid grid-cols-7 gap-2">
-                            <!-- Calendar will be generated here -->
+                        
+                        <div class="mt-6 p-4 bg-yellow-50 rounded-lg">
+                            <h4 class="font-semibold text-sm mb-2">Stats</h4>
+                            <div class="space-y-1 text-sm">
+                                <div class="flex justify-between">
+                                    <span>Pending:</span>
+                                    <span id="pendingCount">0</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Confirmed:</span>
+                                    <span id="confirmedCount">0</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Today:</span>
+                                    <span id="todayCount">0</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Apartments Management Section -->
-                <div id="apartmentsSection" class="section hidden">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Manage Apartments</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Apartment cards will be loaded here -->
+                <!-- Main Content Area -->
+                <div class="lg:col-span-3">
+                    <!-- Pending Bookings Section -->
+                    <div id="pendingSection" class="section">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-2xl font-bold text-gray-800">Pending Bookings</h2>
+                            <div class="flex space-x-2">
+                                <button onclick="refreshData()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                                    🔄 Refresh
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="pendingBookingsList" class="space-y-4">
+                            <!-- Bookings will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Confirmed Bookings Section -->
+                    <div id="confirmedSection" class="section hidden">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Confirmed Bookings</h2>
+                        <div id="confirmedBookingsList" class="space-y-4">
+                            <!-- Confirmed bookings will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Calendar View Section -->
+                    <div id="calendarSection" class="section hidden">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Booking Calendar</h2>
+                        <div class="bg-white rounded-lg shadow-sm p-6">
+                            <div id="bookingCalendar" class="grid grid-cols-7 gap-2">
+                                <!-- Calendar will be generated here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Apartments Management Section -->
+                    <div id="apartmentsSection" class="section hidden">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Manage Apartments</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Apartment cards will be loaded here -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Booking Details Modal -->
-    <div id="bookingModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-2xl p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold" id="modalTitle">Booking Details</h3>
-                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div id="modalContent">
-                <!-- Modal content will be loaded here -->
+        <!-- Booking Details Modal -->
+        <div id="bookingModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-2xl p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold" id="modalTitle">Booking Details</h3>
+                    <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="modalContent">
+                    <!-- Modal content will be loaded here -->
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        // Login and Authentication System
+        const ADMIN_CREDENTIALS = {
+            username: 'admin',
+            password: 'admin123'
+        };
+
+        // Check if user is already logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('lekkiletAdminLoggedIn');
+            const username = localStorage.getItem('lekkiletAdminUsername');
+            
+            if (isLoggedIn === 'true' && username) {
+                showAdminPanel(username);
+            }
+            
+            // Set up login form handler
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+        });
+
+        // Handle login form submission
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple authentication (replace with secure backend in production)
+            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                // Store login state
+                localStorage.setItem('lekkiletAdminLoggedIn', 'true');
+                localStorage.setItem('lekkiletAdminUsername', username);
+                
+                // Show admin panel
+                showAdminPanel(username);
+            } else {
+                alert('Invalid credentials. Please try again.');
+            }
+        }
+
+        // Show admin panel and hide login
+        function showAdminPanel(username) {
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('adminPanel').classList.remove('hidden');
+            document.getElementById('userDisplay').textContent = `Welcome, ${username}`;
+            
+            // Load admin data
+            loadBookings();
+            showSection('pending');
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('lekkiletAdminLoggedIn');
+                localStorage.removeItem('lekkiletAdminUsername');
+                
+                document.getElementById('adminPanel').classList.add('hidden');
+                document.getElementById('loginPage').classList.remove('hidden');
+                
+                // Clear form
+                document.getElementById('loginForm').reset();
+            }
+        }
+
         // Admin JavaScript
         let allBookings = [];
         let currentBookingId = null;
 
         // Load data on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            loadBookings();
-            showSection('pending');
-        });
-
-        // Load bookings from localStorage
         function loadBookings() {
             const saved = localStorage.getItem('lekkiletBookedDates');
             if (saved) {
@@ -728,12 +827,6 @@ Lekkilet Team</textarea>
         function refreshData() {
             loadBookings();
             showNotification('Data refreshed!', 'info');
-        }
-
-        function logout() {
-            if (confirm('Are you sure you want to logout?')) {
-                window.location.href = 'index.html';
-            }
         }
     </script>
 </body>
