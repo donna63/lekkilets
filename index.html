@@ -996,7 +996,7 @@
       </div>
       
       <!-- Booking Form -->
-      <div class="absolute bottom-10 w-full flex justify-center nform px-4 book">
+      <div class="absolute z-10 bottom-10 w-full flex justify-center nform px-4 book">
         <div class="bg-white shadow-xl p-6 md:p-8 w-full max-w-5xl animate-floatIn">
           <form id="bookingForm" class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <!-- Check In -->
@@ -1014,18 +1014,18 @@
             <!-- Guests -->
             <div class="relative">
               <label class="text-gray-600 font-semibold text-sm">Guests</label>
-              <button type="button" id="guestBtn" class="w-full mt-2 p-3 border border-gray-300 flex justify-between items-center focus:ring-2 focus:ring-indigo-500">
-                <span id="guestText">Adults 2, Children 0</span>
+              <button type="button" id="guestBtn" class="w-full text-black mt-2  p-3 border border-gray-300 flex justify-between items-center focus:ring-2 focus:ring-indigo-500">
+                <span class="text-black " id="guestText">Adults 2, Children 0</span>
                 <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
                 </svg>
               </button>
               <!-- Dropdown -->
-              <div id="guestDropdown" class="absolute left-0 mt-2 w-full bg-white border border-gray-200 shadow-lg hidden animate-floatIn">
-                <div class="p-4 space-y-4">
+              <div id="guestDropdown" class="absolute left-0 z-10 mt-[-50px] w-full bg-white border border-gray-200 shadow-lg hidden animate-floatIn ">
+                <div class="p-4 space-y-4 z-10">
                   <!-- Adults -->
-                  <div class="flex justify-between items-center">
-                    <span class="font-medium text-gray-700">Adults</span>
+                  <div class="flex justify-between items-center ">
+                    <span class="font-medium text-gray-700 z-50">Adults</span>
                     <div class="flex items-center space-x-2">
                       <button type="button" class="w-8 h-8 flex justify-center items-center border rounded-full text-gray-600 hover:bg-gray-100" onclick="updateGuests('adults', -1)">-</button>
                       <span id="adultsCount" class="text-gray-800 font-semibold">2</span>
@@ -1034,7 +1034,7 @@
                   </div>
                   <!-- Children -->
                   <div class="flex justify-between items-center">
-                    <span class="font-medium text-gray-700">Children</span>
+                    <span class="font-medium text-gray-700 z-10">Children</span>
                     <div class="flex items-center space-x-2">
                       <button type="button" class="w-8 h-8 flex justify-center items-center border rounded-full text-gray-600 hover:bg-gray-100" onclick="updateGuests('children', -1)">-</button>
                       <span id="childrenCount" class="text-gray-800 font-semibold">0</span>
