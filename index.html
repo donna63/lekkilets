@@ -2220,6 +2220,47 @@
   </footer>
 
   <script>
+    // Desktop apartments dropdown functionality
+const apartmentsToggle = document.getElementById('apartments-toggle');
+const apartmentsDropdown = document.getElementById('apartments-dropdown');
+
+if (apartmentsToggle && apartmentsDropdown) {
+    // Toggle dropdown on click
+    apartmentsToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        apartmentsDropdown.classList.toggle('show');
+        
+        // Rotate the chevron icon
+        const icon = this.querySelector('.dropdown-toggle');
+        icon.classList.toggle('rotated');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!apartmentsToggle.contains(e.target) && !apartmentsDropdown.contains(e.target)) {
+            apartmentsDropdown.classList.remove('show');
+            const icon = apartmentsToggle.querySelector('.dropdown-toggle');
+            icon.classList.remove('rotated');
+        }
+    });
+
+    // Prevent dropdown from closing when clicking inside
+    apartmentsDropdown.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+}
+
+// Close dropdown when clicking on dropdown items
+document.querySelectorAll('.dropdown-item a').forEach(item => {
+    item.addEventListener('click', function() {
+        apartmentsDropdown.classList.remove('show');
+        const icon = apartmentsToggle.querySelector('.dropdown-toggle');
+        icon.classList.remove('rotated');
+    });
+});
+  </script>
+
+  <script>
 
     // Mobile menu toggle
 const mobileMenuButton = document.getElementById('mobile-menu-button');
