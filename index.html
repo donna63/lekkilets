@@ -592,13 +592,36 @@
     }
     
     /* Mobile Menu */
-    .mobile-menu {
+    /* .mobile-menu {
         transform: translateX(-100%);
         transition: transform 0.3s ease-in-out;
-    }
+    } */
     
     .mobile-menu.open {
         transform: translateX(0);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        overflow-y: auto;
+    }
+
+    .mobile-menu.open {
+        transform: translateX(0);
+    }
+
+    /* Remove the hidden class that's conflicting */
+    .mobile-menu:not(.open) {
+        display: block !important; /* Ensure it's always in DOM for transitions */
     }
     
     /* Button Animation */
@@ -1062,7 +1085,7 @@
     </section>
 
     <!-- Rooms & Rates Section -->
-    <div class="max-w-7xl mx-auto px-4 mt-[100px] rooms">
+    <div class="max-w-7xl mx-auto px-4  rooms">
       <!-- Header -->
       <div class="text-center mb-16 rooms">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -2152,6 +2175,46 @@
   </footer>
 
   <script>
+
+    // Mobile menu toggle
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.add('open');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    });
+}
+
+if (closeMobileMenu && mobileMenu) {
+    closeMobileMenu.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = ''; // Restore scrolling
+    });
+}
+
+// Close mobile menu when clicking on links
+document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+    });
+});
+
+// Mobile apartments dropdown toggle
+const mobileApartmentsToggle = document.getElementById('mobile-apartments-toggle');
+const mobileApartmentsDropdown = document.getElementById('mobile-apartments-dropdown');
+
+if (mobileApartmentsToggle && mobileApartmentsDropdown) {
+    mobileApartmentsToggle.addEventListener('click', function() {
+        mobileApartmentsDropdown.classList.toggle('hidden');
+        // Rotate the chevron icon
+        const icon = this.querySelector('.dropdown-toggle');
+        icon.classList.toggle('rotated');
+    });
+}
     // Enhanced booking form functionality
     document.addEventListener('DOMContentLoaded', function() {
       // Mobile menu toggle
