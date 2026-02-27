@@ -844,7 +844,7 @@
                 <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-24 fade-in">
                     <div class="text-center mb-6">
                         <div class="price-display px-6 py-4 rounded-xl mb-4">
-                            <div class="text-2xl font-bold">₦210,000</div>
+                            <div class="text-2xl font-bold">₦220,000</div>
                             <div class="text-sm opacity-90">per day</div>
                         </div>
                         <div class="text-sm text-gray-600">
@@ -914,7 +914,7 @@
                         <!-- Price Breakdown -->
                         <div class="border-t border-gray-200 pt-4 space-y-2">
                             <div class="flex justify-between text-sm">
-                                <span>₦210,000 x <span id="nightsCount">0</span> day</span>
+                                <span>₦220,000 x <span id="nightsCount">0</span> day</span>
                                 <span>₦<span id="subtotal">0</span></span>
                             </div>
                             <div class="flex justify-between text-sm">
@@ -1224,7 +1224,7 @@
                 const isDecember = isDecemberBooking(checkIn, checkOut);
                 
                 // Set price based on month
-                const nightlyRate = isDecember ? 350000 : 210000;
+                const nightlyRate = isDecember ? 350000 : 220000;
                 const cautionFee = 100000;
                 const subtotal = nights * nightlyRate;
                 const total = subtotal + cautionFee;
@@ -1460,7 +1460,7 @@
             
             // Check if December booking
             const isDecember = isDecemberBooking(bookingData.checkIn, bookingData.checkOut);
-            const nightlyRate = isDecember ? 350000 : 210000;
+            const nightlyRate = isDecember ? 350000 : 220000;
             const cautionFee = 100000;
             const subtotal = nights * nightlyRate;
             const totalAmount = subtotal + cautionFee;
