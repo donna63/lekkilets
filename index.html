@@ -670,83 +670,111 @@
         display: block;
     }
     
-    /* Mobile Menu */
-    /* .mobile-menu {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease-in-out;
-    } */
+    /* Mobile Menu - Fixed */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    overflow-y: auto;
+    visibility: hidden; /* Hide when closed */
+}
 
-    /* Prevent body scroll when mobile menu is open */
-    body.menu-open {
-        overflow: hidden;
-    }
+.mobile-menu.open {
+    transform: translateX(0);
+    visibility: visible; /* Show when open */
+}
 
-    /* Mobile menu backdrop */
-    .mobile-menu::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
+/* Remove this conflicting rule */
+/* .mobile-menu:not(.open) {
+    display: block !important;
+} */
 
-    .mobile-menu.open::before {
-        opacity: 1;
-    }
+/* Prevent body scroll when mobile menu is open */
+body.menu-open {
+    overflow: hidden;
+}
 
-    /* Mobile dropdown animations */
-    #mobile-apartments-dropdown {
-        transition: all 0.3s ease;
-    }
+/* Mobile menu backdrop - Improved */
+.mobile-menu::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* Prevent interference */
+}
 
-    #mobile-apartments-dropdown:not(.hidden) {
-        display: block;
-        animation: slideDown 0.3s ease-out;
-    }
+.mobile-menu.open::before {
+    opacity: 1;
+    pointer-events: auto;
+}
 
-    /* Enhanced mobile menu items */
-    #mobile-menu a, 
-    #mobile-menu button {
-        transition: all 0.2s ease;
-    }
+/* Mobile dropdown animations - Improved */
+#mobile-apartments-dropdown {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    opacity: 0;
+}
 
-    #mobile-menu a:hover, 
-    #mobile-menu button:hover {
-        background-color: #f8fafc;
-        transform: translateX(5px);
-    }
-    
-    .mobile-menu.open {
-        transform: translateX(0);
-    }
+#mobile-apartments-dropdown.show {
+    max-height: 500px; /* Adjust based on content */
+    opacity: 1;
+}
 
-    /* Mobile Menu */
-    .mobile-menu {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: white;
-        z-index: 100;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease-in-out;
-        overflow-y: auto;
-    }
+/* Better mobile menu items */
+#mobile-menu a, 
+#mobile-menu button {
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+}
 
-    .mobile-menu.open {
-        transform: translateX(0);
-    }
+#mobile-menu a:active, 
+#mobile-menu button:active {
+    background-color: #f3f4f6;
+    transform: translateX(5px);
+}
 
-    /* Remove the hidden class that's conflicting */
-    .mobile-menu:not(.open) {
-        display: block !important; /* Ensure it's always in DOM for transitions */
-    }
+/* Improved close button */
+#close-mobile-menu {
+    width: 44px; /* Better touch target */
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+#close-mobile-menu:active {
+    background-color: #f3f4f6;
+}
+
+/* Better touch targets for mobile */
+#mobile-menu .py-2 {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+/* Rotate animation for dropdown icon */
+#mobile-apartments-toggle .dropdown-toggle {
+    transition: transform 0.3s ease;
+}
+
+#mobile-apartments-toggle .dropdown-toggle.rotated {
+    transform: rotate(180deg);
+}
     
     /* Button Animation */
     .btn-animate {
@@ -829,6 +857,14 @@
         }
     }
 
+
+    @media (max-width: 390px){
+      .rooms{
+            margin-top: -1500px;
+        }
+    }
+
+
     /* Prevent text selection during swipe */
     .cards-track,
     .card,
@@ -861,7 +897,7 @@
             margin-top: -250px;
         }
         .rooms{
-            margin-top: 500px;
+            margin-top: -30px;
         }
     }
     
@@ -1032,7 +1068,7 @@
                 <i class="fas fa-chevron-down text-xs dropdown-toggle transition-transform duration-300"></i>
               </button>
               
-              <div id="mobile-apartments-dropdown" class="mt-2 space-y-2 hidden">
+              <div id="mobile-apartments-dropdown" class="mt-2 space-y-2">
                 <!-- Lekki Apartments -->
                 <div class="ml-4">
                   <a href="Quicknest2.html">
@@ -1365,7 +1401,7 @@
       <div class="max-w-6xl mx-auto px-6 py-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-pink-100 rounded-3xl">
         <!-- Left: Phone Mockup -->
         <div class="flex justify-center animate-slideInLeft">
-          <img src="image/DSC_11.JPG" alt="Shortlet Apartment" 
+          <img src="image/IMG_8814 (1).jpg" alt="Shortlet Apartment" 
             class="max-w-xs md:max-w-sm lg:max-w-md rounded-3xl shadow-lg transition-transform duration-500 hover:scale-105" />
         </div>
         
@@ -2341,61 +2377,109 @@ document.querySelectorAll('.dropdown-item a').forEach(item => {
         icon.classList.remove('rotated');
     });
 });
-  </script>
 
-  <script>
-
-    // Mobile menu toggle
+    // Mobile menu functionality - FIXED
 const mobileMenuButton = document.getElementById('mobile-menu-button');
 const mobileMenu = document.getElementById('mobile-menu');
 const closeMobileMenu = document.getElementById('close-mobile-menu');
 
 if (mobileMenuButton && mobileMenu) {
-    mobileMenuButton.addEventListener('click', function() {
+    // Open menu
+    mobileMenuButton.addEventListener('click', function(e) {
+        e.stopPropagation();
         mobileMenu.classList.add('open');
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        document.body.classList.add('menu-open'); // Prevent background scrolling
     });
 }
 
 if (closeMobileMenu && mobileMenu) {
-    closeMobileMenu.addEventListener('click', function() {
+    // Close menu with close button
+    closeMobileMenu.addEventListener('click', function(e) {
+        e.stopPropagation();
         mobileMenu.classList.remove('open');
-        document.body.style.overflow = ''; // Restore scrolling
+        document.body.classList.remove('menu-open');
+        
+        // Reset any open dropdowns when closing menu
+        if (mobileApartmentsDropdown) {
+            mobileApartmentsDropdown.classList.remove('show');
+            const icon = mobileApartmentsToggle?.querySelector('.dropdown-toggle');
+            if (icon) icon.classList.remove('rotated');
+        }
     });
 }
 
-// Close mobile menu when clicking on links
+// Close menu when clicking on links
 document.querySelectorAll('#mobile-menu a').forEach(link => {
     link.addEventListener('click', function() {
         mobileMenu.classList.remove('open');
-        document.body.style.overflow = '';
+        document.body.classList.remove('menu-open');
+        
+        // Reset dropdown
+        if (mobileApartmentsDropdown) {
+            mobileApartmentsDropdown.classList.remove('show');
+            const icon = mobileApartmentsToggle?.querySelector('.dropdown-toggle');
+            if (icon) icon.classList.remove('rotated');
+        }
     });
 });
 
-// Mobile apartments dropdown toggle
+// Close menu with escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && mobileMenu?.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        document.body.classList.remove('menu-open');
+        
+        // Reset dropdown
+        if (mobileApartmentsDropdown) {
+            mobileApartmentsDropdown.classList.remove('show');
+            const icon = mobileApartmentsToggle?.querySelector('.dropdown-toggle');
+            if (icon) icon.classList.remove('rotated');
+        }
+    }
+});
+
+// Close menu when clicking on backdrop (optional - if you want to close by tapping outside the menu content)
+mobileMenu?.addEventListener('click', function(e) {
+    // Only close if clicking the backdrop (not the menu content)
+    if (e.target === mobileMenu) {
+        mobileMenu.classList.remove('open');
+        document.body.classList.remove('menu-open');
+        
+        // Reset dropdown
+        if (mobileApartmentsDropdown) {
+            mobileApartmentsDropdown.classList.remove('show');
+            const icon = mobileApartmentsToggle?.querySelector('.dropdown-toggle');
+            if (icon) icon.classList.remove('rotated');
+        }
+    }
+});
+
+// Mobile apartments dropdown toggle - IMPROVED
 const mobileApartmentsToggle = document.getElementById('mobile-apartments-toggle');
 const mobileApartmentsDropdown = document.getElementById('mobile-apartments-dropdown');
 
 if (mobileApartmentsToggle && mobileApartmentsDropdown) {
-    mobileApartmentsToggle.addEventListener('click', function() {
-        mobileApartmentsDropdown.classList.toggle('hidden');
+    mobileApartmentsToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        // Toggle dropdown with class instead of hidden
+        mobileApartmentsDropdown.classList.toggle('show');
+        
         // Rotate the chevron icon
         const icon = this.querySelector('.dropdown-toggle');
         icon.classList.toggle('rotated');
     });
 }
+
+// Prevent dropdown from closing when clicking inside it
+if (mobileApartmentsDropdown) {
+    mobileApartmentsDropdown.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+}
+
     // Enhanced booking form functionality
     document.addEventListener('DOMContentLoaded', function() {
-      // Mobile menu toggle
-      const mobileMenuButton = document.getElementById('mobile-menu-button');
-      const mobileMenu = document.getElementById('mobile-menu');
-      
-      if (mobileMenuButton) {
-        mobileMenuButton.addEventListener('click', function() {
-          mobileMenu.classList.toggle('hidden');
-        });
-      }
-
       // Carousel functionality
       const track = document.querySelector('.cards-track');
       const dots = document.querySelectorAll('.dot');
